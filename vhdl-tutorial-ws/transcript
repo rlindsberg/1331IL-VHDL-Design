@@ -1,1 +1,8 @@
 # Compile of codelock.vhd was successful.
+vsim work.codelock
+# vsim work.codelock 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading work.codelock(behavior)
