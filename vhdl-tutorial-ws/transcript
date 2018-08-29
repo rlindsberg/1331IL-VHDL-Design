@@ -6,3 +6,4 @@ vsim work.codelock
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.std_logic_arith(body)
 # Loading work.codelock(behavior)
+add wave *
