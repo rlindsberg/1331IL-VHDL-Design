@@ -7,3 +7,7 @@ vsim work.codelock
 # Loading ieee.std_logic_arith(body)
 # Loading work.codelock(behavior)
 add wave *
+force codelock/clk 1 0ns, 0 10ns -repeat 20ns
+force codelock/k 000
+force codelock/r 0000
+run 100ns
