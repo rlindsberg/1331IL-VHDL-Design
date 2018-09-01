@@ -1,0 +1,22 @@
+-- https://www.electronicshub.org/carry-look-ahead-adder
+Library ieee;
+Use ieee.std_logic_1164.all;
+
+entity b4_carry_lookahead_adder is
+	port (
+		a0, a1, a2, a3,
+		b0, b1, b2, b3: std_logic;
+		s0, s1, s2, s3: out std_logic);
+end entity;
+
+architecture gooy_inside of b4_carry_lookahead_adder is
+	signal c0, c1, c2, c3,  na0, na1, na2, na3,  no0, no1, no2, no3: std_logic;
+	begin
+		
+	
+		s0 <= c0 xor t0;
+		s1 <= c1 xor t1;
+		s2 <= c2 xor t2;
+		s3 <= c3 xor c3;
+end architecture;
+	
