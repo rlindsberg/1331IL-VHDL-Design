@@ -1,0 +1,75 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\rlindsberg\Documents\Github\1331IL-VHDL-Design\labb1\simulation\modelsim
+Efull_adder_vhdl_code
+Z1 w1535881576
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dC:\Users\rlindsberg\Documents\Github\1331IL-VHDL-Design\labb1\simulation\modelsim
+Z5 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/full_adder_vhdl_code.vhd
+Z6 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/full_adder_vhdl_code.vhd
+l0
+L4
+Ve:LX?lR<HXl_ZeCUgmI4S1
+Z7 OV;C;10.1d;51
+31
+Z8 !s108 1535904287.728000
+Z9 !s90 -reportprogress|300|-93|-work|work|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/full_adder_vhdl_code.vhd|
+Z10 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/full_adder_vhdl_code.vhd|
+Z11 o-93 -work work -O0
+Z12 tExplicit 1
+!s100 ;CFRLMnWd>Mf?V4?`GzdN2
+!i10b 1
+Agate_level
+R2
+R3
+DEx4 work 20 full_adder_vhdl_code 0 22 e:LX?lR<HXl_ZeCUgmI4S1
+l14
+L12
+VbIHP?Z[6I_iI_G0Fk3B^41
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!s100 GV3oG8O`=3>a9LLOUHcAj0
+!i10b 1
+Etb_full_adder
+Z13 w1535904088
+R2
+R3
+R4
+Z14 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/TB_full_adder.vhd
+Z15 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/TB_full_adder.vhd
+l0
+L5
+V`Pe[`VXIlizfgFh2E@`_]2
+!s100 N3Q<2[nHj6mQ>SUESPib<2
+R7
+31
+!i10b 1
+Z16 !s108 1535904287.993000
+Z17 !s90 -reportprogress|300|-93|-work|work|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/TB_full_adder.vhd|
+Z18 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/TB_full_adder.vhd|
+R11
+R12
+Abehavioural
+R2
+R3
+DEx4 work 13 tb_full_adder 0 22 `Pe[`VXIlizfgFh2E@`_]2
+l29
+L7
+VKC5b_:ULXh=g_cOzR<NF=2
+!s100 1;H78E<620T`o7Qo72zBJ1
+R7
+31
+!i10b 1
+R16
+R17
+R18
+R11
+R12

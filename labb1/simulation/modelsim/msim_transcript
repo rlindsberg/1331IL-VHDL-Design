@@ -1,0 +1,55 @@
+# Reading C:/Program Files/Quartus2/modelsim/modelsim_ase/tcl/vsim/pref.tcl 
+# do full_adder_vhdl_code_run_msim_rtl_vhdl.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\Program Files\Quartus2\modelsim\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\Program Files\Quartus2\modelsim\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vcom -93 -work work {C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/full_adder_vhdl_code.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity full_adder_vhdl_code
+# -- Compiling architecture gate_level of full_adder_vhdl_code
+# 
+# vcom -93 -work work {C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/TB_full_adder.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity TB_full_adder
+# -- Compiling architecture behavioural of TB_full_adder
+# ** Warning: [2] C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/TB_full_adder.vhd(47): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
+# 
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneive -L rtl_work -L work -voptargs="+acc"  tb_full_adder
+# vsim -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneive -L rtl_work -L work -voptargs=\"+acc\" -t 1ps tb_full_adder 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.tb_full_adder(behavioural)
+# ** Warning: (vsim-3473) Component instance "C1 : full_adder" is not bound.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_full_adder File: C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/TB_full_adder.vhd
+# 
+# add wave *
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: rlindsberg  Hostname: EMOLINDSBER2F67  ProcessID: 4660
+# 
+#           Attempting to use alternate WLF file "./wlftya0vy1".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlftya0vy1
+# 
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# Break key hit 
