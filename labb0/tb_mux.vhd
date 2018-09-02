@@ -5,11 +5,12 @@ Entity test is End test;
 
 Architecture testMux of test is
 
-  Component nandgate
+  Component mux
     Port(
-      A: IN Bit;
-      B: IN Bit;
-      Q: OUT Bit
+      D0: IN Bit; -- Input data signal A.
+      D1: IN Bit; -- Input data signal B.
+      S: IN Bit; -- Control signal.
+      Z: OUT Bit -- Output data signal.
     );
 
   End Component;
@@ -37,4 +38,4 @@ Architecture testMux of test is
       "010" AFTER 35 ns,
       "110" AFTER 40 ns;
 
-  End testMux
+  End testMux;

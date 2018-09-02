@@ -1,4 +1,20 @@
 # Compile of nandgate.vhd was successful.
 # Compile of tb_nand.vhd was successful.
 # Compile of mux.vhd was successful.
-# 3 compiles, 0 failed with no errors. 
+# Compile of tb_mux.vhd failed with 2 errors.
+# 4 compiles, 1 failed with 2 errors. 
+# Compile of nandgate.vhd was successful.
+# Compile of tb_nand.vhd was successful.
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd failed with 2 errors.
+# 4 compiles, 1 failed with 2 errors. 
+# Compile of nandgate.vhd was successful.
+# Compile of tb_nand.vhd was successful.
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd failed with 5 errors.
+# 4 compiles, 1 failed with 5 errors. 
+# Compile of nandgate.vhd was successful.
+# Compile of tb_nand.vhd was successful.
+# Compile of mux.vhd was successful.
+# Compile of tb_mux.vhd was successful.
+# 4 compiles, 0 failed with no errors. 

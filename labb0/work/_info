@@ -11,15 +11,15 @@ Z3 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/mux.vhd
 l0
 L1
 V20^jC^@S74E^ADlc_72mL2
-!s100 [?=33bf5HY0FmhjXWRW1D3
 Z4 OV;C;10.1d;51
 32
-!i10b 1
-Z5 !s108 1535882137.285000
+Z5 !s108 1535883627.181000
 Z6 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/mux.vhd|
 Z7 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/mux.vhd|
 Z8 o-work work -2002 -explicit -O0
 Z9 tExplicit 1
+!s100 [?=33bf5HY0FmhjXWRW1D3
+!i10b 1
 Artl
 DEx4 work 3 mux 0 22 20^jC^@S74E^ADlc_72mL2
 l23
@@ -28,12 +28,12 @@ VBV`^oMH6kFBgB=k7H0n3]2
 !s100 3GdB0jSzT?A_Qdg5:Dl0c3
 R4
 32
-!i10b 1
 R5
 R6
 R7
 R8
 R9
+!i10b 1
 Enandgate
 Z10 w1535881597
 R1
@@ -44,7 +44,7 @@ L1
 V7<W3gLN7CKYcY=Kn0VhLd0
 R4
 32
-Z13 !s108 1535882137.036000
+Z13 !s108 1535883626.916000
 Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/nandgate.vhd|
 Z15 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/nandgate.vhd|
 R8
@@ -66,33 +66,50 @@ R9
 !s100 [Y;XIzn6hFn[jSh5Bz99K1
 !i10b 1
 Etest
-R10
+Z16 w1535883622
 R1
-Z16 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd
-Z17 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd
+Z17 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_mux.vhd
+Z18 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_mux.vhd
 l0
 L4
 VCXzWffGT<0B`0S2F4BiDz0
+!s100 gh2KSSh<a44XaC?lzZAK;0
 R4
 32
-Z18 !s108 1535882137.160000
-Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd|
-Z20 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd|
+!i10b 1
+Z19 !s108 1535883627.321000
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_mux.vhd|
+Z21 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_mux.vhd|
 R8
 R9
-!s100 NS__cTnPHLY8;Wf>ea1::2
+Atestmux
+Z22 DEx4 work 4 test 0 22 CXzWffGT<0B`0S2F4BiDz0
+l22
+L6
+V6^R_@@dJlKP74m=N<2^n[2
+!s100 M7I688;zNIcOY@K`[a^nY0
+R4
+32
 !i10b 1
+R19
+R20
+R21
+R8
+R9
 Atestnand
-DEx4 work 4 test 0 22 CXzWffGT<0B`0S2F4BiDz0
+R22
 l21
 L8
 VO?59@j[K7Re=8^WCd9oDC0
-!s100 Q]Pmh]1h?=k7zoDLRf=H_2
 R4
 32
-R18
-R19
-R20
+!s108 1535883627.040000
+!s90 -reportprogress|300|-work|work|-2002|-explicit|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd|
+!s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd|
 R8
 R9
+FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd
+R10
+8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd
+!s100 Q]Pmh]1h?=k7zoDLRf=H_2
 !i10b 1
