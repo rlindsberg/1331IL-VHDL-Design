@@ -1,8 +1,14 @@
-C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/mux.vhd {1 {vcom -work work -2002 -explicit C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/mux.vhd
+C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_mux.vhd {1 {vcom -work work -2002 -explicit C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_mux.vhd
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
--- Compiling entity mux
--- Compiling architecture rtl of mux
+-- Compiling entity test
+-- Compiling architecture testMux of test
+
+} {} {}} C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/nandgate.vhd {1 {vcom -work work -2002 -explicit C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/nandgate.vhd
+Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+-- Loading package STANDARD
+-- Compiling entity nandgate
+-- Compiling architecture dataflow of nandgate
 
 } {} {}} C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd {1 {vcom -work work -2002 -explicit C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/tb_nand.vhd
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
@@ -10,10 +16,10 @@ Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling entity test
 -- Compiling architecture testNand of test
 
-} {} {}} C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/nandgate.vhd {1 {vcom -work work -2002 -explicit C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/nandgate.vhd
+} {} {}} C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/mux.vhd {1 {vcom -work work -2002 -explicit C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb0/mux.vhd
 Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 -- Loading package STANDARD
--- Compiling entity nandgate
--- Compiling architecture dataflow of nandgate
+-- Compiling entity mux
+-- Compiling architecture rtl of mux
 
 } {} {}}
