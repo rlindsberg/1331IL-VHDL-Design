@@ -9,6 +9,6 @@ end entity;
 
 architecture gooy_inside of full_adder is
 	begin
-		sum <= cin xor (a xor b);
-		cout <= (a and b) or (cin and (a xor b))
+		sum <= cin xor (a xor b) after 5 ns;
+		cout <= (a and b) or (cin and (a xor b)) after 5 ns;
 end architecture;

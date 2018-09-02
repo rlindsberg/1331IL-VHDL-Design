@@ -1,0 +1,119 @@
+# Loading project labb1
+ls
+# b4_carry_lookahead_adder.vhd
+# b4_carry_lookahead_adder.vhd.bak
+# b4_ripple_adder.vhd
+# b4_ripple_adder.vhd.bak
+# b8_carry_select_adder.vhd
+# b8_carry_select_adder.vhd.bak
+# cla_sub_comp.vhd
+# db
+# full_adder.qpf
+# full_adder.qsf
+# full_adder.qws
+# full_adder.vhd
+# full_adder.vhd.bak
+# labb1.mpf
+# transcript
+# work
+vcom full_adder.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity full_adder
+# -- Compiling architecture gooy_inside of full_adder
+vsim full_adder.vhd
+# OpenFile full_adder.vhd 
+OpenFile full_adder.vhd &
+# Error opening /home/gnmn/Documents/skola/IL1331/labb1/&
+# Path name '/home/gnmn/Documents/skola/IL1331/labb1/&' doesn't exist.
+vsim full_adder &
+# vsim full_adder & 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.full_adder(gooy_inside)
+# ** Error: (vsim-3170) Could not find '/home/gnmn/Documents/skola/IL1331/labb1/work.&'.
+# Error loading design
+vsim full_adder
+# vsim full_adder 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.full_adder(gooy_inside)
+add wave -position insertpoint  \
+sim:/full_adder/a
+add wave -position insertpoint  \
+sim:/full_adder/b
+add wave -position insertpoint  \
+sim:/full_adder/cin
+add wave -position insertpoint  \
+sim:/full_adder/sum
+add wave -position insertpoint  \
+sim:/full_adder/cout
+force -freeze sim:/full_adder/cin 0 0
+force -freeze sim:/full_adder/a 1 5
+run 20
+force -freeze sim:/full_adder/b 0 10
+run 20
+force -freeze sim:/full_adder/b 0 5
+run 20
+# WARNING: No extended dataflow license exists
+vcom full_adder.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity full_adder
+# -- Compiling architecture gooy_inside of full_adder
+vsim full_adder
+# vsim full_adder 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.full_adder(gooy_inside)
+vsim work.full_adder
+# vsim work.full_adder 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.full_adder(gooy_inside)
+add wave -r /*
+force -freeze sim:/full_adder/a 1 0
+force -freeze sim:/full_adder/b 1 5 -cancel 20
+force -freeze sim:/full_adder/cin 0 0
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/full_adder/b 1 20 -cancel 40
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/full_adder/b 1 0
+run
+run
+run
+run
+run
+run
+run
+run
+noforce sim:/full_adder/sum
+noforce sim:/full_adder/cout
+run
+run
+run
+run
+run
+run
+restart

@@ -1,0 +1,40 @@
+m255
+K3
+13
+cModel Technology
+d/home/gnmn
+Efull_adder
+Z0 w1535884235
+Z1 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z2 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z3 d/home/gnmn/Documents/skola/IL1331/labb1
+Z4 8full_adder.vhd
+Z5 Ffull_adder.vhd
+l0
+L4
+V4N[Q=WcmgKgf2k<=1;aNa3
+!s100 [X2YoLzijN9dl9TB:oaF71
+Z6 OV;C;10.1d;51
+32
+!i10b 1
+Z7 !s108 1535886240.682365
+Z8 !s90 -reportprogress|300|full_adder.vhd|
+Z9 !s107 full_adder.vhd|
+o-O0
+Z10 tExplicit 1
+Agooy_inside
+R1
+R2
+Z11 DEx4 work 10 full_adder 0 22 4N[Q=WcmgKgf2k<=1;aNa3
+l11
+L10
+Z12 VE]1EZKJe;D9QLZ9FBWZC@1
+Z13 !s100 ICJ1nBCh_QQPKX:?F;6];0
+R6
+32
+!i10b 1
+R7
+R8
+R9
+o-O0
+R10

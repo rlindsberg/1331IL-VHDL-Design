@@ -32,10 +32,10 @@ architecture gooy_inside of b4_carry_lookahead_adder is
 		c1 <= ('1' and na0) nor no0;
 		t1 <= na1 and not no1;
 		
-		c2 <= ('1' and na0 and na1) nor (na1 and no0) nor no1;
+		c2 <= (('1' and na0 and na1) nor (na1 and no0)) nor no1;
 		t2 <= na2 and not no2;
 		
-		c3 <= ('1' and na0 and na1 and na2) nor (na1 and na2 and no0) nor (na2 and no1) nor no2;
+		c3 <= (('1' and na0 and na1 and na2) nor (na1 and na2 and no0)) nor ((na2 and no1) nor no2);
 		t3 <= na3 and not no3;
 		
 		s0 <= c0 xor t0;
