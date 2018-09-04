@@ -1,0 +1,23 @@
+|b4_carry_lookahead_adder
+A[0] => no0.IN0
+A[0] => na0.IN0
+A[1] => no1.IN0
+A[1] => na1.IN0
+A[2] => no2.IN0
+A[2] => na2.IN0
+A[3] => no3.IN0
+A[3] => na3.IN0
+B[0] => no0.IN1
+B[0] => na0.IN1
+B[1] => no1.IN1
+B[1] => na1.IN1
+B[2] => no2.IN1
+B[2] => na2.IN1
+B[3] => no3.IN1
+B[3] => na3.IN1
+s[0] <= t0.DB_MAX_OUTPUT_PORT_TYPE
+s[1] <= s.DB_MAX_OUTPUT_PORT_TYPE
+s[2] <= s.DB_MAX_OUTPUT_PORT_TYPE
+s[3] <= s.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,77 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\rlindsberg\Documents\Github\1331IL-VHDL-Design\labb1\1.3\simulation\modelsim
+Eb4_carry_lookahead_adder
+Z1 w1536071139
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dC:\Users\rlindsberg\Documents\Github\1331IL-VHDL-Design\labb1\1.3\simulation\modelsim
+Z5 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/b4_carry_lookahead_adder.vhd
+Z6 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/b4_carry_lookahead_adder.vhd
+l0
+L7
+V[F9Dj;SF_MUFI>WVj;nNS3
+Z7 OV;C;10.1d;51
+31
+Z8 !s108 1536084813.623000
+Z9 !s90 -reportprogress|300|-93|-work|work|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/b4_carry_lookahead_adder.vhd|
+Z10 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/b4_carry_lookahead_adder.vhd|
+Z11 o-93 -work work -O0
+Z12 tExplicit 1
+!s100 9SbCOKJXaRa1FeQ4omH3^1
+!i10b 1
+Agooy_inside
+R2
+R3
+DEx4 work 24 b4_carry_lookahead_adder 0 22 [F9Dj;SF_MUFI>WVj;nNS3
+l20
+L14
+VjeEedG_nZKUEZPE1eQm6g2
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!s100 iCEIE=0f<]96_2BfQSU6U2
+!i10b 1
+Etb_b4_carry_lookahead_adder
+Z13 w1536084754
+Z14 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+R2
+R3
+R4
+Z15 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/tb_b4_carry_lookahead_adder.vhd
+Z16 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/tb_b4_carry_lookahead_adder.vhd
+l0
+L6
+VL0UMdWomM[VM5^AY?[83[3
+!s100 hS^THZGYgb1Lha1>_nU_h2
+R7
+31
+!i10b 1
+Z17 !s108 1536084813.842000
+Z18 !s90 -reportprogress|300|-93|-work|work|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/tb_b4_carry_lookahead_adder.vhd|
+Z19 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.3/tb_b4_carry_lookahead_adder.vhd|
+R11
+R12
+Abehavioural
+R14
+R2
+R3
+Z20 DEx4 work 27 tb_b4_carry_lookahead_adder 0 22 L0UMdWomM[VM5^AY?[83[3
+l29
+L9
+Z21 VLKl^mm`HBQinLIQ[XQkf33
+Z22 !s100 L3G0lG=Jf4g8^MX0llh:`1
+R7
+31
+!i10b 1
+R17
+R18
+R19
+R11
+R12
