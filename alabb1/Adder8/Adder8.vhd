@@ -18,7 +18,7 @@ architecture gooy_inside of Adder8 is
 			a : std_logic_vector(3 downto 0);
 			b : std_logic_vector(3 downto 0);
 			c_in : std_logic;
-			sum : out std_logic_vector(3 downto 0);
+			s : out std_logic_vector(3 downto 0);
 			c_out : out std_logic);
 	end component;
 
@@ -26,20 +26,20 @@ architecture gooy_inside of Adder8 is
 	signal int_sum_c0, int_sum_c1, sum_SUM : std_logic_vector(3 downto 0);
 
 	begin
-		RA0 : b4_ripple_adder port map (	A(3 downto 0),
-													B(3 downto 0),
-													C_in,
-													Sum(3 downto 0),
+		RA0 : b4_ripple_adder port map (	a(3 downto 0),
+													b(3 downto 0),
+													carry_in,
+													sum(3 downto 0),
 													int_c);
 
-		RA1 : b4_ripple_adder port map (	A(7 downto 4),
-													B(7 downto 4),
+		RA1 : b4_ripple_adder port map (	a(7 downto 4),
+													b(7 downto 4),
 													'0',
 													int_sum_c0(3 downto 0),
 													c_out0);
 
-		RA2 : b4_ripple_adder port map (	A(7 downto 4),
-													B(7 downto 4),
+		RA2 : b4_ripple_adder port map (	a(7 downto 4),
+													b(7 downto 4),
 													'1',
 													int_sum_c1(3 downto 0),
 													c_out1);
@@ -49,12 +49,13 @@ architecture gooy_inside of Adder8 is
 				INT_C := int_c;
 
 				case INT_C is
-					when '0' => Sum(7 downto 4) <= int_sum_c0(3 downto 0) after 5 ns;
-					when '1' => Sum(7 downto 4) <= int_sum_c1(3 downto 0) after 5 ns;
+					when '0' => sum(7 downto 4) <= int_sum_c0(3 downto 0) after 5 ns;
+					when '1' => sum(7 downto 4) <= int_sum_c1(3 downto 0) after 5 ns;
+					when others => null;
 				end case;
 
 			end process;
 		tmp_or <= c_out0 or int_c after 3 ns;
-		C_out <= c_out1 and tmp_or after 3 ns;
+		carry_out <= c_out1 and tmp_or after 3 ns;
 
 end architecture;

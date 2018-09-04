@@ -16,35 +16,45 @@ architecture gooy_inside of tb_Adder8 is
 			carry_out 	: out std_logic);
 	end component;
 
-	signal A, B, SUM 		: std_logic_vector(7 downto 0);
-	signal C_in, C_out 	: std_logic;
+  signal A_int    : integer;
+  signal B_int    : integer;
+  signal A, B 		: std_logic_vector(7 downto 0);
+	signal C_in 	  : std_logic;
+
+  signal SUM      : std_logic_vector(7 downto 0);
+  signal C_out    : std_logic;
 
 	begin
 
 		TA : Adder8
 		port map (
-			a => A,
+      a => A,
 			b => B,
 			carry_in => C_in,
 			sum => SUM,
 			carry_out => C_out
 		);
 
-		A <= std_logic_vector(to_unsigned(A, a'length));
-		B <= std_logic_vector(to_unsigned(B, b'length));
+		A <= std_logic_vector(to_unsigned(A_int, A'length));
+		B <= std_logic_vector(to_unsigned(B_int, B'length));
+    C_in <= '0';
 
 		process
 			begin
-				A <= 256;
-				B <= 1;
+				A_int <= 256;
+				B_int <= 1;
 				wait for 10 ns;
 
-				A <= 128;
-				B <= 128;
+				A_int <= 128;
+				B_int <= 128;
+				wait for 10 ns;
+				
+				A_int <= 64;
+				B_int <= 96;
 				wait for 10 ns;
 
-				A <= 0;
-				b <= 1;
+				A_int <= 0;
+				B_int <= 1;
 				wait for 10 ns;
 		end process;
 
