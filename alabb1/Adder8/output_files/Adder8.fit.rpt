@@ -1,5 +1,5 @@
 Fitter report for Adder8
-Tue Sep  4 13:38:24 2018
+Tue Sep  4 14:43:48 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -63,15 +63,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Fitter Summary                                                                       ;
 +------------------------------------+-------------------------------------------------+
-; Fitter Status                      ; Successful - Tue Sep  4 13:38:24 2018           ;
+; Fitter Status                      ; Successful - Tue Sep  4 14:43:48 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Adder8                                          ;
 ; Top-level Entity Name              ; Adder8                                          ;
 ; Family                             ; Cyclone IV GX                                   ;
 ; Device                             ; EP4CGX15BF14C6                                  ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 17 / 14,400 ( < 1 % )                           ;
-;     Total combinational functions  ; 17 / 14,400 ( < 1 % )                           ;
+; Total logic elements               ; 21 / 14,400 ( < 1 % )                           ;
+;     Total combinational functions  ; 21 / 14,400 ( < 1 % )                           ;
 ;     Dedicated logic registers      ; 0 / 14,400 ( 0 % )                              ;
 ; Total registers                    ; 0                                               ;
 ; Total pins                         ; 26 / 81 ( 32 % )                                ;
@@ -184,8 +184,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; b[5]      ; Incomplete set of assignments ;
 ; a[6]      ; Incomplete set of assignments ;
 ; b[6]      ; Incomplete set of assignments ;
-; b[7]      ; Incomplete set of assignments ;
 ; a[7]      ; Incomplete set of assignments ;
+; b[7]      ; Incomplete set of assignments ;
 +-----------+-------------------------------+
 
 
@@ -195,8 +195,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Type                ; Value                  ;
 +---------------------+------------------------+
 ; Placement (by node) ;                        ;
-;     -- Requested    ; 0 / 80 ( 0.00 % )      ;
-;     -- Achieved     ; 0 / 80 ( 0.00 % )      ;
+;     -- Requested    ; 0 / 84 ( 0.00 % )      ;
+;     -- Achieved     ; 0 / 84 ( 0.00 % )      ;
 ;                     ;                        ;
 ; Routing (by net)    ;                        ;
 ;     -- Requested    ; 0 / 0 ( 0.00 % )       ;
@@ -219,7 +219,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 ; Partition Name                 ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
-; Top                            ; 70      ; 0                 ; N/A                     ; Source File       ;
+; Top                            ; 74      ; 0                 ; N/A                     ; Source File       ;
 ; hard_block:auto_generated_inst ; 10      ; 0                 ; N/A                     ; Source File       ;
 +--------------------------------+---------+-------------------+-------------------------+-------------------+
 
@@ -235,19 +235,19 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 +---------------------------------------------+-----------------------+
 ; Resource                                    ; Usage                 ;
 +---------------------------------------------+-----------------------+
-; Total logic elements                        ; 17 / 14,400 ( < 1 % ) ;
-;     -- Combinational with no register       ; 17                    ;
+; Total logic elements                        ; 21 / 14,400 ( < 1 % ) ;
+;     -- Combinational with no register       ; 21                    ;
 ;     -- Register only                        ; 0                     ;
 ;     -- Combinational with a register        ; 0                     ;
 ;                                             ;                       ;
 ; Logic element usage by number of LUT inputs ;                       ;
 ;     -- 4 input functions                    ; 5                     ;
-;     -- 3 input functions                    ; 11                    ;
-;     -- <=2 input functions                  ; 1                     ;
+;     -- 3 input functions                    ; 13                    ;
+;     -- <=2 input functions                  ; 3                     ;
 ;     -- Register only                        ; 0                     ;
 ;                                             ;                       ;
 ; Logic elements by mode                      ;                       ;
-;     -- normal mode                          ; 17                    ;
+;     -- normal mode                          ; 21                    ;
 ;     -- arithmetic mode                      ; 0                     ;
 ;                                             ;                       ;
 ; Total registers*                            ; 0 / 14,733 ( 0 % )    ;
@@ -276,10 +276,10 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; Impedance control blocks                    ; 0 / 3 ( 0 % )         ;
 ; Average interconnect usage (total/H/V)      ; 0% / 0% / 0%          ;
 ; Peak interconnect usage (total/H/V)         ; 0% / 0% / 0%          ;
-; Maximum fan-out                             ; 4                     ;
-; Highest non-global fan-out                  ; 4                     ;
-; Total fan-out                               ; 95                    ;
-; Average fan-out                             ; 1.20                  ;
+; Maximum fan-out                             ; 5                     ;
+; Highest non-global fan-out                  ; 5                     ;
+; Total fan-out                               ; 105                   ;
+; Average fan-out                             ; 1.27                  ;
 +---------------------------------------------+-----------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
@@ -292,19 +292,19 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 +---------------------------------------------+----------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                  ; Low                            ;
 ;                                             ;                      ;                                ;
-; Total logic elements                        ; 17 / 14400 ( < 1 % ) ; 0 / 14400 ( 0 % )              ;
-;     -- Combinational with no register       ; 17                   ; 0                              ;
+; Total logic elements                        ; 21 / 14400 ( < 1 % ) ; 0 / 14400 ( 0 % )              ;
+;     -- Combinational with no register       ; 21                   ; 0                              ;
 ;     -- Register only                        ; 0                    ; 0                              ;
 ;     -- Combinational with a register        ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Logic element usage by number of LUT inputs ;                      ;                                ;
 ;     -- 4 input functions                    ; 5                    ; 0                              ;
-;     -- 3 input functions                    ; 11                   ; 0                              ;
-;     -- <=2 input functions                  ; 1                    ; 0                              ;
+;     -- 3 input functions                    ; 13                   ; 0                              ;
+;     -- <=2 input functions                  ; 3                    ; 0                              ;
 ;     -- Register only                        ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Logic elements by mode                      ;                      ;                                ;
-;     -- normal mode                          ; 17                   ; 0                              ;
+;     -- normal mode                          ; 21                   ; 0                              ;
 ;     -- arithmetic mode                      ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Total registers                             ; 0                    ; 0                              ;
@@ -325,7 +325,7 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ;     -- Registered Output Connections        ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; Internal Connections                        ;                      ;                                ;
-;     -- Total Connections                    ; 90                   ; 5                              ;
+;     -- Total Connections                    ; 100                  ; 5                              ;
 ;     -- Registered Connections               ; 0                    ; 0                              ;
 ;                                             ;                      ;                                ;
 ; External Connections                        ;                      ;                                ;
@@ -358,23 +358,23 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+---------------------------+----------------------+
 ; Name     ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination ; Termination Control Block ; Location assigned by ;
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+---------------------------+----------------------+
-; a[0]     ; K9    ; 4        ; 22           ; 0            ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; a[1]     ; H12   ; 5        ; 33           ; 14           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; a[2]     ; K11   ; 5        ; 33           ; 11           ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; a[3]     ; B13   ; 7        ; 26           ; 31           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; a[4]     ; D13   ; 7        ; 29           ; 31           ; 7            ; 4                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; a[0]     ; F9    ; 6        ; 33           ; 25           ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; a[1]     ; D10   ; 6        ; 33           ; 27           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; a[2]     ; B13   ; 7        ; 26           ; 31           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; a[3]     ; H10   ; 5        ; 33           ; 14           ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; a[4]     ; D11   ; 6        ; 33           ; 28           ; 0            ; 4                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
 ; a[5]     ; A9    ; 7        ; 16           ; 31           ; 0            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
 ; a[6]     ; C8    ; 7        ; 22           ; 31           ; 7            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; a[7]     ; B10   ; 7        ; 24           ; 31           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; b[0]     ; K10   ; 4        ; 31           ; 0            ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; b[1]     ; N13   ; 5        ; 33           ; 10           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; b[2]     ; K12   ; 5        ; 33           ; 11           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; b[3]     ; E13   ; 6        ; 33           ; 25           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; b[4]     ; A7    ; 8        ; 12           ; 31           ; 0            ; 4                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; a[7]     ; K8    ; 4        ; 22           ; 0            ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; b[0]     ; N10   ; 4        ; 26           ; 0            ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; b[1]     ; F10   ; 6        ; 33           ; 24           ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; b[2]     ; E13   ; 6        ; 33           ; 25           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; b[3]     ; H12   ; 5        ; 33           ; 14           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; b[4]     ; N8    ; 4        ; 20           ; 0            ; 7            ; 4                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
 ; b[5]     ; A10   ; 7        ; 16           ; 31           ; 7            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; b[6]     ; A12   ; 7        ; 20           ; 31           ; 7            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; b[7]     ; B11   ; 7        ; 24           ; 31           ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
-; carry_in ; N10   ; 4        ; 26           ; 0            ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; b[6]     ; C13   ; 7        ; 29           ; 31           ; 0            ; 3                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; b[7]     ; A12   ; 7        ; 20           ; 31           ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
+; carry_in ; K9    ; 4        ; 22           ; 0            ; 0            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; Off         ; --                        ; Fitter               ;
 +----------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+---------------------------+----------------------+
 
 
@@ -383,36 +383,38 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 +-----------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
 ; Name      ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Output Register ; Output Enable Register ; Power Up High ; Slew Rate ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination                       ; Termination Control Block ; Output Buffer Pre-emphasis ; Voltage Output Differential ; Location assigned by ; Output Enable Source ; Output Enable Group ;
 +-----------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
-; carry_out ; B8    ; 7        ; 22           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[0]    ; M13   ; 5        ; 33           ; 10           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[1]    ; M11   ; 4        ; 29           ; 0            ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[2]    ; L12   ; 5        ; 33           ; 12           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[3]    ; C11   ; 7        ; 31           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[4]    ; C6    ; 8        ; 14           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[5]    ; B6    ; 8        ; 14           ; 31           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[6]    ; A13   ; 7        ; 26           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
-; sum[7]    ; A11   ; 7        ; 20           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; carry_out ; A11   ; 7        ; 20           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[0]    ; G9    ; 6        ; 33           ; 22           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[1]    ; N11   ; 4        ; 26           ; 0            ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[2]    ; B8    ; 7        ; 22           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[3]    ; G10   ; 6        ; 33           ; 22           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[4]    ; B6    ; 8        ; 14           ; 31           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[5]    ; D13   ; 7        ; 29           ; 31           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[6]    ; B11   ; 7        ; 24           ; 31           ; 0            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
+; sum[7]    ; D12   ; 6        ; 33           ; 28           ; 7            ; no              ; no                     ; no            ; 2         ; no              ; no         ; no            ; no       ; Off          ; 2.5 V        ; Default          ; Series 50 Ohm without Calibration ; --                        ; no                         ; no                          ; Fitter               ; -                    ; -                   ;
 +-----------+-------+----------+--------------+--------------+--------------+-----------------+------------------------+---------------+-----------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-----------------------------------+---------------------------+----------------------------+-----------------------------+----------------------+----------------------+---------------------+
 
 
-+-------------------------------------------------------------------------------------------------------+
-; Dual Purpose and Dedicated Pins                                                                       ;
-+----------+------------------+--------------------------+------------------+---------------------------+
-; Location ; Pin Name         ; Reserved As              ; User Signal Name ; Pin Type                  ;
-+----------+------------------+--------------------------+------------------+---------------------------+
-; L3       ; MSEL2            ; -                        ; -                ; Dedicated Programming Pin ;
-; N3       ; MSEL1            ; -                        ; -                ; Dedicated Programming Pin ;
-; K5       ; MSEL0            ; -                        ; -                ; Dedicated Programming Pin ;
-; J5       ; CONF_DONE        ; -                        ; -                ; Dedicated Programming Pin ;
-; K6       ; nSTATUS          ; -                        ; -                ; Dedicated Programming Pin ;
-; N5       ; DIFFIO_B1n, NCEO ; Use as programming pin   ; ~ALTERA_NCEO~    ; Dual Purpose Pin          ;
-; A5       ; DATA0            ; As input tri-stated      ; ~ALTERA_DATA0~   ; Dual Purpose Pin          ;
-; B5       ; ASDO             ; As input tri-stated      ; ~ALTERA_ASDO~    ; Dual Purpose Pin          ;
-; C5       ; NCSO             ; As input tri-stated      ; ~ALTERA_NCSO~    ; Dual Purpose Pin          ;
-; A4       ; DCLK             ; As output driving ground ; ~ALTERA_DCLK~    ; Dual Purpose Pin          ;
-; D5       ; nCONFIG          ; -                        ; -                ; Dedicated Programming Pin ;
-; C4       ; nCE              ; -                        ; -                ; Dedicated Programming Pin ;
-+----------+------------------+--------------------------+------------------+---------------------------+
++-----------------------------------------------------------------------------------------------------------+
+; Dual Purpose and Dedicated Pins                                                                           ;
++----------+----------------------+--------------------------+------------------+---------------------------+
+; Location ; Pin Name             ; Reserved As              ; User Signal Name ; Pin Type                  ;
++----------+----------------------+--------------------------+------------------+---------------------------+
+; L3       ; MSEL2                ; -                        ; -                ; Dedicated Programming Pin ;
+; N3       ; MSEL1                ; -                        ; -                ; Dedicated Programming Pin ;
+; K5       ; MSEL0                ; -                        ; -                ; Dedicated Programming Pin ;
+; J5       ; CONF_DONE            ; -                        ; -                ; Dedicated Programming Pin ;
+; K6       ; nSTATUS              ; -                        ; -                ; Dedicated Programming Pin ;
+; N5       ; DIFFIO_B1n, NCEO     ; Use as programming pin   ; ~ALTERA_NCEO~    ; Dual Purpose Pin          ;
+; G10      ; DIFFIO_R4n, DEV_OE   ; Use as regular IO        ; sum[3]           ; Dual Purpose Pin          ;
+; D10      ; DIFFIO_R2n, DEV_CLRn ; Use as regular IO        ; a[1]             ; Dual Purpose Pin          ;
+; A5       ; DATA0                ; As input tri-stated      ; ~ALTERA_DATA0~   ; Dual Purpose Pin          ;
+; B5       ; ASDO                 ; As input tri-stated      ; ~ALTERA_ASDO~    ; Dual Purpose Pin          ;
+; C5       ; NCSO                 ; As input tri-stated      ; ~ALTERA_NCSO~    ; Dual Purpose Pin          ;
+; A4       ; DCLK                 ; As output driving ground ; ~ALTERA_DCLK~    ; Dual Purpose Pin          ;
+; D5       ; nCONFIG              ; -                        ; -                ; Dedicated Programming Pin ;
+; C4       ; nCE                  ; -                        ; -                ; Dedicated Programming Pin ;
++----------+----------------------+--------------------------+------------------+---------------------------+
 
 
 +-------------------------------------------------------------------------------+
@@ -423,12 +425,12 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; QL0      ; 0 / 8 ( 0 % )    ; --            ; --           ; --               ;
 ; 3        ; 1 / 8 ( 13 % )   ; 2.5V          ; --           ; --               ;
 ; 3A       ; 0 / 2 ( 0 % )    ; --            ; --           ; 2.5V             ;
-; 4        ; 4 / 14 ( 29 % )  ; 2.5V          ; --           ; --               ;
-; 5        ; 6 / 12 ( 50 % )  ; 2.5V          ; --           ; --               ;
-; 6        ; 1 / 12 ( 8 % )   ; 2.5V          ; --           ; --               ;
-; 7        ; 12 / 14 ( 86 % ) ; 2.5V          ; --           ; --               ;
+; 4        ; 5 / 14 ( 36 % )  ; 2.5V          ; --           ; --               ;
+; 5        ; 2 / 12 ( 17 % )  ; 2.5V          ; --           ; --               ;
+; 6        ; 8 / 12 ( 67 % )  ; 2.5V          ; --           ; --               ;
+; 7        ; 10 / 14 ( 71 % ) ; 2.5V          ; --           ; --               ;
 ; 8A       ; 0 / 2 ( 0 % )    ; --            ; --           ; 2.5V             ;
-; 8        ; 3 / 5 ( 60 % )   ; 2.5V          ; --           ; --               ;
+; 8        ; 1 / 5 ( 20 % )   ; 2.5V          ; --           ; --               ;
 ; 9        ; 4 / 4 ( 100 % )  ; 2.5V          ; --           ; --               ;
 +----------+------------------+---------------+--------------+------------------+
 
@@ -444,39 +446,39 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; A4       ; 93         ; 9        ; ~ALTERA_DCLK~                                    ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; On           ;
 ; A5       ; 90         ; 9        ; ~ALTERA_DATA0~ / RESERVED_INPUT_WITH_WEAK_PULLUP ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; On           ;
 ; A6       ; 89         ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
-; A7       ; 87         ; 8        ; b[4]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; A7       ; 87         ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; A8       ; 88         ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; A9       ; 81         ; 7        ; a[5]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; A10      ; 82         ; 7        ; b[5]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
-; A11      ; 79         ; 7        ; sum[7]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
-; A12      ; 80         ; 7        ; b[6]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
-; A13      ; 73         ; 7        ; sum[6]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; A11      ; 79         ; 7        ; carry_out                                        ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; A12      ; 80         ; 7        ; b[7]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; A13      ; 73         ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; B1       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; B2       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; B3       ; 97         ; 9        ; #TCK                                             ; input  ;              ;         ; --         ;                 ; --       ; --           ;
 ; B4       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; B5       ; 91         ; 9        ; ~ALTERA_ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP  ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; On           ;
-; B6       ; 86         ; 8        ; sum[5]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; B6       ; 86         ; 8        ; sum[4]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; B7       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; B8       ; 77         ; 7        ; carry_out                                        ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; B8       ; 77         ; 7        ; sum[2]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; B9       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; B10      ; 76         ; 7        ; a[7]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
-; B11      ; 75         ; 7        ; b[7]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; B10      ; 76         ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
+; B11      ; 75         ; 7        ; sum[6]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; B12      ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; B13      ; 74         ; 7        ; a[3]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; B13      ; 74         ; 7        ; a[2]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; C1       ; 9          ; QL0      ; GXB_NC                                           ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; C2       ; 8          ; QL0      ; GXB_NC                                           ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; C3       ;            ; 9        ; VCCIO9                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; C4       ; 95         ; 9        ; ^nCE                                             ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; C5       ; 92         ; 9        ; ~ALTERA_NCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP  ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; On           ;
-; C6       ; 85         ; 8        ; sum[4]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; C6       ; 85         ; 8        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
 ; C7       ;            ; 8        ; VCCIO8                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; C8       ; 78         ; 7        ; a[6]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; C9       ;            ; 7        ; VCCIO7                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; C10      ;            ; 7        ; VCCIO7                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
-; C11      ; 69         ; 7        ; sum[3]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; C11      ; 69         ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; C12      ; 70         ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
-; C13      ; 71         ; 7        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; C13      ; 71         ; 7        ; b[6]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; D1       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; D2       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; D3       ;            ;          ; VCCD_PLL                                         ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
@@ -486,10 +488,10 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; D7       ;            ; 8A       ; VCC_CLKIN8A                                      ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; D8       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; D9       ;            ; --       ; VCCA                                             ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
-; D10      ; 65         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; D11      ; 68         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; D12      ; 67         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; D13      ; 72         ; 7        ; a[4]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; D10      ; 65         ; 6        ; a[1]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; D11      ; 68         ; 6        ; a[4]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; D12      ; 67         ; 6        ; sum[7]                                           ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; D13      ; 72         ; 7        ; sum[5]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; E1       ; 11         ; QL0      ; GXB_GND*                                         ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; E2       ; 10         ; QL0      ; GXB_GND*                                         ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; E3       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
@@ -502,7 +504,7 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; E10      ; 66         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; E11      ;            ; 6        ; VCCIO6                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; E12      ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; E13      ; 63         ; 6        ; b[3]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; E13      ; 63         ; 6        ; b[2]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; F1       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; F2       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; F3       ;            ; --       ; VCCL_GXB                                         ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
@@ -511,8 +513,8 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; F6       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; F7       ;            ;          ; VCCINT                                           ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; F8       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; F9       ; 64         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; F10      ; 62         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; F9       ; 64         ; 6        ; a[0]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; F10      ; 62         ; 6        ; b[1]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; F11      ; 61         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; F12      ; 58         ; 6        ; GND+                                             ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
 ; F13      ; 57         ; 6        ; GND+                                             ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
@@ -524,8 +526,8 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; G6       ;            ;          ; VCCINT                                           ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; G7       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; G8       ;            ;          ; VCCINT                                           ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
-; G9       ; 60         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
-; G10      ; 59         ; 6        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; G9       ; 60         ; 6        ; sum[0]                                           ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; G10      ; 59         ; 6        ; sum[3]                                           ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; G11      ;            ; 6        ; VCCIO6                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; G12      ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; G13      ; 55         ; 5        ; GND+                                             ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
@@ -538,9 +540,9 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; H7       ;            ;          ; VCCINT                                           ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; H8       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; H9       ;            ; --       ; VCCA                                             ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
-; H10      ; 52         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; H10      ; 52         ; 5        ; a[3]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; H11      ;            ; 5        ; VCCIO5                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
-; H12      ; 51         ; 5        ; a[1]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; H12      ; 51         ; 5        ; b[3]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
 ; H13      ; 56         ; 5        ; GND+                                             ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
 ; J1       ; 15         ; QL0      ; GXB_GND*                                         ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; J2       ; 14         ; QL0      ; GXB_GND*                                         ;        ;              ;         ; --         ;                 ; --       ; --           ;
@@ -562,11 +564,11 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; K5       ; 18         ; 3        ; ^MSEL0                                           ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; K6       ; 20         ; 3        ; ^nSTATUS                                         ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; K7       ;            ; 3A       ; VCC_CLKIN3A                                      ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
-; K8       ; 35         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
-; K9       ; 36         ; 4        ; a[0]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
-; K10      ; 43         ; 4        ; b[0]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
-; K11      ; 48         ; 5        ; a[2]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
-; K12      ; 47         ; 5        ; b[2]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; K8       ; 35         ; 4        ; a[7]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; K9       ; 36         ; 4        ; carry_in                                         ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; K10      ; 43         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; K11      ; 48         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
+; K12      ; 47         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; K13      ; 54         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; L1       ;            ;          ; RREF                                             ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; L2       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
@@ -579,7 +581,7 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; L9       ; 37         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; L10      ;            ; 4        ; VCCIO4                                           ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
 ; L11      ; 44         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
-; L12      ; 50         ; 5        ; sum[2]                                           ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; L12      ; 50         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; L13      ; 49         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; M1       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; M2       ;            ; --       ; VCCA_GXB                                         ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
@@ -591,9 +593,9 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; M8       ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; M9       ; 38         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; M10      ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; M11      ; 41         ; 4        ; sum[1]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; M11      ; 41         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; M12      ;            ;          ; GND                                              ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; M13      ; 46         ; 5        ; sum[0]                                           ; output ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; M13      ; 46         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 ; N1       ;            ; --       ; VCCL_GXB                                         ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; N2       ;            ;          ; NC                                               ;        ;              ;         ; --         ;                 ; --       ; --           ;
 ; N3       ; 17         ; 3        ; ^MSEL1                                           ;        ;              ;         ; --         ;                 ; --       ; --           ;
@@ -601,12 +603,12 @@ The pin-out file can be found in /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-D
 ; N5       ; 24         ; 3        ; ~ALTERA_NCEO~ / RESERVED_OUTPUT_OPEN_DRAIN       ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; N6       ; 26         ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; N7       ; 32         ; 4        ; GND+                                             ;        ;              ;         ; Column I/O ;                 ; --       ; --           ;
-; N8       ; 33         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; N8       ; 33         ; 4        ; b[4]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; N9       ; 34         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
-; N10      ; 39         ; 4        ; carry_in                                         ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
-; N11      ; 40         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; N10      ; 39         ; 4        ; b[0]                                             ; input  ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
+; N11      ; 40         ; 4        ; sum[1]                                           ; output ; 2.5 V        ;         ; Column I/O ; N               ; no       ; Off          ;
 ; N12      ; 42         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
-; N13      ; 45         ; 5        ; b[1]                                             ; input  ; 2.5 V        ;         ; Row I/O    ; N               ; no       ; Off          ;
+; N13      ; 45         ; 5        ; RESERVED_INPUT_WITH_WEAK_PULLUP                  ;        ;              ;         ; Row I/O    ;                 ; no       ; On           ;
 +----------+------------+----------+--------------------------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
 Note: Pin directions (input, output or bidir) are based on device operating in user mode.
 
@@ -616,19 +618,19 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                       ; Library Name ;
 +----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------+--------------+
-; |Adder8                    ; 17 (3)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 26   ; 0            ; 17 (3)       ; 0 (0)             ; 0 (0)            ; |Adder8                                   ; work         ;
-;    |b4_ripple_adder:RA0|   ; 7 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 7 (0)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA0               ; work         ;
+; |Adder8                    ; 21 (6)      ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 26   ; 0            ; 21 (6)       ; 0 (0)             ; 0 (0)            ; |Adder8                                   ; work         ;
+;    |b4_ripple_adder:RA0|   ; 8 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 8 (0)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA0               ; work         ;
 ;       |full_adder:f0|      ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA0|full_adder:f0 ; work         ;
 ;       |full_adder:f1|      ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA0|full_adder:f1 ; work         ;
 ;       |full_adder:f2|      ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA0|full_adder:f2 ; work         ;
-;       |full_adder:f3|      ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA0|full_adder:f3 ; work         ;
-;    |b4_ripple_adder:RA1|   ; 6 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 6 (0)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA1               ; work         ;
-;       |full_adder:f0|      ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA1|full_adder:f0 ; work         ;
+;       |full_adder:f3|      ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA0|full_adder:f3 ; work         ;
+;    |b4_ripple_adder:RA1|   ; 5 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 5 (0)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA1               ; work         ;
 ;       |full_adder:f1|      ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA1|full_adder:f1 ; work         ;
 ;       |full_adder:f2|      ; 2 (2)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 2 (2)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA1|full_adder:f2 ; work         ;
 ;       |full_adder:f3|      ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA1|full_adder:f3 ; work         ;
-;    |b4_ripple_adder:RA2|   ; 1 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 1 (0)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA2               ; work         ;
+;    |b4_ripple_adder:RA2|   ; 2 (0)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 2 (0)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA2               ; work         ;
 ;       |full_adder:f1|      ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA2|full_adder:f1 ; work         ;
+;       |full_adder:f2|      ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |Adder8|b4_ripple_adder:RA2|full_adder:f2 ; work         ;
 +----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -647,23 +649,23 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; sum[6]    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; sum[7]    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; carry_out ; Output   ; --            ; --            ; --                    ; --  ; --   ;
-; a[0]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
+; a[0]      ; Input    ; --            ; (6) 1314 ps   ; --                    ; --  ; --   ;
 ; b[0]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
-; carry_in  ; Input    ; --            ; (6) 1313 ps   ; --                    ; --  ; --   ;
-; b[1]      ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
+; carry_in  ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
+; b[1]      ; Input    ; --            ; (6) 1314 ps   ; --                    ; --  ; --   ;
 ; a[1]      ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
-; a[2]      ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
-; b[2]      ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
-; a[3]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
+; a[2]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
+; b[2]      ; Input    ; --            ; (6) 1314 ps   ; --                    ; --  ; --   ;
+; a[3]      ; Input    ; --            ; (6) 1314 ps   ; --                    ; --  ; --   ;
 ; b[3]      ; Input    ; --            ; (6) 1314 ps   ; --                    ; --  ; --   ;
-; a[4]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
-; b[4]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
+; a[4]      ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
+; b[4]      ; Input    ; --            ; (6) 1313 ps   ; --                    ; --  ; --   ;
 ; a[5]      ; Input    ; (0) 0 ps      ; --            ; --                    ; --  ; --   ;
 ; b[5]      ; Input    ; (0) 0 ps      ; --            ; --                    ; --  ; --   ;
 ; a[6]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
 ; b[6]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
-; b[7]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
 ; a[7]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
+; b[7]      ; Input    ; (6) 1313 ps   ; --            ; --                    ; --  ; --   ;
 +-----------+----------+---------------+---------------+-----------------------+-----+------+
 
 
@@ -673,17 +675,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Source Pin / Fanout                             ; Pad To Core Index ; Setting ;
 +-------------------------------------------------+-------------------+---------+
 ; a[0]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA0|full_adder:f0|sum~0  ; 0                 ; 6       ;
-;      - b4_ripple_adder:RA0|full_adder:f0|cout~0 ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f0|sum~0  ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f0|cout~0 ; 1                 ; 6       ;
 ; b[0]                                            ;                   ;         ;
 ;      - b4_ripple_adder:RA0|full_adder:f0|sum~0  ; 0                 ; 6       ;
 ;      - b4_ripple_adder:RA0|full_adder:f0|cout~0 ; 0                 ; 6       ;
 ; carry_in                                        ;                   ;         ;
-;      - b4_ripple_adder:RA0|full_adder:f0|sum~0  ; 1                 ; 6       ;
-;      - b4_ripple_adder:RA0|full_adder:f0|cout~0 ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f0|sum~0  ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f0|cout~0 ; 0                 ; 6       ;
 ; b[1]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA0|full_adder:f1|sum    ; 0                 ; 6       ;
-;      - b4_ripple_adder:RA0|full_adder:f1|cout~0 ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f1|sum    ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f1|cout~0 ; 1                 ; 6       ;
 ; a[1]                                            ;                   ;         ;
 ;      - b4_ripple_adder:RA0|full_adder:f1|sum    ; 0                 ; 6       ;
 ;      - b4_ripple_adder:RA0|full_adder:f1|cout~0 ; 0                 ; 6       ;
@@ -691,40 +693,40 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ;      - b4_ripple_adder:RA0|full_adder:f2|sum    ; 0                 ; 6       ;
 ;      - b4_ripple_adder:RA0|full_adder:f2|cout~0 ; 0                 ; 6       ;
 ; b[2]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA0|full_adder:f2|sum    ; 0                 ; 6       ;
-;      - b4_ripple_adder:RA0|full_adder:f2|cout~0 ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f2|sum    ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f2|cout~0 ; 1                 ; 6       ;
 ; a[3]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA0|full_adder:f3|sum    ; 0                 ; 6       ;
-;      - carry_out~1                              ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f3|sum    ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f3|cout~0 ; 1                 ; 6       ;
 ; b[3]                                            ;                   ;         ;
 ;      - b4_ripple_adder:RA0|full_adder:f3|sum    ; 1                 ; 6       ;
-;      - carry_out~1                              ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA0|full_adder:f3|cout~0 ; 1                 ; 6       ;
 ; a[4]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA1|full_adder:f0|sum~0  ; 0                 ; 6       ;
-;      - b4_ripple_adder:RA1|full_adder:f1|sum~0  ; 0                 ; 6       ;
+;      - sum~0                                    ; 0                 ; 6       ;
+;      - sum~1                                    ; 0                 ; 6       ;
 ;      - b4_ripple_adder:RA1|full_adder:f1|cout~0 ; 0                 ; 6       ;
 ;      - b4_ripple_adder:RA2|full_adder:f1|cout~0 ; 0                 ; 6       ;
 ; b[4]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA1|full_adder:f0|sum~0  ; 0                 ; 6       ;
-;      - b4_ripple_adder:RA1|full_adder:f1|sum~0  ; 0                 ; 6       ;
-;      - b4_ripple_adder:RA1|full_adder:f1|cout~0 ; 0                 ; 6       ;
-;      - b4_ripple_adder:RA2|full_adder:f1|cout~0 ; 0                 ; 6       ;
+;      - sum~0                                    ; 1                 ; 6       ;
+;      - sum~1                                    ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA1|full_adder:f1|cout~0 ; 1                 ; 6       ;
+;      - b4_ripple_adder:RA2|full_adder:f1|cout~0 ; 1                 ; 6       ;
 ; a[5]                                            ;                   ;         ;
 ; b[5]                                            ;                   ;         ;
 ; a[6]                                            ;                   ;         ;
 ;      - b4_ripple_adder:RA1|full_adder:f2|sum~0  ; 0                 ; 6       ;
 ;      - b4_ripple_adder:RA1|full_adder:f2|cout~0 ; 0                 ; 6       ;
-;      - carry_out~0                              ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA2|full_adder:f2|cout~0 ; 0                 ; 6       ;
 ; b[6]                                            ;                   ;         ;
 ;      - b4_ripple_adder:RA1|full_adder:f2|sum~0  ; 0                 ; 6       ;
 ;      - b4_ripple_adder:RA1|full_adder:f2|cout~0 ; 0                 ; 6       ;
-;      - carry_out~0                              ; 0                 ; 6       ;
-; b[7]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA1|full_adder:f3|sum    ; 0                 ; 6       ;
-;      - carry_out~2                              ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA2|full_adder:f2|cout~0 ; 0                 ; 6       ;
 ; a[7]                                            ;                   ;         ;
-;      - b4_ripple_adder:RA1|full_adder:f3|sum    ; 0                 ; 6       ;
-;      - carry_out~2                              ; 0                 ; 6       ;
+;      - b4_ripple_adder:RA1|full_adder:f3|sum~0  ; 0                 ; 6       ;
+;      - carry_out~1                              ; 0                 ; 6       ;
+; b[7]                                            ;                   ;         ;
+;      - b4_ripple_adder:RA1|full_adder:f3|sum~0  ; 0                 ; 6       ;
+;      - carry_out~1                              ; 0                 ; 6       ;
 +-------------------------------------------------+-------------------+---------+
 
 
@@ -733,14 +735,15 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------------------------+---------+
 ; Name                                     ; Fan-Out ;
 +------------------------------------------+---------+
+; b4_ripple_adder:RA0|full_adder:f3|cout~0 ; 5       ;
 ; b[4]~input                               ; 4       ;
 ; a[4]~input                               ; 4       ;
 ; b[6]~input                               ; 3       ;
 ; a[6]~input                               ; 3       ;
 ; b[5]~input                               ; 3       ;
 ; a[5]~input                               ; 3       ;
-; a[7]~input                               ; 2       ;
 ; b[7]~input                               ; 2       ;
+; a[7]~input                               ; 2       ;
 ; b[3]~input                               ; 2       ;
 ; a[3]~input                               ; 2       ;
 ; b[2]~input                               ; 2       ;
@@ -750,19 +753,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; carry_in~input                           ; 2       ;
 ; b[0]~input                               ; 2       ;
 ; a[0]~input                               ; 2       ;
+; b4_ripple_adder:RA2|full_adder:f2|cout~0 ; 2       ;
 ; b4_ripple_adder:RA1|full_adder:f2|cout~0 ; 2       ;
+; b4_ripple_adder:RA2|full_adder:f1|cout~0 ; 2       ;
 ; b4_ripple_adder:RA1|full_adder:f1|cout~0 ; 2       ;
 ; b4_ripple_adder:RA0|full_adder:f2|cout~0 ; 2       ;
 ; b4_ripple_adder:RA0|full_adder:f1|cout~0 ; 2       ;
 ; b4_ripple_adder:RA0|full_adder:f0|cout~0 ; 2       ;
-; carry_out~2                              ; 1       ;
 ; carry_out~1                              ; 1       ;
 ; carry_out~0                              ; 1       ;
-; b4_ripple_adder:RA2|full_adder:f1|cout~0 ; 1       ;
-; b4_ripple_adder:RA1|full_adder:f3|sum    ; 1       ;
+; sum~3                                    ; 1       ;
+; b4_ripple_adder:RA1|full_adder:f3|sum~0  ; 1       ;
+; sum~2                                    ; 1       ;
 ; b4_ripple_adder:RA1|full_adder:f2|sum~0  ; 1       ;
+; sum~1                                    ; 1       ;
 ; b4_ripple_adder:RA1|full_adder:f1|sum~0  ; 1       ;
-; b4_ripple_adder:RA1|full_adder:f0|sum~0  ; 1       ;
+; sum~0                                    ; 1       ;
 ; b4_ripple_adder:RA0|full_adder:f3|sum    ; 1       ;
 ; b4_ripple_adder:RA0|full_adder:f2|sum    ; 1       ;
 ; b4_ripple_adder:RA0|full_adder:f1|sum    ; 1       ;
@@ -776,8 +782,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Other Routing Resource Type       ; Usage                 ;
 +-----------------------------------+-----------------------+
 ; Block interconnects               ; 28 / 42,960 ( < 1 % ) ;
-; C16 interconnects                 ; 4 / 1,518 ( < 1 % )   ;
-; C4 interconnects                  ; 25 / 26,928 ( < 1 % ) ;
+; C16 interconnects                 ; 12 / 1,518 ( < 1 % )  ;
+; C4 interconnects                  ; 33 / 26,928 ( < 1 % ) ;
 ; Direct links                      ; 1 / 42,960 ( < 1 % )  ;
 ; GXB block output buffers          ; 0 / 1,200 ( 0 % )     ;
 ; Global clocks                     ; 0 / 20 ( 0 % )        ;
@@ -785,54 +791,56 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Interquad TXRX Clocks             ; 0 / 8 ( 0 % )         ;
 ; Interquad TXRX PCSRX outputs      ; 0 / 4 ( 0 % )         ;
 ; Interquad TXRX PCSTX outputs      ; 0 / 4 ( 0 % )         ;
-; Local interconnects               ; 6 / 14,400 ( < 1 % )  ;
+; Local interconnects               ; 10 / 14,400 ( < 1 % ) ;
 ; R24 interconnects                 ; 3 / 1,710 ( < 1 % )   ;
-; R4 interconnects                  ; 28 / 37,740 ( < 1 % ) ;
+; R4 interconnects                  ; 26 / 37,740 ( < 1 % ) ;
 +-----------------------------------+-----------------------+
 
 
-+--------------------------------------------------------------------------+
-; LAB Logic Elements                                                       ;
-+--------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 8.50) ; Number of LABs  (Total = 2) ;
-+--------------------------------------------+-----------------------------+
-; 1                                          ; 0                           ;
-; 2                                          ; 0                           ;
-; 3                                          ; 0                           ;
-; 4                                          ; 0                           ;
-; 5                                          ; 0                           ;
-; 6                                          ; 1                           ;
-; 7                                          ; 0                           ;
-; 8                                          ; 0                           ;
-; 9                                          ; 0                           ;
-; 10                                         ; 0                           ;
-; 11                                         ; 1                           ;
-; 12                                         ; 0                           ;
-; 13                                         ; 0                           ;
-; 14                                         ; 0                           ;
-; 15                                         ; 0                           ;
-; 16                                         ; 0                           ;
-+--------------------------------------------+-----------------------------+
-
-
 +---------------------------------------------------------------------------+
-; LAB Signals Sourced                                                       ;
+; LAB Logic Elements                                                        ;
 +---------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 8.50) ; Number of LABs  (Total = 2) ;
+; Number of Logic Elements  (Average = 10.50) ; Number of LABs  (Total = 2) ;
 +---------------------------------------------+-----------------------------+
-; 0                                           ; 0                           ;
 ; 1                                           ; 0                           ;
 ; 2                                           ; 0                           ;
 ; 3                                           ; 0                           ;
 ; 4                                           ; 0                           ;
 ; 5                                           ; 0                           ;
-; 6                                           ; 1                           ;
+; 6                                           ; 0                           ;
 ; 7                                           ; 0                           ;
-; 8                                           ; 0                           ;
+; 8                                           ; 1                           ;
 ; 9                                           ; 0                           ;
 ; 10                                          ; 0                           ;
-; 11                                          ; 1                           ;
+; 11                                          ; 0                           ;
+; 12                                          ; 0                           ;
+; 13                                          ; 1                           ;
+; 14                                          ; 0                           ;
+; 15                                          ; 0                           ;
+; 16                                          ; 0                           ;
 +---------------------------------------------+-----------------------------+
+
+
++----------------------------------------------------------------------------+
+; LAB Signals Sourced                                                        ;
++----------------------------------------------+-----------------------------+
+; Number of Signals Sourced  (Average = 10.50) ; Number of LABs  (Total = 2) ;
++----------------------------------------------+-----------------------------+
+; 0                                            ; 0                           ;
+; 1                                            ; 0                           ;
+; 2                                            ; 0                           ;
+; 3                                            ; 0                           ;
+; 4                                            ; 0                           ;
+; 5                                            ; 0                           ;
+; 6                                            ; 0                           ;
+; 7                                            ; 0                           ;
+; 8                                            ; 1                           ;
+; 9                                            ; 0                           ;
+; 10                                           ; 0                           ;
+; 11                                           ; 0                           ;
+; 12                                           ; 0                           ;
+; 13                                           ; 1                           ;
++----------------------------------------------+-----------------------------+
 
 
 +-------------------------------------------------------------------------------+
@@ -844,9 +852,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 1                                               ; 0                           ;
 ; 2                                               ; 0                           ;
 ; 3                                               ; 0                           ;
-; 4                                               ; 1                           ;
-; 5                                               ; 0                           ;
-; 6                                               ; 1                           ;
+; 4                                               ; 0                           ;
+; 5                                               ; 2                           ;
 +-------------------------------------------------+-----------------------------+
 
 
@@ -862,11 +869,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 4                                           ; 0                           ;
 ; 5                                           ; 0                           ;
 ; 6                                           ; 0                           ;
-; 7                                           ; 1                           ;
+; 7                                           ; 0                           ;
 ; 8                                           ; 0                           ;
-; 9                                           ; 0                           ;
-; 10                                          ; 0                           ;
-; 11                                          ; 1                           ;
+; 9                                           ; 2                           ;
 +---------------------------------------------+-----------------------------+
 
 
@@ -955,8 +960,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; b[5]               ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; a[6]               ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; b[6]               ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; b[7]               ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; a[7]               ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; b[7]               ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 +--------------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
 
 
@@ -1040,8 +1045,8 @@ Critical Warning (169085): No exact pin location assignment(s) for 26 pins of 26
     Info (169086): Pin b[5] not assigned to an exact location on the device
     Info (169086): Pin a[6] not assigned to an exact location on the device
     Info (169086): Pin b[6] not assigned to an exact location on the device
-    Info (169086): Pin b[7] not assigned to an exact location on the device
     Info (169086): Pin a[7] not assigned to an exact location on the device
+    Info (169086): Pin b[7] not assigned to an exact location on the device
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'Adder8.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332144): No user constrained base clocks found in the design
 Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
@@ -1085,11 +1090,11 @@ Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Info (144001): Generated suppressed messages file /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/alabb1/Adder8/output_files/Adder8.fit.smsg
 Info: Quartus II 64-Bit Fitter was successful. 0 errors, 6 warnings
     Info: Peak virtual memory: 823 megabytes
-    Info: Processing ended: Tue Sep  4 13:38:24 2018
+    Info: Processing ended: Tue Sep  4 14:43:48 2018
     Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:04
 

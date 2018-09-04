@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Adder8
-Tue Sep  4 13:38:18 2018
+Tue Sep  4 14:43:42 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -43,13 +43,13 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Sep  4 13:38:18 2018           ;
+; Analysis & Synthesis Status        ; Successful - Tue Sep  4 14:43:42 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Adder8                                          ;
 ; Top-level Entity Name              ; Adder8                                          ;
 ; Family                             ; Cyclone IV GX                                   ;
-; Total logic elements               ; 17                                              ;
-;     Total combinational functions  ; 17                                              ;
+; Total logic elements               ; 21                                              ;
+;     Total combinational functions  ; 21                                              ;
 ;     Dedicated logic registers      ; 0                                               ;
 ; Total registers                    ; 0                                               ;
 ; Total pins                         ; 26                                              ;
@@ -173,18 +173,18 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +-------------------------------------+-----------------+-----------------+----------------------------------------------------------------------------------------------+---------+
 
 
-+---------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary ;
-+--------------------------+------------------+
-; Resource                 ; Usage            ;
-+--------------------------+------------------+
-; I/O pins                 ; 26               ;
-; DSP block 9-bit elements ; 0                ;
-; Maximum fan-out node     ; a[4]~input       ;
-; Maximum fan-out          ; 4                ;
-; Total fan-out            ; 90               ;
-; Average fan-out          ; 1.30             ;
-+--------------------------+------------------+
++---------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                         ;
++--------------------------+------------------------------------------+
+; Resource                 ; Usage                                    ;
++--------------------------+------------------------------------------+
+; I/O pins                 ; 26                                       ;
+; DSP block 9-bit elements ; 0                                        ;
+; Maximum fan-out node     ; b4_ripple_adder:RA0|full_adder:f3|cout~0 ;
+; Maximum fan-out          ; 5                                        ;
+; Total fan-out            ; 100                                      ;
+; Average fan-out          ; 1.37                                     ;
++--------------------------+------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -192,19 +192,19 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+-------------------------------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; Full Hierarchy Name                       ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+-------------------------------------------+--------------+
-; |Adder8                    ; 17 (3)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 26   ; 0            ; |Adder8                                   ; work         ;
-;    |b4_ripple_adder:RA0|   ; 7 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA0               ; work         ;
+; |Adder8                    ; 21 (6)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 26   ; 0            ; |Adder8                                   ; work         ;
+;    |b4_ripple_adder:RA0|   ; 8 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA0               ; work         ;
 ;       |full_adder:f0|      ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA0|full_adder:f0 ; work         ;
 ;       |full_adder:f1|      ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA0|full_adder:f1 ; work         ;
 ;       |full_adder:f2|      ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA0|full_adder:f2 ; work         ;
-;       |full_adder:f3|      ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA0|full_adder:f3 ; work         ;
-;    |b4_ripple_adder:RA1|   ; 6 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA1               ; work         ;
-;       |full_adder:f0|      ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA1|full_adder:f0 ; work         ;
+;       |full_adder:f3|      ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA0|full_adder:f3 ; work         ;
+;    |b4_ripple_adder:RA1|   ; 5 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA1               ; work         ;
 ;       |full_adder:f1|      ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA1|full_adder:f1 ; work         ;
 ;       |full_adder:f2|      ; 2 (2)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA1|full_adder:f2 ; work         ;
 ;       |full_adder:f3|      ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA1|full_adder:f3 ; work         ;
-;    |b4_ripple_adder:RA2|   ; 1 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA2               ; work         ;
+;    |b4_ripple_adder:RA2|   ; 2 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA2               ; work         ;
 ;       |full_adder:f1|      ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA2|full_adder:f1 ; work         ;
+;       |full_adder:f2|      ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0         ; 0    ; 0            ; |Adder8|b4_ripple_adder:RA2|full_adder:f2 ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+-------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -224,14 +224,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "b4_ripple_adder:RA2"                                                                ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; c_in ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; s    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
++-------------------------------------------------+
+; Port Connectivity Checks: "b4_ripple_adder:RA2" ;
++------+-------+----------+-----------------------+
+; Port ; Type  ; Severity ; Details               ;
++------+-------+----------+-----------------------+
+; c_in ; Input ; Info     ; Stuck at VCC          ;
++------+-------+----------+-----------------------+
 
 
 +-------------------------------------------------+
@@ -258,7 +257,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Sep  4 13:38:17 2018
+    Info: Processing started: Tue Sep  4 14:43:41 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Adder8 -c Adder8
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/alabb1/Full_adder/full_adder.vhd
@@ -274,21 +273,18 @@ Info (12021): Found 2 design units, including 1 entities, in source file Adder8.
     Info (12022): Found design unit 1: Adder8-gooy_inside
     Info (12023): Found entity 1: Adder8
 Info (12127): Elaborating entity "Adder8" for the top level hierarchy
-Warning (10492): VHDL Process Statement warning at Adder8.vhd(52): signal "int_sum_c0" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at Adder8.vhd(53): signal "int_sum_c1" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10873): Using initial value X (don't care) for net "pro_case:INT_C" at Adder8.vhd(47)
 Info (12128): Elaborating entity "b4_ripple_adder" for hierarchy "b4_ripple_adder:RA0"
 Info (12128): Elaborating entity "full_adder" for hierarchy "b4_ripple_adder:RA0|full_adder:f0"
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 43 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 47 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 17 input pins
     Info (21059): Implemented 9 output pins
-    Info (21061): Implemented 17 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 4 warnings
+    Info (21061): Implemented 21 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 683 megabytes
-    Info: Processing ended: Tue Sep  4 13:38:18 2018
+    Info: Processing ended: Tue Sep  4 14:43:42 2018
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:02
 
