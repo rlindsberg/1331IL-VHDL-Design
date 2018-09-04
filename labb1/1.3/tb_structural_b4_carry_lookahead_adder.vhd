@@ -22,7 +22,7 @@ Signal A_int: std_logic_vector (3 downto 0);
 Signal B_int : std_logic_vector (3 downto 0);
 
 --outputs
-Signal Sum : std_logic_vector (3 downto 0);
+Signal Sum : std_logic_vector (4 downto 0);
 Signal Overflow : std_logic;
 
 Begin
@@ -40,7 +40,7 @@ Begin
 		num2 <= 1;
 		wait for 50 ns;
 
-    -- testing 1111 + 011 + 1 = 1 0011
+    -- testing 1111 + 011 + 1 = 1 0010
 		num1 <= 15;
 		num2 <= 3;
 		wait for 50 ns;
