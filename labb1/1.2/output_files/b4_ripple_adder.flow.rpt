@@ -1,5 +1,5 @@
 Flow report for b4_ripple_adder
-Tue Sep 04 10:54:14 2018
+Tue Sep 04 11:11:09 2018
 Quartus II 32-bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Tue Sep 04 10:54:14 2018           ;
+; Flow Status                        ; Successful - Tue Sep 04 11:11:09 2018           ;
 ; Quartus II 32-bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; b4_ripple_adder                                 ;
 ; Top-level Entity Name              ; b4_ripple_adder                                 ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/04/2018 10:54:12 ;
+; Start date & time ; 09/04/2018 11:11:07 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; b4_ripple_adder     ;
 +-------------------+---------------------+
@@ -73,7 +73,7 @@ applicable agreement for further details.
 +-------------------------------------+-------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                         ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+-------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 1095778030714.153605125202440 ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 1095778030714.153605226704536 ; --            ; --          ; --         ;
 ; PARTITION_COLOR                     ; 16764057                      ; --            ; --          ; Top        ;
 ; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING         ; --            ; --          ; Top        ;
 ; PARTITION_NETLIST_TYPE              ; SOURCE                        ; --            ; --          ; Top        ;
@@ -86,7 +86,7 @@ applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:02     ; 1.0                     ; 369 MB              ; 00:00:02                           ;
+; Analysis & Synthesis ; 00:00:02     ; 1.0                     ; 365 MB              ; 00:00:02                           ;
 ; Total                ; 00:00:02     ; --                      ; --                  ; 00:00:02                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
