@@ -1,0 +1,82 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do b4_ripple_adder_run_msim_rtl_vhdl.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vcom -93 -work work {C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/full_adder.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity full_adder
+# -- Compiling architecture behavioural of full_adder
+# vcom -93 -work work {C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/b4_ripple_adder.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity b4_ripple_adder
+# -- Compiling architecture structral_b4_ripple_adder of b4_ripple_adder
+# vcom -93 -work work {C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/tb_b4_ripple_adder.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_b4_ripple_adder
+# -- Compiling architecture behavioural of tb_b4_ripple_adder
+# 
+# vcom -93 -work work {C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/tb_b4_ripple_adder.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_b4_ripple_adder
+# -- Compiling architecture behavioural of tb_b4_ripple_adder
+# 
+# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneive -L rtl_work -L work -voptargs="+acc"  tb_b4_ripple_adder
+# vsim -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cycloneive -L rtl_work -L work -voptargs=\"+acc\" -t 1ps tb_b4_ripple_adder 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_b4_ripple_adder(behavioural)
+# Loading work.b4_ripple_adder(structral_b4_ripple_adder)
+# Loading work.full_adder(behavioural)
+# 
+# add wave *
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+# 
+#           File in use by: rlindsberg  Hostname: EMOLINDSBER2F67  ProcessID: 1836
+# 
+#           Attempting to use alternate WLF file "./wlftnkbffb".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+# 
+#           Using alternate file: ./wlftnkbffb
+# 
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_b4_ripple_adder
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_b4_ripple_adder
+add wave -position insertpoint sim:/tb_b4_ripple_adder/*
+restart
+restart
+add wave *
+run 100ns
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_b4_ripple_adder
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_b4_ripple_adder

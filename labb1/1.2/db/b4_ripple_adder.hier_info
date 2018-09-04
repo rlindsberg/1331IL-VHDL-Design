@@ -1,0 +1,73 @@
+|b4_ripple_adder
+A[0] => full_adder:FA0.A
+A[1] => full_adder:FA1.A
+A[2] => full_adder:FA2.A
+A[3] => full_adder:FA3.A
+B[0] => full_adder:FA0.B
+B[1] => full_adder:FA1.B
+B[2] => full_adder:FA2.B
+B[3] => full_adder:FA3.B
+Cin => full_adder:FA0.Cin
+Cout <= full_adder:FA3.Carry
+Sum[0] <= full_adder:FA0.Sum
+Sum[1] <= full_adder:FA1.Sum
+Sum[2] <= full_adder:FA2.Sum
+Sum[3] <= full_adder:FA3.Sum
+
+
+|b4_ripple_adder|full_adder:FA0
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|b4_ripple_adder|full_adder:FA1
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|b4_ripple_adder|full_adder:FA2
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|b4_ripple_adder|full_adder:FA3
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+
