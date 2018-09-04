@@ -6,9 +6,9 @@ Use work.all;
 
 entity b4_carry_lookahead_adder is
 	port (
-		a0, a1, a2, a3,
-		b0, b1, b2, b3: std_logic;
-		s0, s1, s2, s3: out std_logic);
+		A: std_logic_vector(3 downto 0);
+    B: std_logic_vector(3 downto 0);
+    s: OUT std_logic_vector(3 downto 0));
 end entity;
 
 architecture gooy_inside of b4_carry_lookahead_adder is
@@ -18,15 +18,15 @@ architecture gooy_inside of b4_carry_lookahead_adder is
 	signal no0, no1, no2, no3: std_logic;
 
 	begin
-		no0 <= a0 nor b0;
-		no1 <= a1 nor b1;
-		no2 <= a2 nor b2;
-		no3 <= a3 nor b3;
+		no0 <= A(0) nor B(0);
+		no1 <= A(1) nor B(1);
+		no2 <= A(2) nor B(2);
+		no3 <= A(3) nor B(3);
 
-		na0 <= a0 nand b0;
-		na1 <= a1 nand b1;
-		na2 <= a2 nand b2;
-		na3 <= a3 nand b3;
+		na0 <= A(0) nand B(0);
+		na1 <= A(1) nand B(1);
+		na2 <= A(2) nand B(2);
+		na3 <= A(3) nand B(3);
 	-- '0' och '1' är där ev. carry_in skulle varit och kan egentligen förkortas bort.
 		c0 <= '0';
 		t0 <= na0 and not no0;
@@ -40,8 +40,8 @@ architecture gooy_inside of b4_carry_lookahead_adder is
 		c3 <= (('1' and na0 and na1 and na2) nor (na1 and na2 and no0)) nor ((na2 and no1) nor no2);
 		t3 <= na3 and not no3;
 
-		s0 <= c0 xor t0;
-		s1 <= c1 xor t1;
-		s2 <= c2 xor t2;
-		s3 <= c3 xor t3;
+		s(0) <= c0 xor t0;
+		s(1) <= c1 xor t1;
+		s(2) <= c2 xor t2;
+		s(3) <= c3 xor t3;
 end architecture;
