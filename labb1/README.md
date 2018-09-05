@@ -17,7 +17,7 @@ KLAR
 
 ##### 1.3. Skapa en funktionell VHDL-modell för en 4-bitars carry-lookahead-adderare. Adderaren ska *inte* ha en carry-generate eller carry-propagate utgång.
 
-KLAR?
+KLAR
 
 ##### 1.4. I Figur 1 visas en carry-select-adderare. Förklara funktionen! Skapa en strukturell VHDL-modell för en 8-bitars carry-select-adderare uppbyggd av 4-bitars ripple-adderare. Muxarna ska ha 4 ns, AND grindar 3 ns och OR grindar 3 ns fördröjning.
 
