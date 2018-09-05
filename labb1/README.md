@@ -1,4 +1,4 @@
-*Ni får ej använda dena kod i VHDL kurser på kth. Ni vet villka ni är!*
+*Ni får ej använda denna kod i VHDL kurser på kth. Ni vet villka ni är!*
 # Förberedelseuppgifter
 
 ##### 1. När väljer en konstruktör en ripple- adderare och när är en carry-lookahead adderare att föredra?
