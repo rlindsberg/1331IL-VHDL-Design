@@ -45,8 +45,8 @@ architecture gooy_inside of Adder8 is
 													c_out1);
 
 
-      sum(7 downto 4) <= int_sum_c0(3 downto 0) after 5 ns when int_c='0' else
-                         int_sum_c1(3 downto 0) after 5 ns;
+      sum(7 downto 4) <= int_sum_c0(3 downto 0) after 4 ns when int_c='0' else
+                         int_sum_c1(3 downto 0) after 4 ns;
 
 		tmp_or <= c_out0 or int_c after 3 ns;
 		carry_out <= c_out1 and tmp_or after 3 ns;

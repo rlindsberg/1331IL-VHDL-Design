@@ -6,11 +6,12 @@
 
 #### 4-bit Ripple Adder
 
-carry0 -> carry1 -> carry2 -> carry out: 3 * 5 ns = 15 ns
+Full Adder -> Full Adder -> Full Adder -> Full Adder -> sum
+5 + 5 + 5 + 5 = 20
 
 |sum|carry|
 |-|-|
-|5 ns|15 ns|
+|20 ns|20 ns|
 
 #### 4-bit Carry Lookahead Adder
 
@@ -20,9 +21,9 @@ carry0 -> carry1 -> carry2 -> carry out: 3 * 5 ns = 15 ns
 
 #### 8-bit Carry Select Adder
 
-4-bit ripple adder sum + mux = 5 + 5 = 10 ns
+4-bit ripple adder sum + mux = 20 + 4 = 24 ns
 
-4-bit ripple adder carry + OR + AND = 15 + 3 + 3 = 21 ns
+4-bit ripple adder carry + OR + AND = 20 + 3 + 3 = 26 ns
 
 |sum|carry|
 |-|-|
@@ -31,9 +32,9 @@ carry0 -> carry1 -> carry2 -> carry out: 3 * 5 ns = 15 ns
 ### Resultat
 *enhet: ns*
 
-| Krets                        |Sum |Carry|
+| Krets                        |Sum  |Carry|
 |-|-|
-| Full Adder                   | 5  |  5  |
-| 4-bit Ripple Adder           | 5  |  15 |
-| 4-bit Carry Lookahead Adder  | 5  |  5  |
-| 8-bit Carry Select Adder     | 10 |  21 |
+| Full Adder                   | 5   |  5  |
+| 4-bit Ripple Adder           | 20  |  20 |
+| 4-bit Carry Lookahead Adder  | 5   |  5  |
+| 8-bit Carry Select Adder     | 24  |  26 |
