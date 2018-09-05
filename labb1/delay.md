@@ -33,7 +33,7 @@ Full Adder -> Full Adder -> Full Adder -> Full Adder -> sum
 *enhet: ns*
 
 | Krets                        |Sum  |Carry|
-|-|-|
+|-|-|-|
 | Full Adder                   | 5   |  5  |
 | 4-bit Ripple Adder           | 20  |  20 |
 | 4-bit Carry Lookahead Adder  | 5   |  5  |
