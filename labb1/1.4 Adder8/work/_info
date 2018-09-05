@@ -4,7 +4,7 @@ K3
 cModel Technology
 d/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/alabb1/Adder8/modelsim
 Eadder8
-Z0 w1536149286
+Z0 w1536153084
 Z1 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
 Z2 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
 Z3 d/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8
@@ -12,23 +12,23 @@ Z4 8/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/Adder8
 Z5 F/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/Adder8.vhd
 l0
 L5
-VK:6]=1@Iikn2LRdeLkQSH1
+VWUSPZoOJ:4XQ>]<;0F9Pf0
 Z6 OV;C;10.1d;51
 32
-Z7 !s108 1536150886.351249
+Z7 !s108 1536153521.275556
 Z8 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/Adder8.vhd|
 Z9 !s107 /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/Adder8.vhd|
 Z10 o-work work -2002 -explicit -O0
 Z11 tExplicit 1
-!s100 A9kCn0m]1nR7T;FHRc6D82
+!s100 ?F;NOlBhM:EWib[IY4FHa0
 !i10b 1
 Agooy_inside
 R1
 R2
-DEx4 work 6 adder8 0 22 K:6]=1@Iikn2LRdeLkQSH1
-l28
+DEx4 work 6 adder8 0 22 WUSPZoOJ:4XQ>]<;0F9Pf0
+l37
 L14
-V^0Qe4;Moa4F<YF<`:_Y@73
+V?i1kA1VChQ8G9DhDg:PNH2
 R6
 32
 R7
@@ -36,7 +36,7 @@ R8
 R9
 R10
 R11
-!s100 S4U>EHC@giof8f0AVb6o[2
+!s100 Ol<lLMImd@4HPnho;XYRO2
 !i10b 1
 Eb4_ripple_adder
 Z12 w1536150762
@@ -50,7 +50,7 @@ L4
 VNc@R8H^MFO?2@e3f?gMb00
 R6
 32
-Z15 !s108 1536150886.543740
+Z15 !s108 1536153521.294340
 Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/b4_ripple_adder.vhd|
 Z17 !s107 /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/b4_ripple_adder.vhd|
 R10
@@ -85,7 +85,7 @@ L5
 VMFXnBad[kYaNcY3fWhmCA3
 R6
 32
-Z20 !s108 1536150886.566736
+Z20 !s108 1536153521.312362
 Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/full_adder.vhd|
 Z22 !s107 /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/full_adder.vhd|
 R10
@@ -109,7 +109,7 @@ R10
 R11
 !i10b 1
 Etb_adder8
-Z23 w1536149286
+Z23 w1536153506
 Z24 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
 R1
 R2
@@ -123,7 +123,7 @@ V>3EQN8LFe3Ao0^>Hh22332
 R6
 32
 !i10b 1
-Z27 !s108 1536150886.593768
+Z27 !s108 1536153521.329947
 Z28 !s90 -reportprogress|300|-work|work|-2002|-explicit|/home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/tb_Adder8.vhd|
 Z29 !s107 /home/gnmn/Documents/skola/IL1331/1331IL-VHDL-Design/labb1/1.4 Adder8/tb_Adder8.vhd|
 R10
@@ -135,8 +135,8 @@ R2
 Z30 DEx4 work 9 tb_adder8 0 22 >3EQN8LFe3Ao0^>Hh22332
 l27
 L9
-Z31 V:;dO=H0f5G3CoW<94m@Xg0
-Z32 !s100 E7Ie^_4OUlhChCdnPcQ;b0
+V:4R23o]8T[cc9a@`5Y55o2
+!s100 @ncV?6>zcgfdW7dhZ^@U11
 R6
 32
 !i10b 1

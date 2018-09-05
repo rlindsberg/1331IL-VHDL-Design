@@ -41,21 +41,21 @@ architecture gooy_inside of tb_Adder8 is
 
 		process
 			begin
-				A_int <= 256;
-				B_int <= 1;
-				wait for 10 ns;
-
 				A_int <= 128;
-				B_int <= 128;
-				wait for 10 ns;
-				
+				B_int <= 1;
+				wait for 20 ns;
+
+				A_int <= 64;
+				B_int <= 64;
+				wait for 20 ns;
+
 				A_int <= 64;
 				B_int <= 96;
-				wait for 10 ns;
+				wait for 20 ns;
 
 				A_int <= 0;
 				B_int <= 1;
-				wait for 10 ns;
+				wait for 20 ns;
 		end process;
 
 end architecture;
