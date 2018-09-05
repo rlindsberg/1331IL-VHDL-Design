@@ -1,0 +1,115 @@
+# Loading project Adder8
+# Compile of Adder8.vhd was successful.
+# Compile of b4_ripple_adder.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of tb_Adder8.vhd was successful.
+# 4 compiles, 0 failed with no errors. 
+# Load canceled
+# Compile of Adder8.vhd was successful.
+# Compile of b4_ripple_adder.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of tb_Adder8.vhd was successful.
+# 4 compiles, 0 failed with no errors. 
+vsim work.tb_adder8(gooy_inside)
+# vsim work.tb_adder8(gooy_inside) 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_adder8(gooy_inside)
+# Loading work.adder8(gooy_inside)
+# Loading work.b4_ripple_adder(gooy_inside)
+# Loading work.full_adder(gooy_inside)
+add wave -position insertpoint sim:/tb_adder8/*
+run
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder8
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder8
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# Compile of Adder8.vhd was successful.
+# Compile of b4_ripple_adder.vhd was successful.
+# Compile of full_adder.vhd was successful.
+# Compile of tb_Adder8.vhd was successful.
+# 4 compiles, 0 failed with no errors. 
+vsim work.tb_adder8(gooy_inside)
+# vsim work.tb_adder8(gooy_inside) 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_adder8(gooy_inside)
+# Loading work.adder8(gooy_inside)
+# Loading work.b4_ripple_adder(gooy_inside)
+# Loading work.full_adder(gooy_inside)
+add wave -position insertpoint sim:/tb_adder8/*
+run
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder8
+# ** Error: (vsim-86) Arg Value -2147483648 is out of NATURAL range 0 to 2147483647.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder8
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run

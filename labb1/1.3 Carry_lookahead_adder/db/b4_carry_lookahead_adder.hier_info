@@ -1,0 +1,86 @@
+|structural_b4_carry_lookahead_adder
+A[0] => w_G[0].IN0
+A[0] => full_adder:FULL_ADDER_BIT_0.A
+A[1] => w_G[1].IN0
+A[1] => w_P[1].IN0
+A[1] => full_adder:FULL_ADDER_BIT_1.A
+A[2] => w_G[2].IN0
+A[2] => w_P[2].IN0
+A[2] => full_adder:FULL_ADDER_BIT_2.A
+A[3] => w_G[3].IN0
+A[3] => w_P[3].IN0
+A[3] => full_adder:FULL_ADDER_BIT_3.A
+B[0] => w_G[0].IN1
+B[0] => full_adder:FULL_ADDER_BIT_0.B
+B[1] => w_G[1].IN1
+B[1] => w_P[1].IN1
+B[1] => full_adder:FULL_ADDER_BIT_1.B
+B[2] => w_G[2].IN1
+B[2] => w_P[2].IN1
+B[2] => full_adder:FULL_ADDER_BIT_2.B
+B[3] => w_G[3].IN1
+B[3] => w_P[3].IN1
+B[3] => full_adder:FULL_ADDER_BIT_3.B
+Sum[0] <= full_adder:FULL_ADDER_BIT_0.Sum
+Sum[1] <= full_adder:FULL_ADDER_BIT_1.Sum
+Sum[2] <= full_adder:FULL_ADDER_BIT_2.Sum
+Sum[3] <= full_adder:FULL_ADDER_BIT_3.Sum
+Sum[4] <= w_C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|structural_b4_carry_lookahead_adder|full_adder:FULL_ADDER_BIT_0
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|structural_b4_carry_lookahead_adder|full_adder:FULL_ADDER_BIT_1
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|structural_b4_carry_lookahead_adder|full_adder:FULL_ADDER_BIT_2
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|structural_b4_carry_lookahead_adder|full_adder:FULL_ADDER_BIT_3
+A => Sum.IN0
+A => Carry.IN0
+A => Carry.IN0
+B => Sum.IN1
+B => Carry.IN1
+B => Carry.IN0
+Cin => Sum.IN1
+Cin => Carry.IN1
+Cin => Carry.IN1
+Carry <= Carry.DB_MAX_OUTPUT_PORT_TYPE
+Sum <= Sum.DB_MAX_OUTPUT_PORT_TYPE
+
+

@@ -1,0 +1,112 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\rlindsberg\Documents\Github\1331IL-VHDL-Design\labb1\1.2\simulation\modelsim
+Eb4_ripple_adder
+Z1 w1536051250
+Z2 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z3 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z4 dC:\Users\rlindsberg\Documents\Github\1331IL-VHDL-Design\labb1\1.2\simulation\modelsim
+Z5 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/b4_ripple_adder.vhd
+Z6 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/b4_ripple_adder.vhd
+l0
+L5
+VZD@6nWDYF[H2:HbW`Te?^0
+Z7 OV;C;10.1d;51
+31
+Z8 !s108 1536053922.197000
+Z9 !s90 -reportprogress|300|-93|-work|work|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/b4_ripple_adder.vhd|
+Z10 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/b4_ripple_adder.vhd|
+Z11 o-93 -work work -O0
+Z12 tExplicit 1
+!s100 Y1n1fN2knj[=eS2bAdiCT2
+!i10b 1
+Astructral_b4_ripple_adder
+R2
+R3
+DEx4 work 15 b4_ripple_adder 0 22 ZD@6nWDYF[H2:HbW`Te?^0
+l26
+L14
+VUSTUz8fc^];20^Knf`PN_2
+R7
+31
+R8
+R9
+R10
+R11
+R12
+!s100 7^Rg3`DoAIG0`QA`Dm<fn2
+!i10b 1
+Efull_adder
+Z13 w1536050446
+R2
+R3
+R4
+Z14 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/full_adder.vhd
+Z15 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/full_adder.vhd
+l0
+L5
+VG5>Zh=EcieW>^6@T3Q?`71
+R7
+31
+Z16 !s108 1536053922.103000
+Z17 !s90 -reportprogress|300|-93|-work|work|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/full_adder.vhd|
+Z18 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/full_adder.vhd|
+R11
+R12
+!s100 ZC@FU<z4bQRgb`0]QzQc:3
+!i10b 1
+Abehavioural
+R2
+R3
+DEx4 work 10 full_adder 0 22 G5>Zh=EcieW>^6@T3Q?`71
+l17
+L15
+V1OV6@W?lBX1?VT2bRQV:R2
+R7
+31
+R16
+R17
+R18
+R11
+R12
+!s100 LY0UHXjIe;@OCUYW3l3UL2
+!i10b 1
+Etb_b4_ripple_adder
+Z19 w1536053912
+Z20 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+R2
+R3
+R4
+Z21 8C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/tb_b4_ripple_adder.vhd
+Z22 FC:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/tb_b4_ripple_adder.vhd
+l0
+L6
+V=Y`R992k;zbFdz4zi=A:m3
+!s100 z`1=GgB[dACj0A5<Jl2UF2
+R7
+31
+!i10b 1
+Z23 !s108 1536053922.400000
+Z24 !s90 -reportprogress|300|-93|-work|work|C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/tb_b4_ripple_adder.vhd|
+Z25 !s107 C:/Users/rlindsberg/Documents/Github/1331IL-VHDL-Design/labb1/1.2/tb_b4_ripple_adder.vhd|
+R11
+R12
+Abehavioural
+R20
+R2
+R3
+Z26 DEx4 work 18 tb_b4_ripple_adder 0 22 =Y`R992k;zbFdz4zi=A:m3
+l31
+L9
+Z27 VjZchUW67U_Iei=I[]fEMG2
+Z28 !s100 KMAfJMgQWDG^4OO9fKW_D1
+R7
+31
+!i10b 1
+R23
+R24
+R25
+R11
+R12
