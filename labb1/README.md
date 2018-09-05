@@ -21,9 +21,11 @@ KLAR
 
 ##### 1.4. I Figur 1 visas en carry-select-adderare. Förklara funktionen! Skapa en strukturell VHDL-modell för en 8-bitars carry-select-adderare uppbyggd av 4-bitars ripple-adderare. Muxarna ska ha 4 ns, AND grindar 3 ns och OR grindar 3 ns fördröjning.
 
-| Adderare | Sum | Carry | Sum |Carry |
+KLAR
+
+| Adderare                        | Sum | Carry | Sum |Carry |
 | ----------- | ----------- | ----------- | ----------- | ----------- |
-| Heladderare |        |        |        |        |
-| 4-bitars Ripple-adderare |        |        |        |        |
-| 4-bitars Look-ahead-adderare |        |        |        |        |
-| 8-bitars Carry-Select-adderare |        |        |        |        |
+| Heladderare                     |    5   |    5    |        |        |
+| 4-bitars Ripple-adderare        |   20   |   20    |        |        |
+| 4-bitars Look-ahead-adderare    |    5   |    5    |        |        |
+| 8-bitars Carry-Select-adderare  |   24   |   26    |        |        |
