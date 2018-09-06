@@ -12,7 +12,8 @@ Component structural_b4_carry_lookahead_adder is
   Port (
     A: std_logic_vector(3 downto 0);
     B: std_logic_vector(3 downto 0);
-    Sum: OUT std_logic_vector(4 downto 0));
+    Sum: OUT std_logic_vector(3 downto 0);
+	 Carry : out std_logic);
 End Component;
 
 --inputs
@@ -22,15 +23,16 @@ Signal A_int: std_logic_vector (3 downto 0);
 Signal B_int : std_logic_vector (3 downto 0);
 
 --outputs
-Signal Sum : std_logic_vector (4 downto 0);
-Signal Overflow : std_logic;
+Signal Sum : std_logic_vector (3 downto 0);
+Signal Carry : std_logic;
 
 Begin
 
   DUT: structural_b4_carry_lookahead_adder Port Map(
 		A => A_int,
 		B => B_int,
-		Sum => Sum
+		Sum => Sum,
+		Carry => Carry
 	);
 
 	process
