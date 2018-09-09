@@ -30,7 +30,7 @@ Architecture gooy_inside of tb_b8_arith_adder is
 
   Process
     Begin
-      A_int <= unsigned(to_unsigned(256, 8));
+      A_int <= unsigned(to_unsigned(120, 8));
       B_int <= unsigned(to_unsigned(10, 8));
       wait for 10 ns;
   End Process;
