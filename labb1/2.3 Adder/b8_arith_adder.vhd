@@ -2,7 +2,7 @@ Library IEEE;
 Use IEEE.STD_LOGIC_ARITH.ALL;
 Use WORK.ALL;
 
-entity Adder is
+entity b8_arith_adder is
   port(
     a : unsigned(7 downto 0);
     b : unsigned(7 downto 0);
@@ -10,7 +10,7 @@ entity Adder is
   );
 End;
 
-Architecture behavioural of Adder is
+Architecture behavioural of b8_arith_adder is
   Begin
 
     sum <= a + b After 5 ns;
