@@ -14,7 +14,7 @@ Architecture RTL of tb_ALU is
       B     : in data_word;
       En    : in std_logic;
       clk   : in std_logic;
-      y     : out data_word;
+      y     : out std_logic_vector(4 downto 0);
       n_flag: out std_logic;
       z_flag: out std_logic;
       o_flag: out std_logic
@@ -25,7 +25,7 @@ Architecture RTL of tb_ALU is
   Signal A_in, B_in                         : data_word;
   Signal A_int, B_int                       : integer;
   Signal En_in, clk_in                      : std_logic;
-  Signal y_out                              : data_word;
+  Signal y_out                              : std_logic_vector(4 downto 0);
   Signal n_flag_out,z_flag_out,o_flag_out   : std_logic;
 
   Begin
