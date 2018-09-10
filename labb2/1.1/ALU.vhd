@@ -1,5 +1,7 @@
 Library IEEE;
 use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 use work.cpu_package.all;
 
 Entity ALU is
@@ -14,7 +16,7 @@ Entity ALU is
       z_flag: out std_logic;
       o_flag: out std_logic
       );
-End ALU;
+End Entity;
 
 Architecture RTL of ALU is
   Begin
@@ -29,14 +31,11 @@ Architecture RTL of ALU is
             a when "110";
 
     -- negative flag
-    --if y'left = '0' then n_flag <= '1';
-	 n_flag<= '1' when y'left='0' else '0';
+	 n_flag<= '1' when y'left=0 else '0';
 
     -- zero flag
-    -- if y is inactive at all bits
-    --if -y'active then z_flag <= '1';
-	 n_flag<= '1' when -y'active else '0';
+	 n_flag<= '1' when not y'active else '0';
 
-    -- overflow flag
-    o_flag <= (not a'left and not b'left and y'left) or (a'left and b'left and not y'left);
+    -- overflow flag NOT WORKING
+    o_flag <= (not A'left and not B'left and y'left) or (A'left and B'left and y'left);
 End Architecture;
