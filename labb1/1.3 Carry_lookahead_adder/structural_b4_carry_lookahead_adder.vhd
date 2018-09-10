@@ -6,7 +6,8 @@ Entity structural_b4_carry_lookahead_adder is
   Port(
     A: IN std_logic_vector(3 downto 0);
     B: IN std_logic_vector(3 downto 0);
-    Sum: OUT std_logic_vector(4 downto 0)
+    Sum: OUT std_logic_vector(3 downto 0);
+	 Carry: out std_logic
     );
 End structural_b4_carry_lookahead_adder;
 
@@ -25,7 +26,7 @@ Architecture behavioural of structural_b4_carry_lookahead_adder is
 
   Signal w_G: std_logic_vector(3 downto 0); -- Generate
   Signal w_P: std_logic_vector(3 downto 0); -- Propagate
-  Signal w_C: std_logic_vector(4 downto 0); -- Carry
+  Signal w_C: std_logic_vector(3 downto 0); -- Carry
 
   Signal w_SUM: std_logic_vector(3 downto 0);
 
@@ -84,9 +85,12 @@ Begin
   w_C(1) <= w_G(0) or (w_P(0) and w_C(0));
   w_C(2) <= w_G(1) or (w_P(1) and w_C(1));
   w_C(3) <= w_G(2) or (w_P(2) and w_C(2));
-  w_C(4) <= w_G(3) or (w_P(3) and w_C(3));
+  --w_C(4) <= w_G(3) or (w_P(3) and w_C(3));
 
   -- Final Answer
-  Sum <= w_C(4) & w_SUM;  -- VHDL Concatenation
+  --Sum <= w_C(4) & w_SUM;  -- VHDL Concatenation
+  Sum <= w_SUM;
+  Carry <= w_G(3) or (w_P(3) and w_C(3));
+  
 
 end behavioural;
