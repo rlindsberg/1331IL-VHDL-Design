@@ -11,7 +11,7 @@ Entity ALU is
       B     : in data_word;
       En    : in std_logic;
       clk   : in std_logic;
-      y     : out data_word;
+      y     : out std_logic_vector(4 downto 0);
       n_flag: out std_logic;
       z_flag: out std_logic;
       o_flag: out std_logic
@@ -19,17 +19,20 @@ Entity ALU is
 End Entity;
 
 Architecture RTL of ALU is
+  signal y_temp: std_logic_vector(4 downto 0);
+
   Begin
 
-    With Op Select
-      y <=  add_overflow(a, b) when "000",
-            sub_overflow(a, b) when "001",
-            a AND b when "010",
-            a OR b when "011",
-            a XOR b when "100",
-            NOT a when "101",
-            a when "110",
-            a when Others;
+  Process
+  Begin
+    n_flag <= '0';
+    z_flag <= '0';
+    o_flag <= '0';
+
+    if Op = "000" then
+      y_temp <= add_overflow(a, b);
+      y <= y_temp;
+    end if;
 
     -- negative flag
     if (y'left = 0) then
@@ -42,5 +45,9 @@ Architecture RTL of ALU is
     end if;
 
     -- overflow flag NOT WORKING
-    o_flag <= (not A(A'left) and not B(B'left) and y(y'left)) or ( A(A'left) and B(B'left) and y(y'left) );
+    o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and y_temp(y_temp'left));
+
+    wait for 100 ns;
+
+    End Process;
 End Architecture;
