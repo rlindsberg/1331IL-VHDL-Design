@@ -23,7 +23,7 @@ Architecture RTL of ALU is
 
   Begin
 
-  Process
+  Process(clk)
   Begin
     n_flag <= '0';
     z_flag <= '0';
@@ -39,15 +39,8 @@ Architecture RTL of ALU is
       n_flag<= '1';
     end if;
 
-    -- zero flag
-    if not y'active then
-      n_flag<= '1';
-    end if;
-
     -- overflow flag NOT WORKING
     o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and y_temp(y_temp'left));
-
-    wait for 100 ns;
 
     End Process;
 End Architecture;
