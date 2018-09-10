@@ -28,9 +28,9 @@ Package Body cpu_package is
   )
   -- carry out is the most sig. bit
   Return std_logic_vector is
-    Variable in_A: unsigned;
-    Variable in_B: unsigned;
-    Variable out_A: std_logic_vector;
+    Variable in_A: unsigned(data_size-1 downto 0);
+    Variable in_B: unsigned(data_size-1 downto 0);
+    Variable out_A: std_logic_vector(data_size downto 0);
     Variable sum : unsigned(in_A'length downto 0);
 
     Begin
