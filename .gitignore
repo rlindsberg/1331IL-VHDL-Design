@@ -40,25 +40,25 @@
 
 !/*.gitignore
 ##
-!*.qpf
-!*.qsf
-!*.qws
+*.qpf
+*.qsf
+*.qws
 ##
-!*.bdf
-!*.v
+*.bdf
+*.v
 ##
-!*.ptf
-!*.bsf
+*.ptf
+*.bsf
 ##
-!**/class.ptf
+**/class.ptf
 ##
-!*.tbd
+*.tbd
 ##
-!*.sof
+*.sof
 ##
 ## tbd
 
-!*.tcl
+*.tcl
 
 
 ### macOS ###
@@ -91,3 +91,15 @@ Temporary Items
 
 
 # End of https://www.gitignore.io/api/macos
+
+*.mti
+*.mpf
+*.rpt
+*.vhd.bak
+db
+incremental_db
+output_files
+simulation
+work
+transcript
+*.wlf
