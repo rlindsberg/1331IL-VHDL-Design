@@ -24,7 +24,7 @@ End;
 
 Package Body cpu_package is
   Function add_overflow(
-    a, b: std_logic_vector
+    a, b: data_word
   )
   -- carry out is the most sig. bit
   Return std_logic_vector is
@@ -43,7 +43,7 @@ Package Body cpu_package is
     -- end function add_overflow
 
     Function sub_overflow(
-      a, b: std_logic_vector
+      a, b: data_word
     )
     -- carry out is the most sig. bit
     Return std_logic_vector is
