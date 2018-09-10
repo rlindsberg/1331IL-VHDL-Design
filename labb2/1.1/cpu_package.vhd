@@ -28,16 +28,16 @@ Package Body cpu_package is
   )
   -- carry out is the most sig. bit
   Return std_logic_vector is
-    Variable in_A: unsigned(data_size-1 downto 0);
-    Variable in_B: unsigned(data_size-1 downto 0);
+    Variable in_A: signed(data_size-1 downto 0);
+    Variable in_B: signed(data_size-1 downto 0);
     Variable out_A: std_logic_vector(data_size downto 0);
-    Variable sum : unsigned(in_A'length downto 0);
+    Variable sum : signed(in_A'length downto 0);
 
     Begin
-      in_A := unsigned(a);
-      in_B := unsigned(b);
+      in_A := signed(a);
+      in_B := signed(b);
       sum := ('0' & in_A) + in_B;
-      out_A := std_logic_vector(unsigned(sum));
+      out_A := std_logic_vector(sum);
       Return out_A;
     End;
     -- end function add_overflow
@@ -47,9 +47,9 @@ Package Body cpu_package is
     )
     -- carry out is the most sig. bit
     Return std_logic_vector is
-      Variable in_A: signed;
-      Variable in_B: signed;
-      Variable out_A: std_logic_vector;
+      Variable in_A: signed(data_size-1 downto 0);
+      Variable in_B: signed(data_size-1 downto 0);
+      Variable out_A: std_logic_vector(data_size downto 0);
       Variable diff : signed(in_A'length downto 0);
 
       Begin
