@@ -24,7 +24,7 @@ Architecture RTL of ALU is
 
   Begin
 
-  Process(clk)
+  Process(clk, En, Op, A, B)
   Begin
     n_flag <= '0';
     z_flag <= '0';
@@ -33,6 +33,7 @@ Architecture RTL of ALU is
     -- with..select..others is a concurrent signal assignment statement used outside of a process. Thus, useing if.
     if (Rising_edge(clk) AND En='1') then
       -- reset flags
+      n_flag <= '0';
 			o_flag <= '0';
 			z_flag <= '0';
 
@@ -55,22 +56,23 @@ Architecture RTL of ALU is
 			elsif (Op = "110") then
 				y <= ('0' & A);
 			end if;
-
+      -- end decode op
     end if;
+    -- end ALU calc.
 
-    if Op = "000" then
-      y_temp := add_overflow(a, b);
-      y <= y_temp;
-    end if;
-
-
+    -- begin ALU flags
     -- negative flag
-    if (y'left = 0) then
+    if ( y_temp(y_temp'left) = '0' ) then
       n_flag<= '1';
     end if;
 
-    -- overflow flag NOT WORKING
+    -- overflow flag
     o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and y_temp(y_temp'left));
 
+    -- zero flag
+    if y_temp = "00000" then
+      z_flag <= '1';
+
+    end if;
     End Process;
 End Architecture;
