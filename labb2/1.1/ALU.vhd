@@ -32,10 +32,14 @@ Architecture RTL of ALU is
             a when Others;
 
     -- negative flag
-	 n_flag<= '1' when y'left=0 else '0';
+    if (y'left = 0) then
+      n_flag<= '1';
+    end if;
 
     -- zero flag
-	 n_flag<= '1' when not y'active else '0';
+    if not y'active then
+      n_flag<= '1';
+    end if;
 
     -- overflow flag NOT WORKING
     o_flag <= (not A(A'left) and not B(B'left) and y(y'left)) or ( A(A'left) and B(B'left) and y(y'left) );
