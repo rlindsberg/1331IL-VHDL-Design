@@ -28,7 +28,8 @@ Architecture RTL of ALU is
             a OR b when "011",
             a XOR b when "100",
             NOT a when "101",
-            a when "110";
+            a when "110",
+            a when Others;
 
     -- negative flag
 	 n_flag<= '1' when y'left=0 else '0';
