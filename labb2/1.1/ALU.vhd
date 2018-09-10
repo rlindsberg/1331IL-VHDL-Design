@@ -19,7 +19,8 @@ Entity ALU is
 End Entity;
 
 Architecture RTL of ALU is
-  signal y_temp: std_logic_vector(4 downto 0);
+  -- ariable declared outside subprogram or process must be a shared variable
+  Shared Variable y_temp: std_logic_vector(4 downto 0);
 
   Begin
 
@@ -29,10 +30,39 @@ Architecture RTL of ALU is
     z_flag <= '0';
     o_flag <= '0';
 
+    -- with..select..others is a concurrent signal assignment statement used outside of a process. Thus, useing if.
+    if (Rising_edge(clk) AND En='1') then
+      -- reset flags
+			o_flag <= '0';
+			z_flag <= '0';
+
+      -- decode op
+			if (Op = "000") then
+        -- save to y_temp for determining o_flag later
+				y_temp := add_overflow(a, b);
+				y <= y_temp;
+			elsif  (Op = "001") then
+				y_temp := sub_overflow(a, b);
+        y <= y_temp;
+			elsif (Op = "010") then
+				y <= ('0' & A) AND B;
+			elsif (Op = "011") then
+				y <= ('0' & A) OR B;
+			elsif (Op = "100") then
+				y <= ('0' & A) XOR B;
+			elsif (Op = "101") then
+				y <= '0' & (NOT A);
+			elsif (Op = "110") then
+				y <= ('0' & A);
+			end if;
+
+    end if;
+
     if Op = "000" then
-      y_temp <= add_overflow(a, b);
+      y_temp := add_overflow(a, b);
       y <= y_temp;
     end if;
+
 
     -- negative flag
     if (y'left = 0) then
