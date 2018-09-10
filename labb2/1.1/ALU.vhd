@@ -38,5 +38,5 @@ Architecture RTL of ALU is
 	 n_flag<= '1' when not y'active else '0';
 
     -- overflow flag NOT WORKING
-    o_flag <= (not A'left and not B'left and y'left) or (A'left and B'left and y'left);
+    o_flag <= (not A(A'left) and not B(B'left) and y(y'left)) or ( A(A'left) and B(B'left) and y(y'left) );
 End Architecture;
