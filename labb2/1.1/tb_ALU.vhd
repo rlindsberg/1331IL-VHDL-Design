@@ -7,7 +7,7 @@ Entity tb_ALU is
 End Entity;
 
 Architecture RTL of tb_ALU is
-  component ALU is
+  Component ALU is
     Port (
       Op    : in std_logic_vector(2 downto 0);
       A     : in data_word;
@@ -19,18 +19,19 @@ Architecture RTL of tb_ALU is
       z_flag: out std_logic;
       o_flag: out std_logic
     );
-  end component;
+  End Component;
 
   Signal op_in                              : std_logic_vector(2 downto 0);
   Signal A_in, B_in                         : data_word;
   Signal A_int, B_int                       : integer;
-  Signal En_in, clk_in                      : std_logic;
+  Signal En_in                              : std_logic;
+  Signal clk_in                             : std_logic := '0';
   Signal y_out                              : std_logic_vector(4 downto 0);
   Signal n_flag_out,z_flag_out,o_flag_out   : std_logic;
 
   Begin
 
-    C : ALU port map (
+    C : ALU Port Map (
       Op      =>  op_in,
       A       =>  A_in,
       B       =>  B_in,
@@ -42,14 +43,22 @@ Architecture RTL of tb_ALU is
       o_flag  =>  o_flag_out
     );
 
-    A_in <= std_logic_vector(to_unsigned(A_int, A_in'length));
-    B_in <= std_logic_vector(to_unsigned(B_int, B_in'length));
+    A_in <= std_logic_vector(to_signed(A_int, A_in'length));
+    B_in <= std_logic_vector(to_signed(B_int, B_in'length));
+
+    Process(clk_in)
+      Begin
+    	  clk_in <= NOT clk_in After 2 ns;
+
+    End Process;
 
     Process
       Begin
         op_in <= "000"; -- addition
+        En_in <= '1';
         A_int <= 3;
         B_int <= 3;
+
         wait for 10 ns;
 
         A_int <= 8;

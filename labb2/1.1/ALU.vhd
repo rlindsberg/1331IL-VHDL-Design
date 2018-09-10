@@ -62,7 +62,7 @@ Architecture RTL of ALU is
 
     -- begin ALU flags
     -- negative flag
-    if ( y_temp(y_temp'left) = '0' ) then
+    if ( y_temp(y_temp'left) = '1' ) then
       n_flag<= '1';
     end if;
 
