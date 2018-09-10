@@ -10,12 +10,12 @@ Package cpu_package is
   Constant operation_size: integer := 4;
   Constant instruction_size: integer := 10;
 
-  Subtype data_word is std_logic_vector(data_size downto 0);
-  Subtype address_bus is std_logic_vector(adress_size downto 0);
-  Subtype data_bus is std_logic_vector(data_size downto 0);
-  Subtype instruction_bus is std_logic_vector(instruction_size downto 0);
-  Subtype program_word is std_logic_vector(instruction_size downto 0);
-  Subtype command_word is std_logic_vector(operation_size downto 0);
+  Subtype data_word is std_logic_vector(data_size-1 downto 0);
+  Subtype address_bus is std_logic_vector(adress_size-1 downto 0);
+  Subtype data_bus is std_logic_vector(data_size-1 downto 0);
+  Subtype instruction_bus is std_logic_vector(instruction_size-1 downto 0);
+  Subtype program_word is std_logic_vector(instruction_size-1 downto 0);
+  Subtype command_word is std_logic_vector(operation_size-1 downto 0);
 
   Function add_overflow(a, b: std_logic_vector) Return std_logic_vector;
   Function sub_overflow(a, b: std_logic_vector) Return std_logic_vector;

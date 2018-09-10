@@ -14,26 +14,11 @@ End ALU;
 
 Architecture RTL of ALU is
   Begin
-    signal tmp : std_logic;
-
-    if Op = "000" -- then add
-      then
-        --signal tmp: std_logic;
-        tmp <= add_overflow(a, b);
-        o_flag < tmp'left;
-        y <= tmp;
-    end if;
-
-    if Op = "001" -- then add
-      then
-        --signal tmp2: std_logic;
-        tmp <= sub_overflow(a, b);
-
-        y <= tmp; -- overflow by too large numbers
-    end if;
 
     With Op Select
-      y <=  a AND b when "010",
+      y <=  add_overflow(a, b) when "000",
+            sub_overflow(a, b) when "001",
+            a AND b when "010",
             a OR b when "011",
             a XOR b when "100",
             NOT a when "101",
@@ -48,6 +33,5 @@ Architecture RTL of ALU is
     if -y'active then z_flag <= '1';
 
     -- overflow flag
-    -- addition
-    if Op = "000" then
-      add_overflow(a, b)'left = '1'
+    o_flag <= (not a'left and not b'left and y'left) or (a'left and b'left and not y'left);
+End Architecture;
