@@ -65,9 +65,9 @@ Architecture RTL of tb_ALU is
         B_int <= 8;
         wait for 5 ns;
 
-		  A_int <= -1;
-		  B_int <= 0;
-		  wait for 5 ns;
+        A_int <= -1;
+        B_int <= 0;
+        wait for 5 ns;
 
         op_in <= "001"; -- subtraction
         A_int <= 4;
