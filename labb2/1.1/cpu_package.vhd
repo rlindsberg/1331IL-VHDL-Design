@@ -1,8 +1,6 @@
 Library IEEE;
-Use IEEE.STD_LOGIC_ARITH.ALL;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_signed.all;
-use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 
 Package cpu_package is
   Constant adress_size: integer := 4;
@@ -27,18 +25,9 @@ Package Body cpu_package is
     a, b: data_word
   )
   -- carry out is the most sig. bit
-  Return std_logic_vector is
-    Variable in_A: signed(data_size-1 downto 0);
-    Variable in_B: signed(data_size-1 downto 0);
-    Variable out_A: std_logic_vector(data_size downto 0);
-    Variable sum : signed(in_A'length downto 0);
-
+  Return data_word is
     Begin
-      in_A := signed(a);
-      in_B := signed(b);
-      sum := ('0' & in_A) + in_B;
-      out_A := std_logic_vector(sum);
-      Return out_A;
+      Return data_word(unsigned(a) + unsigned(b));
     End;
     -- end function add_overflow
 
@@ -46,17 +35,10 @@ Package Body cpu_package is
       a, b: data_word
     )
     -- carry out is the most sig. bit
-    Return std_logic_vector is
-      Variable in_A: signed(data_size-1 downto 0);
-      Variable in_B: signed(data_size-1 downto 0);
-      Variable out_A: std_logic_vector(data_size downto 0);
-      Variable diff : signed(in_A'length downto 0);
+    Return data_word is
+      Variable diff : data_word;
 
       Begin
-        in_A := signed(a);
-        in_B := signed(b);
-        diff := ('0' & in_A) - in_B;
-        out_A := std_logic_vector(unsigned(diff));
-        Return out_A;
+        Return data_word(unsigned(a)-unsigned(b));
       End;
 End Package Body;

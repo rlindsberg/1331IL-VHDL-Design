@@ -14,7 +14,7 @@ Architecture RTL of tb_ALU is
       B     : in data_word;
       En    : in std_logic;
       clk   : in std_logic;
-      y     : out std_logic_vector(4 downto 0);
+      y     : out data_word;
       n_flag: out std_logic;
       z_flag: out std_logic;
       o_flag: out std_logic
@@ -26,8 +26,8 @@ Architecture RTL of tb_ALU is
   Signal A_int, B_int                       : integer;
   Signal En_in                              : std_logic;
   Signal clk_in                             : std_logic := '0';
-  Signal y_out                              : std_logic_vector(4 downto 0);
-  Signal n_flag_out,z_flag_out,o_flag_out   : std_logic;
+  Signal y_out                              : data_word;
+  Signal n_flag_out,z_flag_out,o_flag_out   : std_logic := '0';
 
   Begin
 
@@ -48,7 +48,7 @@ Architecture RTL of tb_ALU is
 
     Process(clk_in)
       Begin
-    	  clk_in <= NOT clk_in After 2 ns;
+    	  clk_in <= NOT clk_in After 1 ns;
 
     End Process;
 
@@ -59,20 +59,24 @@ Architecture RTL of tb_ALU is
         A_int <= 3;
         B_int <= 3;
 
-        wait for 10 ns;
+        wait for 5 ns;
 
         A_int <= 8;
         B_int <= 8;
-        wait for 10 ns;
+        wait for 5 ns;
+
+		  A_int <= -1;
+		  B_int <= 0;
+		  wait for 5 ns;
 
         op_in <= "001"; -- subtraction
         A_int <= 4;
         B_int <= 3;
-        wait for 10 ns;
+        wait for 5 ns;
 
-        A_int <= 8;
-        B_int <= -8;
-        wait for 10 ns;
+        A_int <= 3;
+        B_int <= -3;
+        wait for 5 ns;
     End Process;
 
 End Architecture;

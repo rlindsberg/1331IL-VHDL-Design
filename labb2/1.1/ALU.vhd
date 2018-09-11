@@ -1,6 +1,5 @@
 Library IEEE;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 use work.cpu_package.all;
 
@@ -11,7 +10,7 @@ Entity ALU is
       B     : in data_word;
       En    : in std_logic;
       clk   : in std_logic;
-      y     : out std_logic_vector(4 downto 0);
+      y     : out data_word;
       n_flag: out std_logic;
       z_flag: out std_logic;
       o_flag: out std_logic
@@ -20,7 +19,7 @@ End Entity;
 
 Architecture RTL of ALU is
   -- ariable declared outside subprogram or process must be a shared variable
-  Shared Variable y_temp: std_logic_vector(4 downto 0);
+  Shared Variable y_temp: std_logic_vector(data_size-1 downto 0);
 
   Begin
 
@@ -44,17 +43,17 @@ Architecture RTL of ALU is
 				y <= y_temp;
 			elsif  (Op = "001") then
 				y_temp := sub_overflow(a, b);
-        y <= y_temp;
+		      y <= y_temp;
 			elsif (Op = "010") then
-				y <= ('0' & A) AND B;
+				y <= A AND B;
 			elsif (Op = "011") then
-				y <= ('0' & A) OR B;
+				y <= A OR B;
 			elsif (Op = "100") then
-				y <= ('0' & A) XOR B;
+				y <= A XOR B;
 			elsif (Op = "101") then
-				y <= '0' & (NOT A);
+				y <= NOT A;
 			elsif (Op = "110") then
-				y <= ('0' & A);
+				y <= A;
 			end if;
       -- end decode op
     end if;
@@ -67,10 +66,10 @@ Architecture RTL of ALU is
     end if;
 
     -- overflow flag
-    o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and y_temp(y_temp'left));
+    o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and not y_temp(y_temp'left));
 
     -- zero flag
-    if y_temp = "00000" then
+    if y_temp = "0000" then
       z_flag <= '1';
 
     end if;
