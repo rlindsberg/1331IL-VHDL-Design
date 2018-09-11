@@ -36,8 +36,6 @@ Package Body cpu_package is
     )
     -- carry out is the most sig. bit
     Return data_word is
-      Variable diff : data_word;
-
       Begin
         Return data_word(unsigned(a)-unsigned(b));
       End;
