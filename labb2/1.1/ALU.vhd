@@ -41,9 +41,11 @@ Architecture RTL of ALU is
         -- save to y_temp for determining o_flag later
 				y_temp := add_overflow(a, b);
 				y <= y_temp;
+        o_flag <= not A(A'left) and not B(B'left) and y_temp(y_temp'left);
 			elsif  (Op = "001") then
 				y_temp := sub_overflow(a, b);
-		      y <= y_temp;
+		    y <= y_temp;
+        o_flag <= A(A'left) and B(B'left) and not y_temp(y_temp'left);
 			elsif (Op = "010") then
 				y <= A AND B;
 			elsif (Op = "011") then
@@ -66,7 +68,7 @@ Architecture RTL of ALU is
     end if;
 
     -- overflow flag
-    o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and not y_temp(y_temp'left));
+    --o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and not y_temp(y_temp'left));
 
     -- zero flag
     if y_temp = "0000" then
