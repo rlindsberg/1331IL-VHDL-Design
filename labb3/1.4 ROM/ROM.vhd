@@ -6,7 +6,7 @@ Entity ROM is
   );
 End;
 
-Architecture behavioural of ROM is
+Architecture gooey_inside of ROM is
   Type InstructionMem is array (0 to 15) of instruction_bus;
   Signal memory: InstructionMem;
 
@@ -29,7 +29,13 @@ Architecture behavioural of ROM is
     memory(14) <= "1011000000"; -- NOP
     memory(15) <= "1011000000"; -- NOP
 
-    Process
+    Process(ce)
       Begin
-
-End behavioural;
+        -- pass data in mem cell to output upon ce is low
+        if ce = '0' then
+          data <= memory(to_integer(unsigned(addr)))
+        else
+          data <= "Z";
+        end if;
+    End Process;
+End gooey_inside;
