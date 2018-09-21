@@ -11,67 +11,67 @@ Entity ALU is
       En    : in std_logic;
       clk   : in std_logic;
       y     : out data_word;
-      n_flag: out std_logic;
-      z_flag: out std_logic;
-      o_flag: out std_logic
+      n_flag: out std_logic := '0';
+      z_flag: out std_logic := '0';
+      o_flag: out std_logic := '0'
       );
 End Entity;
 
 Architecture RTL of ALU is
-  -- ariable declared outside subprogram or process must be a shared variable
-  Shared Variable y_temp: std_logic_vector(data_size-1 downto 0);
-
   Begin
 
+  -- we need a process since functions from cpu_package can't be called outside one.
   Process(clk, En, Op, A, B)
+  -- data_bus because it is only a midpoint between destinations
+  Variable S  : data_bus;
+  Variable al : std_logic;
+  Variable bl : std_logic;
+  Variable sl : std_logic;
+
   Begin
-    n_flag <= '0';
-    z_flag <= '0';
-    o_flag <= '0';
+  -- time is needed for a value to propagate ergo we need to assign it after "begin".
+  al := A(A'length-1);
+  bl := B(B'length-1);
 
     -- with..select..others is a concurrent signal assignment statement used outside of a process. Thus, useing if.
     if (Rising_edge(clk) AND En='1') then
       -- reset flags
-      n_flag <= '0';
-			o_flag <= '0';
-			z_flag <= '0';
+		  n_flag <= '0';
+		  o_flag <= '0';
+		  z_flag <= '0';
 
-      -- decode op
-			if (Op = "000") then
-        -- save to y_temp for determining o_flag later
-				y_temp := add_overflow(a, b);
-				y <= y_temp;
-			elsif  (Op = "001") then
-				y_temp := sub_overflow(a, b);
-		      y <= y_temp;
-			elsif (Op = "010") then
-				y <= A AND B;
-			elsif (Op = "011") then
-				y <= A OR B;
-			elsif (Op = "100") then
-				y <= A XOR B;
-			elsif (Op = "101") then
-				y <= NOT A;
-			elsif (Op = "110") then
-				y <= A;
-			end if;
-      -- end decode op
-    end if;
-    -- end ALU calc.
+      -- decoding Op
+		  S_CASE : case Op is
+		    when "000" =>   S := add_overflow(a,b);
+        when "001" =>   S := sub_overflow(a,b);
+        when "010" =>   S := A and B;
+        when "011" =>   S := A or B;
+        when "100" =>   S := A xor B;
+        when "101" =>   S := not A;
+        when "110" =>   S := A;
+        when others =>  S := S;
+      end case;
 
-    -- begin ALU flags
-    -- negative flag
-    if ( y_temp(y_temp'left) = '1' ) then
-      n_flag<= '1';
-    end if;
+      -- S gets its value in S_CASE and processes are sequential
+      sl := S(S'length-1);
 
-    -- overflow flag
-    o_flag <= (not A(A'left) and not B(B'left) and y_temp(y_temp'left)) or ( A(A'left) and B(B'left) and not y_temp(y_temp'left));
+      -- using Op for deciding the way to calculate overflow flag.
+      O_CASE : case Op is
+        when "000" =>   o_flag <= (not al and not bl and sl) or (al and bl and not sl);
+        when "001" =>   o_flag <= (not al and bl and sl) or (al and not bl and not sl);
+        when others =>  o_flag <= '0';
+      end case;
 
-    -- zero flag
-    if y_temp = "0000" then
-      z_flag <= '1';
+      -- setting y to S
+      y <= S;
+
+      -- negative flag
+      n_flag <= sl;
+
+      -- zero flag
+      if unsigned(S) = 0 then z_flag <= '1';
+      end if;
 
     end if;
-    End Process;
+  End Process;
 End Architecture;

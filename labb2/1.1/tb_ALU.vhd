@@ -77,6 +77,10 @@ Architecture RTL of tb_ALU is
         A_int <= 3;
         B_int <= -3;
         wait for 5 ns;
+
+        A_int <= 0;
+        B_int <= 1;
+        wait for 5 ns;
     End Process;
 
 End Architecture;
