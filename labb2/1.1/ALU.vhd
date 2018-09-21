@@ -18,13 +18,21 @@ Entity ALU is
 End Entity;
 
 Architecture RTL of ALU is
-  -- variable declared outside subprogram or process must be a shared variable
-  Shared Variable S: std_logic_vector(data_size-1 downto 0);
-
   Begin
 
+  -- we need a process since functions from cpu_package can't be called outside one.
   Process(clk, En, Op, A, B)
+  -- data_bus because it is only a midpoint between destinations
+  Variable S  : data_bus;
+  Variable al : std_logic;
+  Variable bl : std_logic;
+  Variable sl : std_logic;
+
   Begin
+  -- time is needed for a value to propagate ergo we need to assign it after "begin".
+  al := A(A'length-1);
+  bl := B(B'length-1);
+
     -- with..select..others is a concurrent signal assignment statement used outside of a process. Thus, useing if.
     if (Rising_edge(clk) AND En='1') then
       -- reset flags
@@ -33,8 +41,8 @@ Architecture RTL of ALU is
 		  z_flag <= '0';
 
       -- decoding Op
-		S_CASE : case Op is
-		  when "000" =>   S := add_overflow(a,b);
+		  S_CASE : case Op is
+		    when "000" =>   S := add_overflow(a,b);
         when "001" =>   S := sub_overflow(a,b);
         when "010" =>   S := A and B;
         when "011" =>   S := A or B;
@@ -44,14 +52,13 @@ Architecture RTL of ALU is
         when others =>  S := S;
       end case;
 
-      -- setting o_flag
+      -- S gets its value in S_CASE and processes are sequential
+      sl := S(S'length-1);
+
+      -- using Op for deciding the way to calculate overflow flag.
       O_CASE : case Op is
-        when "000" =>   o_flag <= (not A(A'left) and not B(B'left) and S(S'left)) or
-                             (A(A'left) and B(B'left) and not S(S'left));
-
-        when "001" =>   o_flag <= (not A(A'left) and B(B'left) and S(S'left)) or
-                             (A(A'left) and not B(B'left) and not S(S'left));
-
+        when "000" =>   o_flag <= (not al and not bl and sl) or (al and bl and not sl);
+        when "001" =>   o_flag <= (not al and bl and sl) or (al and not bl and not sl);
         when others =>  o_flag <= '0';
       end case;
 
@@ -59,11 +66,12 @@ Architecture RTL of ALU is
       y <= S;
 
       -- negative flag
-      n_flag <= S(S'left);
+      n_flag <= sl;
 
       -- zero flag
       if unsigned(S) = 0 then z_flag <= '1';
       end if;
+
     end if;
   End Process;
 End Architecture;
