@@ -42,14 +42,15 @@ Begin
         if internal_counter = "1111" then
           if internal_step_state /= in_step then
             internal_counter <= "0000";
-
+            -- toggle clk when counter reaches 16
             internal_clk <= '1';
           end if;
         -- not yet 16
         elsif internal_step_state /= in_step then
+          -- keep clk to 0 when counter is less than 16
+          internal_clk <= '0';
           -- counter++
           internal_counter <= internal_counter + "0001";
-          internal_counter <= internal_counter;
           -- save step state
           internal_step_state <= in_step;
         end if;
