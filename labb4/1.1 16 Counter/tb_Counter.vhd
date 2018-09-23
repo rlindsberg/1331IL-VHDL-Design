@@ -23,12 +23,12 @@ Architecture RTL of tb_Counter is
   Signal counter_out  : std_logic_vector(data_size-1 downto 0);
 
   Begin
-  Counter_ins : Counter Port Map(
-    in_clk      => clk_in;
-    in_step     => step_in;
-    in_reset    => reset_in;
-    out_clk     => clk_out;
-    out_counter => counter_out;
+  Counter_ins : Counter Port Map (
+    in_clk      => clk_in,
+    in_step     => step_in,
+    in_reset    => reset_in,
+    out_clk     => clk_out,
+    out_counter => counter_out
   );
 
   -- clk_in should in practice be mapped to FPGA's clk
