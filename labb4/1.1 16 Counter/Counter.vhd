@@ -5,7 +5,9 @@
 -- en sjusegmentdisplay.
 
 Library IEEE;
-Use IEEE.STD.LOGIC_1164.ALL
+Use IEEE.STD_LOGIC_1164.ALL;
+use ieee.std_logic_unsigned.all;
+Use work.cpu_package.ALL;
 
 Entity Counter is
   Port(
@@ -18,26 +20,26 @@ Entity Counter is
 End;
 
 Architecture arch of Counter is
+  
+  Signal internal_counter: std_logic_vector(data_size-1 downto 0);
+  Signal internal_step_state: std_logic;
 
 Begin
 
   Process(in_clk, in_step)
-    Variable internal_counter: std_logic_vector(data_size-1 downto 0);
-    Variable internal_step_state: std_logic;
-
     Begin
       if in_reset = '1' then
         out_clk <= '0';
         out_counter <= (others=>'0'); -- reset to 0000
       end if;
 
-      if Rising_edge(clk) then
+      if Rising_edge(in_clk) then
         -- count to 16
         if internal_counter = "1111" then
           if internal_step_state /= in_step then
             internal_counter <= "0000";
             out_counter <= "0000";
-            out_clk <= not out_clk;
+            out_clk <= '1';
           end if;
         -- not yet 16
         elsif internal_step_state /= in_step then
@@ -49,5 +51,5 @@ Begin
         end if;
 
       end if;
-
+  End Process;
 End Architecture;
