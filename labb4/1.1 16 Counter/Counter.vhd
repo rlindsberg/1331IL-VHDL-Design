@@ -20,36 +20,44 @@ Entity Counter is
 End;
 
 Architecture arch of Counter is
-  
+
   Signal internal_counter: std_logic_vector(data_size-1 downto 0);
+  Signal internal_clk: std_logic;
   Signal internal_step_state: std_logic;
 
 Begin
 
   Process(in_clk, in_step)
     Begin
-      if in_reset = '1' then
-        out_clk <= '0';
-        out_counter <= (others=>'0'); -- reset to 0000
-      end if;
 
       if Rising_edge(in_clk) then
+
+        -- reset counter
+        if in_reset = '1' then
+          internal_clk <= '0';
+          internal_counter <= (others=>'0'); -- reset to 0000
+        end if;
+
         -- count to 16
         if internal_counter = "1111" then
           if internal_step_state /= in_step then
             internal_counter <= "0000";
-            out_counter <= "0000";
-            out_clk <= '1';
+
+            internal_clk <= '1';
           end if;
         -- not yet 16
         elsif internal_step_state /= in_step then
           -- counter++
           internal_counter <= internal_counter + "0001";
-          out_counter <= internal_counter;
+          internal_counter <= internal_counter;
           -- save step state
           internal_step_state <= in_step;
         end if;
 
       end if;
   End Process;
+
+  out_counter <= internal_counter;
+  out_clk <= internal_clk;
+
 End Architecture;
