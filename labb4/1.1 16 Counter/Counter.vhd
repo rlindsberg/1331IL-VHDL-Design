@@ -32,13 +32,22 @@ Begin
       end if;
 
       if Rising_edge(clk) then
-        -- upon in_step changes
-        if internal_step_state /= in_step then
+        -- count to 16
+        if internal_counter = "1111" then
+          if internal_step_state /= in_step then
+            internal_counter <= "0000";
+            out_counter <= "0000";
+            out_clk <= not out_clk;
+          end if;
+        -- not yet 16
+        elsif internal_step_state /= in_step then
           -- counter++
           internal_counter <= internal_counter + "0001";
+          out_counter <= internal_counter;
           -- save step state
           internal_step_state <= in_step;
         end if;
+
       end if;
 
 End Architecture;
