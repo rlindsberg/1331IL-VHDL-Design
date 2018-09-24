@@ -23,7 +23,7 @@ Architecture test of tb_rw_memory is
 Begin
   RM : rw_memory port map(adr, data, clk, ce, rw);
 
-  Process
+  Simulation: Process
     Variable test_data  :  data_bus;
     Variable z_data     :  data_bus;
   Begin
@@ -31,35 +31,14 @@ Begin
                    1 downto 0 =>'1');
     z_data := (others => 'Z');
 
+-- test 1: ce 0, oe X, we 0
     -- write to mem when ce = '0' rw = '0'
     -- should write to mem.
     ce <= '0';
     rw <= '0';
-    wait for 2 ns;
-
     adr <= "0000";
-    data <= test_data;
-    wait for 5 ns;
-
+    data <= "1010";
     ce <= '1';
-
-    wait for 5 ns;
-
-    -- read from mem when ce = '0' rw = '0'
-    -- should read from mem.
-    rw <= '1';
-    -- verify that mem can be read
-    data_out_from_mem <= data;
-    wait for 2 ns;
-
-    assert data = test_data
-    report "Values does not match ce=0 rw=0"
-    severity warning;
-
-    wait for 5 ns;
-
-    ce <= '1';
-    data_out_from_mem <= data;
     wait for 10 ns;
 
 
