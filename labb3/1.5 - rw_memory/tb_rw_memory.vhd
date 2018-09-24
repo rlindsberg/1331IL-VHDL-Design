@@ -34,13 +34,23 @@ Begin
 -- test 1: ce 0, oe X, we 0
     -- write to mem when ce = '0' rw = '0'
     -- should write to mem.
+    -- 11 ns
     ce <= '0';
     rw <= '0';
     adr <= "0000";
-    data <= "1010";
+    data <= "0011"; wait for 1 ns;
     ce <= '1';
     wait for 10 ns;
 
+-- test 2: ce 0, oe X, we 0
+    -- 11 ns
+    ce <= '0';
+    rw <= '0';
+    adr <= "0000";
+    data <= "0100"; wait for 1 ns;
+    ce <= '1';
+    test_data := "1010";
+    wait for 10 ns;
 
   End Process;
 End Architecture;
