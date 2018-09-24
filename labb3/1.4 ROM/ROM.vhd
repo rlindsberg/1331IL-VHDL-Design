@@ -1,41 +1,30 @@
-Entity ROM is
-  Port(
-    addr: in address_bus;
-    data: out instruction_bus;
-    ce: in std_logic
-  );
-End;
+Library IEEE;
+Use IEEE.std_logic_1164.all;
+Use IEEE.numeric_std.all;
+Use work.cpu_package.all;
 
-Architecture gooey_inside of ROM is
-  Type InstructionMem is array (0 to 15) of instruction_bus;
-  Signal memory: InstructionMem;
+Entity rom is
+  Port( adr   :     address_bus;
+        data  : out instruction_bus;
+        ce    :     std_logic);         --active low
+End Entity;
 
+Architecture rtl of rom is
+  constant rom_length:integer:=15;
+  type rom_table is array (0 to rom_length-1) of instruction_bus;
+  constant rom_data	:	rom_table := (B"1010_11_0011", B"1001_11_1110", B"1010_01_0001",
+                                    B"1010_00_1110", B"0110_00_0010", B"0000_10_0110",
+                                    B"0001_00_0100", B"1100_00_1100", B"1011_00_0000",
+                                    B"1111_00_0101", B"1011_00_0000", B"1011_00_0000",
+                                    B"1001_10_1111", B"1111_00_1101", B"1011_00_0000");
+
+Begin
+  Process(ce, adr)
   Begin
-    -- define memory instruction set
-    memory(0)  <= "1010110011"; -- LDI R3,  3
-    memory(1)  <= "1001011110"; -- STR R3, 14
-    memory(2)  <= "1010010001"; -- LDI R1,  1
-    memory(3)  <= "1000001110"; -- LDR R0, 14
-    memory(4)  <= "0110000010"; -- MOV r0, R2
-    memory(5)  <= "0000100110"; -- ADD R2, R1, R2
-    memory(6)  <= "0001000100"; -- SUB R0, R1, R0
-    memory(7)  <= "1100001100"; -- BRZ 12
-    memory(8)  <= "1011000000"; -- NOP
-    memory(9)  <= "1111000101"; -- BRA 5
-    memory(10) <= "1011000000"; -- NOP
-    memory(11) <= "1011000000"; -- NOP
-    memory(12) <= "1001101111"; -- STR R2, 15
-    memory(13) <= "1111001101"; -- BRA 13
-    memory(14) <= "1011000000"; -- NOP
-    memory(15) <= "1011000000"; -- NOP
-
-    Process(ce)
-      Begin
-        -- pass data in mem cell to output upon ce is low
-        if ce = '0' then
-          data <= memory(to_integer(unsigned(addr)))
-        else
-          data <= "Z";
-        end if;
-    End Process;
-End gooey_inside;
+    if ce = '0' then
+      data<=rom_data(to_integer(unsigned(adr)));    --data from rom memory
+    else
+      data<=(others => 'Z');
+    end if;
+  End Process;
+End Architecture;
