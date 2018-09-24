@@ -13,21 +13,29 @@ End Entity;
 
 Architecture behaviour of rw_memory is
   Type data_array is array (0 to 15) of data_bus;
-  Signal internal_data : data_bus;
+  Signal mem: data_array;
+  Signal data_out : data_bus;
 Begin
-  
-  Process(clk)
-    Variable data_table : data_array;
-  Begin
+
+-- Memory Write Block
+-- Write Operation : When we = 1, cs = 1
+  MEM_WRITE: process (adr, data, clk, ce, rw, mem) begin
     if rising_edge(clk) and ce = '0' then
       if rw = '0' then
-        data_table(to_integer(unsigned(adr))) := data;
+        mem(to_integer(unsigned(adr))) <= data;
+      end if;
+    end if;
+  end process;
 
-      elsif rw = '1' then
-        internal_data <= data_table(to_integer(unsigned(adr)));
-		  
-		end if;
-    End if;
-  End Process;
-  data <= (others => 'Z') when ce = '1' else internal_data;
+ -- Tri-State Buffer control
+  data <= data_out when (ce = '0' and rw = '1') else (others=>'Z');
+
+ -- Memory Read Block
+  MEM_READ: process (adr, ce, rw, data_out, mem) begin
+    if (ce = '0' and rw = '1') then
+      data_out <= mem(to_integer(unsigned(adr)));
+    else
+      data_out <= (others=>'0');
+    end if;
+  end process;
 End Architecture;
