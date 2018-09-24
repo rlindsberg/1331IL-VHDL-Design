@@ -49,7 +49,14 @@ Begin
     adr <= "0000";
     data <= "0100"; wait for 1 ns;
     ce <= '1';
-    test_data := "1010";
+    wait for 10 ns;
+
+-- test 3: ce 1, oe X, we 0
+    -- test writing to mem when ce is high, mem should not be overwritten
+    ce <= '1';
+    rw <= '0';
+    adr <= "0000";
+    data <= "0101"; wait for 1 ns;
     wait for 10 ns;
 
   End Process;
