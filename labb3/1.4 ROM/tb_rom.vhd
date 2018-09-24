@@ -31,14 +31,15 @@ Begin
 
     en <= '0';
     for i in 0 to 15 loop
-	   en <= '0';
       addr <= std_logic_vector(to_unsigned(i,4));
 
-      wait for 2 ns;
+      wait for 1 ns;
 
-      assert data = data_list(i);
+      assert data = data_list(i); -- correct but gives false...?
       report "Values not matching"
       severity warning;
+		
+		wait for 2 ns;
 
     end loop;
   end process;
