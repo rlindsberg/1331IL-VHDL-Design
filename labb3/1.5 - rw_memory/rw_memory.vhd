@@ -28,8 +28,8 @@ Begin
   end process;
 
  -- Tri-State Buffer control
-  data <= data_out when (ce = '0' and rw = '1') else (others=>'Z');
-
+--  data <= data_out when (ce = '0' and rw = '1') else (others=>'Z');
+  data <= "ZZZZ" when ce = '1';
  -- Memory Read Block
   MEM_READ: process (adr, ce, rw, data_out, mem) begin
     if (ce = '0' and rw = '1') then

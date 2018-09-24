@@ -18,7 +18,7 @@ Architecture test of tb_rw_memory is
   Signal adr            :   address_bus;
   Signal data           :   data_bus;
   Signal clk, ce, rw    :   std_logic;
-  --Signal data_out_from_mem : data_bus;
+  Signal data_out_from_mem : data_bus;
 
 Begin
   RM : rw_memory port map(adr, data, clk, ce, rw);
@@ -32,7 +32,6 @@ Begin
     z_data := (others => 'Z');
 
     -- write to mem when ce = '0' rw = '0'
-    -- read from mem when ce = '0' rw = '0'
     -- should write to mem.
     ce <= '0';
     rw <= '0';
@@ -40,19 +39,28 @@ Begin
 
     adr <= "0000";
     data <= test_data;
+    wait for 5 ns;
 
-    wait for 2 ns;
+    ce <= '1';
 
+    wait for 5 ns;
+
+    -- read from mem when ce = '0' rw = '0'
+    -- should read from mem.
     rw <= '1';
-    --data_out_from_mem <= data;
+    -- verify that mem can be read
+    data_out_from_mem <= data;
     wait for 2 ns;
 
     assert data = test_data
     report "Values does not match ce=0 rw=0"
     severity warning;
 
-    rw <= '0';
-    wait for 1 ns;
+    wait for 5 ns;
+
+    ce <= '1';
+    data_out_from_mem <= data;
+    wait for 10 ns;
 
 
   End Process;
