@@ -51,14 +51,6 @@ Begin
     ce <= '1';
     wait for 10 ns;
 
--- test 3: ce 1, oe X, we 0
-    -- test writing to mem when ce is high, mem should not be overwritten
-    -- 11 ns
-    ce <= '1';
-    rw <= '0';
-    adr <= "0010";
-    data <= "0101"; wait for 1 ns;
-    wait for 10 ns;
 
 -- test 4: read from mem
     -- ce 0, oe 0, we 1
