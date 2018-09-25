@@ -21,6 +21,13 @@ architecture behave of bidir is
   Signal Z_internal: std_logic_vector(3 downto 0);
 
 begin
+  process(ce)
+  begin
+    if ce = '0' then
+      Z <= A;
+    elsif ce = '1' then
+      Z <= "ZZZZ";
+    end if;
 
   Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
 
