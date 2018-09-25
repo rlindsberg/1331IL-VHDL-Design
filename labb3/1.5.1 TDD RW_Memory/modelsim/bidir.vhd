@@ -12,9 +12,14 @@ end Entity bidir;
 
 architecture behave of bidir is
 begin
+  process(ce)
+  begin
+    if ce = '0' then
+      Z <= A;
+    elsif ce = '1' then
+      Z <= "ZZZZ";
+    end if;
 
-    Z <= A        when (ce = '0' and rw = '1') else -- read
-         "ZZZZ"   when (ce = '1')              else -- disabled
-         "XXXX";                                    -- unknown
 
+  end process;
 end behave;
