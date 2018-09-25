@@ -9,8 +9,7 @@ Entity rw_memory is
     addr    :        address_bus;
     Z       : inout  std_logic_vector(3 downto 0);
     ce      : in     std_logic;
-    rw      : in     std_logic;
-    A       : in     std_logic_vector(3 downto 0)
+    rw      : in     std_logic
     );
 End Entity rw_memory;
 
@@ -22,13 +21,13 @@ Architecture behavourial of rw_memory is
 
 Begin
 
-  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
+  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'H');
 
   -- Memory Write Block
   -- Write Operation : When ce active low, rw write on low
   MEM_WRITE: Process (clk) Begin
     if rising_edge(clk) and ce = '0' and rw = '0' then
-      mem(to_integer(unsigned(addr))) <= A;
+      mem(to_integer(unsigned(addr))) <= Z;
     end if;
   End Process;
 

@@ -12,8 +12,7 @@ Architecture arch of tb_rw_memory is
     addr    :        address_bus;
     Z       : inout  std_logic_vector(3 downto 0);
     ce      : in     std_logic;
-    rw      : in     std_logic;
-    A       : in     std_logic_vector(3 downto 0)
+    rw      : in     std_logic
   );
   End Component rw_memory;
 
@@ -22,10 +21,9 @@ Architecture arch of tb_rw_memory is
   Signal Z_inout  : std_logic_vector(3 downto 0);
   Signal ce_in    : std_logic;
   Signal rw_in    : std_logic;
-  Signal A_in     : std_logic_vector(3 downto 0);
 
   Begin
-    rw_memory_ins: rw_memory Port Map(clk_in, addr_in, Z_inout, ce_in, rw_in, A_in);
+    rw_memory_ins: rw_memory Port Map(clk_in, addr_in, Z_inout, ce_in, rw_in);
 
     sim: Process
     Begin
@@ -38,8 +36,10 @@ Architecture arch of tb_rw_memory is
     addr_in <= "0000";
     ce_in <= '0';
     rw_in <= '0';
-    A_in <= "1010";
+    Z_inout <= "1010";
+
     wait for 1 ns;
+    Z_inout <= "ZZZZ";
     ce_in <= '1';
     wait for 5 ns;
 
@@ -51,8 +51,10 @@ Architecture arch of tb_rw_memory is
     addr_in <= "0001";
     ce_in <= '0';
     rw_in <= '0';
-    A_in <= "1011";
+    Z_inout <= "1011";
+
     wait for 1 ns;
+    Z_inout <= "ZZZZ";
     ce_in <= '1';
     wait for 5 ns;
 
