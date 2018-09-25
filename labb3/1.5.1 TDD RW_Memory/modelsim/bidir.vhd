@@ -6,6 +6,7 @@ Use work.cpu_package.all;
 entity bidir is
     port (
         clk:       std_logic;
+        addr:       address_bus;
         Z  : inout  std_logic_vector(3 downto 0);
         ce : in     std_logic;
         rw : in     std_logic;
@@ -27,14 +28,14 @@ begin
   -- Write Operation : When we = 1, cs = 1
     MEM_WRITE: process (clk) begin
       if rising_edge(clk) and ce = '0' and rw = '0' then
-        mem(0) <= A;
+        mem(to_integer(unsigned(addr))) <= A;
       end if;
     end process;
 
     -- Memory Read Block
      MEM_READ: process (clk) begin
        if (rising_edge(clk) and ce = '0' and rw = '1') then
-         Z_internal <= mem(0);
+         Z_internal <= mem(to_integer(unsigned(addr)));
        end if;
      end process;
 

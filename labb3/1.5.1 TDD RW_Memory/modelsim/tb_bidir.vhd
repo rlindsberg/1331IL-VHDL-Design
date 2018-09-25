@@ -9,6 +9,7 @@ architecture arch of tb_bidir is
   component bidir
   port (
     clk:       std_logic;
+    addr:       address_bus;
     Z  : inout  std_logic_vector(3 downto 0);
     ce : in     std_logic;
     rw : in     std_logic;
@@ -17,16 +18,18 @@ architecture arch of tb_bidir is
   end component bidir;
 
   Signal clk_in: std_logic;
+  Signal addr_in: address_bus;
   signal Z_inout: std_logic_vector(3 downto 0);
   signal ce_in: std_logic;
   signal rw_in: std_logic;
   signal A_in: std_logic_vector(3 downto 0);
 
   begin
-    bidir_ins: bidir port map(clk_in, Z_inout, ce_in, rw_in, A_in);
+    bidir_ins: bidir port map(clk_in, addr_in, Z_inout, ce_in, rw_in, A_in);
 
     sim: process
     Begin
+    addr_in <= "0000";
     A_in <= "1010";
     ce_in <= '0';
     rw_in <= '0';
@@ -34,6 +37,16 @@ architecture arch of tb_bidir is
     ce_in <= '1';
     wait for 5 ns;
 
+
+    addr_in <= "0001";
+    A_in <= "1011";
+    ce_in <= '0';
+    rw_in <= '0';
+    wait for 1 ns;
+    ce_in <= '1';
+    wait for 5 ns;
+
+    addr_in <= "0000";
     ce_in <= '0';
     rw_in<= '1';
     wait for 1 ns;
