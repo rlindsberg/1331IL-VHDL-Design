@@ -1,5 +1,7 @@
-library ieee;
-use ieee.std_logic_1164.all;
+Library IEEE;
+Use IEEE.std_logic_1164.all;
+Use IEEE.numeric_std.all;
+Use work.cpu_package.all;
 
 Entity tb_bidir is End Entity;
 
@@ -30,7 +32,7 @@ architecture arch of tb_bidir is
     rw_in <= '0';
     wait for 5 ns;
 
-    ce_in<= '1';
+    rw_in<= '1';
     wait for 5 ns;
 
   end process;

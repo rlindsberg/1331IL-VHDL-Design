@@ -21,6 +21,8 @@ architecture behave of bidir is
 
 begin
 
+  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
+
   -- Memory Write Block
   -- Write Operation : When we = 1, cs = 1
     MEM_WRITE: process (clk) begin
@@ -37,4 +39,5 @@ begin
          Z_internal <= (others=>'0');
        end if;
      end process;
+
 end behave;
