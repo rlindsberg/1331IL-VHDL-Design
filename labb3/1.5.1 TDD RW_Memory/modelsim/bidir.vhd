@@ -17,6 +17,7 @@ architecture behave of bidir is
 
   Type data_array is array (0 to 15) of data_bus;
   Signal mem: data_array;
+  Signal Z_internal: std_logic_vector(3 downto 0);
 
 begin
 
@@ -31,9 +32,9 @@ begin
     -- Memory Read Block
      MEM_READ: process (clk) begin
        if (rising_edge(clk) and ce = '0' and rw = '1') then
-         Z <= mem(0);
+         Z_internal <= mem(0);
        else
-         Z <= (others=>'0');
+         Z_internal <= (others=>'0');
        end if;
      end process;
 end behave;
