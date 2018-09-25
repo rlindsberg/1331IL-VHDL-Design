@@ -31,8 +31,8 @@ Begin
   data <= data_out when (ce = '0' and rw = '1') else (others=>'Z');
 
  -- Memory Read Block
-  MEM_READ: process (adr, ce, rw, data_out, mem) begin
-    if (ce = '0' and rw = '1') then
+  MEM_READ: process (clk, adr, ce, rw, data_out, mem) begin
+    if (rising_edge(clk) and ce = '0' and rw = '1') then
       data_out <= mem(to_integer(unsigned(adr)));
     else
       data_out <= (others=>'0');
