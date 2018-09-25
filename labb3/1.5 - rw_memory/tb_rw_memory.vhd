@@ -29,23 +29,38 @@ Architecture arch of tb_rw_memory is
 
     sim: Process
     Begin
+
+    -- test 1: write 1010 to mem(0000)
+    -- bring ce to low for 1 ns
+    -- bring rw to low for writing
+    -- bring ce to high
+    -- time: 6 ns
     addr_in <= "0000";
+    ce_in <= '0';
+    rw_in <= '0';
     A_in <= "1010";
-    ce_in <= '0';
-    rw_in <= '0';
     wait for 1 ns;
     ce_in <= '1';
     wait for 5 ns;
 
-
+    -- test 2: write 1011 to mem(0001)
+    -- bring ce to low for 1 ns
+    -- bring rw to low for writing
+    -- bring ce to high
+    -- time: 6 ns
     addr_in <= "0001";
-    A_in <= "1011";
     ce_in <= '0';
     rw_in <= '0';
+    A_in <= "1011";
     wait for 1 ns;
     ce_in <= '1';
     wait for 5 ns;
 
+    -- test 3: read from mem(0000), expecting 1010
+    -- bring ce to low for 1 ns
+    -- keep rw at high for reading
+    -- bring ce to high
+    -- time: 6 ns
     addr_in <= "0000";
     ce_in <= '0';
     rw_in<= '1';

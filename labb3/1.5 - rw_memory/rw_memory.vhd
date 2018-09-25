@@ -25,18 +25,18 @@ Begin
   Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
 
   -- Memory Write Block
-  -- Write Operation : When we = 1, cs = 1
-    MEM_WRITE: Process (clk) Begin
-      if rising_edge(clk) and ce = '0' and rw = '0' then
-        mem(to_integer(unsigned(addr))) <= A;
-      end if;
-    End Process;
+  -- Write Operation : When ce active low, rw write on low
+  MEM_WRITE: Process (clk) Begin
+    if rising_edge(clk) and ce = '0' and rw = '0' then
+      mem(to_integer(unsigned(addr))) <= A;
+    end if;
+  End Process;
 
-    -- Memory Read Block
-     MEM_READ: Process (clk) Begin
-       if (rising_edge(clk) AND ce = '0' and rw = '1') then
-         Z_internal <= mem(to_integer(unsigned(addr)));
-       end if;
-     End Process;
-
+  -- Memory Read Block
+  -- Read Operation : When ce active low, rw read on high
+  MEM_READ: Process (clk) Begin
+    if (rising_edge(clk) AND ce = '0' and rw = '1') then
+      Z_internal <= mem(to_integer(unsigned(addr)));
+    end if;
+  End Process;
 End behavourial;
