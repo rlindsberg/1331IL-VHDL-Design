@@ -4,34 +4,39 @@ Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
 Entity rw_memory is
-  Port (  adr   :       address_bus;
-          data  : inout data_bus;
-          clk   :       std_logic;
-          ce    :       std_logic;        -- active low
-          rw    :       std_logic);       -- read on high
-End Entity;
+  Port (
+    clk     :        std_logic;
+    addr    :        address_bus;
+    Z       : inout  std_logic_vector(3 downto 0);
+    ce      : in     std_logic;
+    rw      : in     std_logic;
+    A       : in     std_logic_vector(3 downto 0)
+    );
+End Entity rw_memory;
 
-Architecture behaviour of rw_memory is
+Architecture behavourial of rw_memory is
+
   Type data_array is array (0 to 15) of data_bus;
-  Signal data_out       :   data_bus;
-  Signal data_table     :   data_array;
+  Signal mem: data_array;
+  Signal Z_internal: std_logic_vector(3 downto 0);
+
 Begin
 
-  data <= data_out when ce = '0' else (others => 'Z');
+  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
 
-  READ : Process(clk, rw, ce, adr, data)
-  Begin
-    if (clk'event and clk = '1') and rw = '1' then
-      data_out <= data_table(to_integer(unsigned(adr)));
-    else
-      data_out <= (others => 'Z');
-    end if;
-  End Process;
+  -- Memory Write Block
+  -- Write Operation : When we = 1, cs = 1
+    MEM_WRITE: Process (clk) Begin
+      if rising_edge(clk) and ce = '0' and rw = '0' then
+        mem(to_integer(unsigned(addr))) <= A;
+      end if;
+    End Process;
 
-  WRITE : Process(clk, rw, ce, adr, data)
-  Begin
-    if (clk'event and clk = '1') and rw = '0' then
-      data_table(to_integer(unsigned(adr))) <= data;
-    end if;
-  End Process;
-End Architecture;
+    -- Memory Read Block
+     MEM_READ: Process (clk) Begin
+       if (rising_edge(clk) AND ce = '0' and rw = '1') then
+         Z_internal <= mem(to_integer(unsigned(addr)));
+       end if;
+     End Process;
+
+End behavourial;
