@@ -3,65 +3,55 @@ Use IEEE.std_logic_1164.all;
 Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
-Entity tb_rw_memory is
-End Entity;
+Entity tb_rw_memory is End Entity;
 
-Architecture test of tb_rw_memory is
-  Component rw_memory
-    Port (  adr   :       address_bus;
-            data  : inout data_bus;
-            clk   :       std_logic;
-            ce    :       std_logic;        -- active low
-            rw    :       std_logic);       -- read on high
-  End Component;
+architecture arch of tb_rw_memory is
+  component rw_memory
+  port (
+    clk:       std_logic;
+    addr:       address_bus;
+    Z  : inout  std_logic_vector(3 downto 0);
+    ce : in     std_logic;
+    rw : in     std_logic;
+    A  : in     std_logic_vector(3 downto 0)
+  );
+  end component rw_memory;
 
-  Signal adr            :   address_bus;
-  Signal data           :   data_bus;
-  Signal clk, ce, rw    :   std_logic;
-  Signal data_out_from_mem : data_bus;
+  Signal clk_in: std_logic;
+  Signal addr_in: address_bus;
+  signal Z_inout: std_logic_vector(3 downto 0);
+  signal ce_in: std_logic;
+  signal rw_in: std_logic;
+  signal A_in: std_logic_vector(3 downto 0);
 
-Begin
-  RM : rw_memory port map(adr, data, clk, ce, rw);
+  begin
+    rw_memory_ins: rw_memory port map(clk_in, addr_in, Z_inout, ce_in, rw_in, A_in);
 
-  Simulation: Process
-    Variable test_data  :  data_bus;
-    Variable z_data     :  data_bus;
-  Begin
-    test_data := ( test_data'length-1 downto 2 =>'0', --0011
-                   1 downto 0 =>'1');
-    z_data := (others => 'Z');
-
--- test 1: ce 0, oe X, we 0
-    -- write to mem when ce = '0' rw = '0'
-    -- should write to mem.
-    -- 11 ns
-    ce <= '0';
-    rw <= '0';
-    adr <= "0000";
-    data <= "0011"; wait for 1 ns;
-    ce <= '1';
-    wait for 10 ns;
-
--- test 2: ce 0, oe X, we 0
-    -- 11 ns
-    ce <= '0';
-    rw <= '0';
-    adr <= "0001";
-    data <= "0100"; wait for 1 ns;
-    ce <= '1';
-    wait for 10 ns;
-
-
--- test 4: read from mem
-    -- ce 0, oe 0, we 1
-    -- 11 ns
-    ce <= '0';
-    rw <= '1';
-    adr <= "0000";
-    data_out_from_mem <= data;
+    sim: process
+    Begin
+    addr_in <= "0000";
+    A_in <= "1010";
+    ce_in <= '0';
+    rw_in <= '0';
     wait for 1 ns;
-    ce <= '1';
-    wait for 10 ns;
+    ce_in <= '1';
+    wait for 5 ns;
 
-  End Process;
-End Architecture;
+
+    addr_in <= "0001";
+    A_in <= "1011";
+    ce_in <= '0';
+    rw_in <= '0';
+    wait for 1 ns;
+    ce_in <= '1';
+    wait for 5 ns;
+
+    addr_in <= "0000";
+    ce_in <= '0';
+    rw_in<= '1';
+    wait for 1 ns;
+    ce_in <= '1';
+    wait for 5 ns;
+
+  end process;
+end architecture;

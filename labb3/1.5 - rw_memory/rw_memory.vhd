@@ -3,39 +3,47 @@ Use IEEE.std_logic_1164.all;
 Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
-Entity rw_memory is
-  Port (  adr   :       address_bus;
-          data  : inout data_bus;
-          clk   :       std_logic;
-          ce    :       std_logic;        -- active low
-          rw    :       std_logic);       -- read on high
-End Entity;
+entity rw_memory is
+    port (
+        clk:       std_logic;
+        addr:       address_bus;
+        Z  : inout  std_logic_vector(3 downto 0);
+        ce : in     std_logic;
+        rw : in     std_logic;
+        A  : in     std_logic_vector(3 downto 0)
+        );
+end Entity rw_memory;
 
-Architecture behaviour of rw_memory is
+architecture behave of rw_memory is
+
   Type data_array is array (0 to 15) of data_bus;
   Signal mem: data_array;
-  Signal data_out : data_bus;
-Begin
+  Signal Z_internal: std_logic_vector(3 downto 0);
 
--- Memory Write Block
--- Write Operation : When we = 1, cs = 1
-  MEM_WRITE: process (adr, data, clk, ce, rw, mem) begin
-    if rising_edge(clk) and ce = '0' then
-      if rw = '0' then
-        mem(to_integer(unsigned(adr))) <= data;
+begin
+  process(ce)
+  begin
+    if ce = '0' then
+      Z <= A;
+    elsif ce = '1' then
+      Z <= "ZZZZ";
+    end if;
+
+  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
+
+  -- Memory Write Block
+  -- Write Operation : When we = 1, cs = 1
+    MEM_WRITE: process (clk) begin
+      if rising_edge(clk) and ce = '0' and rw = '0' then
+        mem(to_integer(unsigned(addr))) <= A;
       end if;
-    end if;
-  end process;
+    end process;
 
- -- Tri-State Buffer control
-  data <= data_out when (ce = '0' and rw = '1') else (others=>'Z');
+    -- Memory Read Block
+     MEM_READ: process (clk) begin
+       if (rising_edge(clk) and ce = '0' and rw = '1') then
+         Z_internal <= mem(to_integer(unsigned(addr)));
+       end if;
+     end process;
 
- -- Memory Read Block
-  MEM_READ: process (clk, adr, ce, rw, data_out, mem) begin
-    if (rising_edge(clk) and ce = '0' and rw = '1') then
-      data_out <= mem(to_integer(unsigned(adr)));
-    else
-      data_out <= (others=>'0');
-    end if;
-  end process;
-End Architecture;
+end behave;
