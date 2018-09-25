@@ -35,8 +35,6 @@ begin
      MEM_READ: process (clk) begin
        if (rising_edge(clk) and ce = '0' and rw = '1') then
          Z_internal <= mem(0);
-       else
-         Z_internal <= (others=>'0');
        end if;
      end process;
 

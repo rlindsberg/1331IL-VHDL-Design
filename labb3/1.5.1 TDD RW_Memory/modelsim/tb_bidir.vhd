@@ -30,9 +30,14 @@ architecture arch of tb_bidir is
     A_in <= "1010";
     ce_in <= '0';
     rw_in <= '0';
+    wait for 1 ns;
+    ce_in <= '1';
     wait for 5 ns;
 
+    ce_in <= '0';
     rw_in<= '1';
+    wait for 1 ns;
+    ce_in <= '1';
     wait for 5 ns;
 
   end process;
