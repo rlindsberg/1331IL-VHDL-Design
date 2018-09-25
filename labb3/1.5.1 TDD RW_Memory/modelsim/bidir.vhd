@@ -1,8 +1,12 @@
-library ieee;
-use ieee.std_logic_1164.all;
+Library IEEE;
+Use IEEE.std_logic_1164.all;
+Use IEEE.numeric_std.all;
+Use work.cpu_package.all;
 
 entity bidir is
     port (
+        clk:       std_logic;
+        addr:       address_bus;
         Z  : inout  std_logic_vector(3 downto 0);
         ce : in     std_logic;
         rw : in     std_logic;
@@ -11,6 +15,11 @@ entity bidir is
 end Entity bidir;
 
 architecture behave of bidir is
+
+  Type data_array is array (0 to 15) of data_bus;
+  Signal mem: data_array;
+  Signal Z_internal: std_logic_vector(3 downto 0);
+
 begin
   process(ce)
   begin
@@ -20,6 +29,21 @@ begin
       Z <= "ZZZZ";
     end if;
 
+  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
 
-  end process;
+  -- Memory Write Block
+  -- Write Operation : When we = 1, cs = 1
+    MEM_WRITE: process (clk) begin
+      if rising_edge(clk) and ce = '0' and rw = '0' then
+        mem(to_integer(unsigned(addr))) <= A;
+      end if;
+    end process;
+
+    -- Memory Read Block
+     MEM_READ: process (clk) begin
+       if (rising_edge(clk) and ce = '0' and rw = '1') then
+         Z_internal <= mem(to_integer(unsigned(addr)));
+       end if;
+     end process;
+
 end behave;
