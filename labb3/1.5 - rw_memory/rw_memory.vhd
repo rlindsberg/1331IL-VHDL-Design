@@ -3,47 +3,40 @@ Use IEEE.std_logic_1164.all;
 Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
-entity rw_memory is
-    port (
-        clk:       std_logic;
-        addr:       address_bus;
-        Z  : inout  std_logic_vector(3 downto 0);
-        ce : in     std_logic;
-        rw : in     std_logic;
-        A  : in     std_logic_vector(3 downto 0)
-        );
-end Entity rw_memory;
+Entity rw_memory is
+  Port (
+    clk     :        std_logic;
+    addr    :        address_bus;
+    Z       : inout  std_logic_vector(3 downto 0);
+    ce      : in     std_logic;
+    rw      : in     std_logic;
+    A       : in     std_logic_vector(3 downto 0)
+    );
+End Entity rw_memory;
 
-architecture behave of rw_memory is
+Architecture behavourial of rw_memory is
 
   Type data_array is array (0 to 15) of data_bus;
   Signal mem: data_array;
   Signal Z_internal: std_logic_vector(3 downto 0);
 
-begin
-  process(ce)
-  begin
-    if ce = '0' then
-      Z <= A;
-    elsif ce = '1' then
-      Z <= "ZZZZ";
-    end if;
+Begin
 
   Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
 
   -- Memory Write Block
   -- Write Operation : When we = 1, cs = 1
-    MEM_WRITE: process (clk) begin
+    MEM_WRITE: Process (clk) Begin
       if rising_edge(clk) and ce = '0' and rw = '0' then
         mem(to_integer(unsigned(addr))) <= A;
       end if;
-    end process;
+    End Process;
 
     -- Memory Read Block
-     MEM_READ: process (clk) begin
-       if (rising_edge(clk) and ce = '0' and rw = '1') then
+     MEM_READ: Process (clk) Begin
+       if (rising_edge(clk) AND ce = '0' and rw = '1') then
          Z_internal <= mem(to_integer(unsigned(addr)));
        end if;
-     end process;
+     End Process;
 
-end behave;
+End behavourial;
