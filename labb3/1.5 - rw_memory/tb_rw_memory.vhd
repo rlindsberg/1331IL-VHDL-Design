@@ -23,11 +23,13 @@ Begin
   RM : rw_memory port map(adr, data, clk, ce, rw);
 
   Process
-    Variable test_data  :  data_bus;
+    Variable test_data_0, test_data_1, test_data_2, test_data_3  :  data_bus;
     Variable z_data     :  data_bus;
   Begin
-    test_data := ( test_data'length-1 downto 2 =>'0', --0011
-                   1 downto 0 =>'1');
+    test_data_0 := ( test_data_0'length-1 downto 2 =>'0', 1 downto 0 =>'1'); --0011
+    test_data_1 := ( test_data_1'length-1 downto 2 =>'0', 1 => '1', 0 => '0'); --0010
+	  test_data_2 := ( test_data_2'length-1 downto 2 =>'0', 1 => '0', 0 => '1'); --0001
+    test_data_3 := ( test_data_3'length-1 downto 2 =>'0', 1 => '0', 0 => '0'); --0000
     z_data := (others => 'Z');
 
     -- write to mem when ce = '0' rw = '0'
@@ -35,20 +37,21 @@ Begin
     -- should write to mem.
     ce <= '0';
     rw <= '0';
-    wait for 2 ns;
+    wait for 1 ns;
 
     adr <= "0000";
-    data <= test_data;
+    data <= test_data_0;
 
-    wait for 2 ns;
+    wait for 1 ns;
 
     rw <= '1';
 
-    assert data = test_data
+    wait for 4 ns;
+
+    assert data = test_data_0
     report "Values does not match ce=0 rw=0"
     severity warning;
 
-    rw <= '0';
     wait for 1 ns;
 
     -- write to mem when ce = '0' rw = '1'
@@ -56,16 +59,16 @@ Begin
     -- should read from mem.
     ce <= '0';
     rw <= '1';
-    wait for 2 ns;
+    wait for 1 ns;
 
     adr <= "0001";
-    data <= test_data;
+    data <= test_data_1;
 
-    wait for 2 ns;
+    wait for 1 ns;
 
     rw <= '1';
 
-    assert data /= test_data
+    assert data /= test_data_1
     report "Values does not match ce=0 rw=1"
     severity warning;
 
@@ -79,12 +82,11 @@ Begin
     wait for 2 ns;
 
     adr <= "0010";
-    data <= test_data;
+    data <= test_data_2;
 
-    wait for 2 ns;
+    wait for 1 ns;
 
     rw <= '1';
-    data <= data;
 
     assert data = z_data
     report "Values does not match ce=1 rw=0"
@@ -97,12 +99,12 @@ Begin
     -- Should become ZZZZ...
     ce <= '1';
     rw <= '1';
-    wait for 2 ns;
+    wait for 1 ns;
 
     adr <= "0011";
-    data <= test_data;
+    data <= test_data_3;
 
-    wait for 2 ns;
+    wait for 1 ns;
 
     rw <= '1';
 
