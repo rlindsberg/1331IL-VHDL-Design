@@ -21,7 +21,7 @@ Architecture behavourial of rw_memory is
 
 Begin
 
-  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'H');
+  Z <= Z_internal when (ce = '0' and rw = '1') else (others=>'Z');
 
   -- Memory Write Block
   -- Write Operation : When ce active low, rw write on low

@@ -85,13 +85,24 @@ Architecture arch of tb_rw_memory is
     wait for 3 ns;
 
     -- test 5: write when rw is high
-    -- expect: Z_inout is HHHH
+    -- expect: still 1011 at mem(0001)
     -- time 4 ns, start 22 ns
-    addr_in <= "0011";
+    addr_in <= "0001";
     ce_in <= '0';
     rw_in<= '1';
+    Z_inout <= "1101";
     wait for 1 ns;
+    Z_inout <= "ZZZZ";
     ce_in <= '1';
+    wait for 3 ns;
+
+    -- test 6: read when ce is high
+    -- expect: Z_inout is HHHH
+    -- time 4 ns, start 26 ns
+    addr_in <= "0000";
+    ce_in <= '1';
+    rw_in<= '1';
+    wait for 1 ns;
     wait for 3 ns;
 
   end Process;
