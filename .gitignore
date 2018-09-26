@@ -103,3 +103,6 @@ simulation
 work
 transcript
 *.wlf
+
+# Add as of commit fc09983
+greybox_tmp
