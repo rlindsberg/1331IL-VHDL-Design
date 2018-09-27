@@ -10,13 +10,13 @@ entity controller is
         RWM_en    : out std_logic;                -- active low
         ROM_en    : out std_logic;                -- active low
         clk       :     std_logic;
-        reset     : out std_logic;                -- active high
+        reset     :     std_logic;                -- active high
         rw_reg    : out std_logic;                -- read on high
         sel_op_1  : out unsigned(1 downto 0);
         sel_op_0  : out unsigned(1 downto 0);
         sel_in    : out unsigned(1 downto 0);
         sel_mux   : out unsigned(1 downto 0);
-        alu_op    : out unsigned(1 downto 0);
+        alu_op    : out unsigned(2 downto 0);
         alu_en    : out std_logic;                -- active high
         z_flag    :     std_logic;                -- active high
         n_flag    :     std_logic;                -- active high
@@ -26,82 +26,81 @@ entity controller is
 end entity;
 
 architecture fun_part of controller is
-  -- components
-  component ALU
-    port( Op          :     std_logic_vector(2 downto 0);
-          A           :     data_word;
-          B           :     data_word;
-          En          :     std_logic;
-          clk         :     std_logic;
-          y           : out data_word;
-          n_flag      : out std_logic;
-          z_flag      : out std_logic;
-          o_flag      : out std_logic);
-  end component;
-
-  component DataBuffer
-    port( out_en      :     std_logic;
-          data_in     :     data_word;
-          data_out    : out data_word);
-  end component;
-
-  component MUX
-    port( sel         :     std_logic_vector(1 downto 0);
-          data_in_2   :     data_word;
-          data_in_1   :     data_word;
-          data_in_0   :     data_word;
-          data_out    : out data_word);
-  end component;
-
-  component RegisterFile
-    port( clk         :     std_logic;
-          data_in     :     data_word;
-          data_out_1  : out data_word;
-          data_out_0  : out data_word;
-          sel_in      :     std_logic_vector (1 downto 0);
-          sel_out_1   :     std_logic_vector (1 downto 0);
-          sel_out_0   :     std_logic_vector (1 downto 0);
-          rw_reg      :     std_logic);
-  end component;
-
-  -- signals
-  signal AAA  :   data_word; -- reg_file, alu, buffer
-  signal BBB  :   data_word; -- reg_file, alu
-  signal CCC  :   data_word; -- alu, mux
-  signal DDD  :   data_word: -- mux, reg_file
+  signal program_counter  : integer := 0; -- only signal for easier test benching
 begin
-  -- components port map
-  ALU : ALU port map(
-      Op          => alu_op,
-      A           => AAA, -- from register_file data_out_1
-      B           => BBB, -- from register_file data_out_0
-      En          => alu_en,
-      clk         => clk,
-      y           => CCC, --out (to mux data_in_0)
-      n_flag      => n_flag, --out
-      z_flag      => z_flag, --out
-      o_flag      => o_flag); -- out
 
-  data_buffer : data_buffer port map(
-      out_en      => out_en,
-      data_in     => AAA, -- from register_file data_out_1
-      data_out    =>); --out
+  PC : process(clk, reset, program_counter, data)
+  begin
+    if reset = '1' then program_counter <= 0;
+    end if;
+    if rising_edge(clk) then
+      if data(9) = '0' then                   -- ALU operations --
+        alu_op    <=  unsigned(data(8 downto 6));       -- alu operation
+        sel_op_1 <=  unsigned(data(5 downto 4));       -- r1; reg to read from
+        sel_in    <=  unsigned(data(1 downto 0));       -- r3; reg to save to
+        sel_mux   <=  "00";                   -- alu output
 
-  MUX : multiplexer port map(
-      sel         => sel_mux,
-      data_in_2   => data_imm,
-      data_in_1   =>, -- from ?
-      data_in_0   => CCC, -- from ALU y
-      data_out    => DDD); --out (to register_file data_in)
+        -- "00" for NOT and MOV, r2 for the rest
+        if data(8 downto 6) = "101" or data(8 downto 6) = "111" then
+          sel_op_0 <= "00";
+        else
+          sel_op_0 <= unsigned(data(5 downto 4));
+        end if;
 
-  register_file : RegisterFile port map(
-      clk         => clk,
-      data_in     => DDD, -- from mux data_out
-      data_out_1  => AAA, --out (to buffer data_in & ALU A)
-      data_out_0  => data_out_0_to_B, --out (to ALU B)
-      sel_in      => sel_in,
-      sel_out_1   => sel_op_1,
-      sel_out_0   => sel_op_0,
-      rw_reg      => rw_reg);
+        alu_en    <=  '1';                    -- enable alu
+        rw_reg    <=  '0';                    -- enable write to reg
 
+        program_counter <= program_counter + 1;
+        -- TODO återställa rw_reg? timing?
+      elsif data(8 downto 6) = "000" then       -- r1 = <mem>
+        RWM_en      <=  '1';
+        ROM_en      <=  '0';
+        adr         <=  data(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+        rw_RWM      <=  '1';                -- set RWM in 'read from' mode
+        sel_mux     <=  "01";               -- data from RWM
+        sel_in      <=  unsigned(data(5 downto 4));   -- r1; reg to save to
+        rw_reg      <=  '0';
+        program_counter <= program_counter + 1;
+
+      elsif data(8 downto 6) = "001" then    -- mem = r1
+        RWM_en      <=  '1';
+        ROM_en      <=  '0';
+        adr         <=  data(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+        rw_RWM      <=  '0';                -- set RWM in 'write to' mode
+        sel_op_1    <=  unsigned(data(5 downto 4));
+  		out_en      <=  '1';
+        program_counter <= program_counter + 1;
+
+      elsif data(8 downto 6) = "010" then    -- r1 = d1d2d3d4
+        sel_in      <=  unsigned(data(5 downto 4));
+        sel_mux     <=  "10";
+        data_imm    <=  data(3 downto 0);
+        program_counter <= program_counter + 1;
+
+      elsif data(8 downto 6) = "100" then     -- z = '1' -> pc = mem; z = '0' -> pc += 1;
+        if z_flag = '1' then
+          program_counter <= to_integer(unsigned(data(3 downto 0)));
+        else
+          program_counter <= program_counter + 1;
+        end if;
+
+      elsif data(8 downto 6) = "101" then     -- n = '1' -> pc = mem; n = '0' -> pc += 1;
+        if n_flag = '1' then
+          program_counter <= to_integer(unsigned(data(3 downto 0)));
+        else
+          program_counter <= program_counter + 1;
+        end if;
+
+      elsif data(8 downto 6) = "110" then     -- o = '1' -> pc = mem; o = '0' -> pc += 1;
+        if o_flag = '1' then
+          program_counter <= to_integer(unsigned(data(3 downto 0)));
+        else
+          program_counter <= program_counter + 1;
+        end if;
+
+      else
+        program_counter <= to_integer(unsigned(data(3 downto 0)));
+      end if;
+    end if;
+  end process;
 end architecture;
