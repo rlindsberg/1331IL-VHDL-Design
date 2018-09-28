@@ -36,7 +36,6 @@ architecture fun_part of controller is
   signal sel_reg_in       : unsigned(1 downto 0);
   signal sel_mux_in       : unsigned(1 downto 0);
   signal alu_op_code      : unsigned(2 downto 0);
-  signal alu_en           : std_logic;
   signal rom_enable       : std_logic;
   signal rwm_enable       : std_logic;
 begin
@@ -48,10 +47,12 @@ begin
   RST : process(clk, state, reset)
   begin
 
-    if reset = '1' then
-      state <= 0;
-    end if;
     if rising_edge(clk) then
+      
+      if reset = '1' then
+        state <= 0;
+      end if;
+
       case state is
       when 0 =>
         program_counter <= 0;
