@@ -32,7 +32,7 @@ begin
   process
   begin
     -- ADD --
-    
+
     -- SUB
     -- AND
     -- OR
@@ -47,4 +47,5 @@ begin
     -- BRN
     -- BRO
     -- BRA
+  end process;
 end architecture;

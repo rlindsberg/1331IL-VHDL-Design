@@ -27,80 +27,147 @@ end entity;
 
 architecture fun_part of controller is
   signal program_counter  : integer := 0; -- only signal for easier test benching
-begin
+  signal state            : integer := 0;
 
-  PC : process(clk, reset, program_counter, data)
+  signal inst             : program_word; -- data
+  signal address          : address_bus;
+  signal sel_reg_out_1    : unsigned(1 downto 0);
+  signal sel_reg_out_0    : unsigned(1 downto 0);
+  signal sel_reg_in       : unsigned(1 downto 0);
+  signal sel_mux_in       : unsigned(1 downto 0);
+  signal alu_op_code      : unsigned(2 downto 0);
+  signal alu_en           : std_logic;
+  signal rom_enable       : std_logic;
+  signal rwm_enable       : std_logic;
+begin
+  adr       <=  address;
+  sel_op_1  <=  sel_reg_out_1;
+  sel_op_0  <=  sel_reg_out_0;
+  -- T.B.C.
+
+  RST : process(clk, state, reset)
   begin
-    if reset = '1' then program_counter <= 0;
+
+    if reset = '1' then
+      state <= 0;
     end if;
     if rising_edge(clk) then
-      if data(9) = '0' then                   -- ALU operations --
-        alu_op    <=  unsigned(data(8 downto 6));       -- alu operation
-        sel_op_1 <=  unsigned(data(5 downto 4));       -- r1; reg to read from
-        sel_in    <=  unsigned(data(1 downto 0));       -- r3; reg to save to
-        sel_mux   <=  "00";                   -- alu output
+      case state is
+      when 0 =>
+        program_counter <= 0;
 
-        -- "00" for NOT and MOV, r2 for the rest
-        if data(8 downto 6) = "101" or data(8 downto 6) = "111" then
-          sel_op_0 <= "00";
-        else
-          sel_op_0 <= unsigned(data(5 downto 4));
-        end if;
+      when 1 =>
+        adr <= std_logic_vector(to_unsigned(program_counter, address_size));
+        ROM_en <= '1';
 
-        alu_en    <=  '1';                    -- enable alu
-        rw_reg    <=  '0';                    -- enable write to reg
+      when 2 =>
+        inst <= data;
 
-        program_counter <= program_counter + 1;
-        -- TODO återställa rw_reg? timing?
-      elsif data(8 downto 6) = "000" then       -- r1 = <mem>
-        RWM_en      <=  '1';
-        ROM_en      <=  '0';
-        adr         <=  data(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
-        rw_RWM      <=  '1';                -- set RWM in 'read from' mode
-        sel_mux     <=  "01";               -- data from RWM
-        sel_in      <=  unsigned(data(5 downto 4));   -- r1; reg to save to
-        rw_reg      <=  '0';
-        program_counter <= program_counter + 1;
+      when 3 =>
+        case inst(9 downto 6) is
+            -- add, sub, and, or, xor, not, mov
+            when "0000" => -- add
+            when "0001" => -- sub
+            when "0010" => -- and
+            when "0011" => -- or
+            when "0100" => -- xor
+            when "0101" => -- not
+            when "0110" => -- mov
+              --state <= 4;
+              alu_op    <=  unsigned(inst(8 downto 6));       -- alu operation
+              sel_op_1  <=  unsigned(inst(5 downto 4));       -- r1; reg to read from
+              sel_in    <=  unsigned(inst(1 downto 0));       -- r3; reg to save to
+              sel_mux   <=  "00";                   -- alu output
 
-      elsif data(8 downto 6) = "001" then    -- mem = r1
-        RWM_en      <=  '1';
-        ROM_en      <=  '0';
-        adr         <=  data(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
-        rw_RWM      <=  '0';                -- set RWM in 'write to' mode
-        sel_op_1    <=  unsigned(data(5 downto 4));
-  		out_en      <=  '1';
-        program_counter <= program_counter + 1;
+              -- "00" for NOT and MOV, r2 for the rest
+              if inst(8 downto 6) = "101" or inst(8 downto 6) = "111" then
+                sel_op_0 <= "00";
+              else
+                sel_op_0 <= unsigned(inst(5 downto 4));
+              end if;
 
-      elsif data(8 downto 6) = "010" then    -- r1 = d1d2d3d4
-        sel_in      <=  unsigned(data(5 downto 4));
-        sel_mux     <=  "10";
-        data_imm    <=  data(3 downto 0);
-        program_counter <= program_counter + 1;
+              alu_en    <=  '1';                    -- enable alu
+              rw_reg    <=  '0';                    -- enable write to reg
 
-      elsif data(8 downto 6) = "100" then     -- z = '1' -> pc = mem; z = '0' -> pc += 1;
-        if z_flag = '1' then
-          program_counter <= to_integer(unsigned(data(3 downto 0)));
-        else
-          program_counter <= program_counter + 1;
-        end if;
+              program_counter <= program_counter + 1;
+              state     <=  1;
 
-      elsif data(8 downto 6) = "101" then     -- n = '1' -> pc = mem; n = '0' -> pc += 1;
-        if n_flag = '1' then
-          program_counter <= to_integer(unsigned(data(3 downto 0)));
-        else
-          program_counter <= program_counter + 1;
-        end if;
+          -- ldr
+          when "1000" => --state <= 5;
+            RWM_en          <=  '1';
+            ROM_en          <=  '0';
+            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+            rw_RWM          <=  '1';                -- set RWM in 'read from' mode
+            sel_mux         <=  "01";               -- inst from RWM
+            sel_in          <=  unsigned(inst(5 downto 4));   -- r1; reg to save to
+            rw_reg          <=  '0';
+            program_counter <=  program_counter + 1;
+            state           <=  1;
 
-      elsif data(8 downto 6) = "110" then     -- o = '1' -> pc = mem; o = '0' -> pc += 1;
-        if o_flag = '1' then
-          program_counter <= to_integer(unsigned(data(3 downto 0)));
-        else
-          program_counter <= program_counter + 1;
-        end if;
+          -- str
+          when "1001" => --state <= 6;
+            RWM_en          <=  '1';
+            ROM_en          <=  '0';
+            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+            rw_RWM          <=  '0';                -- set RWM in 'write to' mode
+            sel_op_1        <=  unsigned(inst(5 downto 4));
+            out_en          <=  '1';
+            program_counter <=  program_counter + 1;
+            state           <=  1;
 
-      else
-        program_counter <= to_integer(unsigned(data(3 downto 0)));
-      end if;
+          -- ldi
+          when "1010" => --state <= 7;
+            sel_in      <=  unsigned(inst(5 downto 4));
+            sel_mux     <=  "10";
+            data_imm    <=  inst(3 downto 0);
+            program_counter <= program_counter + 1;
+            state <= 1;
+
+          -- nop
+          when "1011" =>
+            program_counter <= program_counter + 1;
+            state <= 1;
+
+          -- brz
+          when "1100" =>
+            if z_flag = '1' then
+              program_counter <= to_integer(unsigned(inst( 3 downto 0)));
+            else
+              program_counter <= program_counter + 1;
+            end if;
+            state <= 1;
+
+          -- brn
+          when "1101" =>
+            if n_flag = '1' then
+              program_counter <= to_integer(unsigned(inst( 3 downto 0)));
+            else
+              program_counter <= program_counter + 1;
+            end if;
+            state <= 1;
+
+          -- bro
+          when "1110" =>
+            if o_flag = '1' then
+              program_counter <= to_integer(unsigned(inst( 3 downto 0)));
+            else
+              program_counter <= program_counter + 1;
+            end if;
+            state <= 1;
+
+          -- bra
+          when "1111" =>
+            program_counter <= to_integer(unsigned(inst(3 downto 0)));
+            state <= 1;
+
+          when others =>
+            state <= 1;
+
+          end case;
+
+        when others =>
+          state <= 1;
+      end case;
     end if;
   end process;
 end architecture;
