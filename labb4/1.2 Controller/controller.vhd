@@ -26,94 +26,96 @@ entity controller is
 end entity;
 
 architecture fun_part of controller is
+  SUBTYPE state_type IS integer RANGE 0 TO 3;
+
   signal program_counter  : integer := 0; -- only signal for easier test benching
-  signal state            : integer := 0;
+  signal pres_state       : state_type := 0;
+  signal next_state       : state_type := 0;
+  signal inst             : program_word;
+  -- signal adr_s1           : address_bus;
+  -- signal adr_s5           : address_bus;
+  -- signal adr_s6           : address_bus;
+  -- signal ROM_en       : std_logic;
 
-  signal inst             : program_word; -- data
-  signal address          : address_bus;
-  signal sel_reg_out_1    : unsigned(1 downto 0);
-  signal sel_reg_out_0    : unsigned(1 downto 0);
-  signal sel_reg_in       : unsigned(1 downto 0);
-  signal sel_mux_in       : unsigned(1 downto 0);
-  signal alu_op_code      : unsigned(2 downto 0);
-  signal alu_en           : std_logic;
-  signal rom_enable       : std_logic;
-  signal rwm_enable       : std_logic;
+  alias inst_op:std_logic_vector(3 downto 0) is inst(9 downto 6);
 begin
-  adr       <=  address;
-  sel_op_1  <=  sel_reg_out_1;
-  sel_op_0  <=  sel_reg_out_0;
-  -- T.B.C.
 
-  RST : process(clk, state, reset)
+  COUNT : process(clk, reset)
   begin
-
     if reset = '1' then
-      state <= 0;
+      pres_state <= 0;
+    elsif rising_edge(clk) then
+      pres_state <= next_state;
     end if;
-    if rising_edge(clk) then
-      case state is
+  end process;
+
+  LOGIC : process(pres_state) -- decode + branching
+  begin
+    case pres_state is
       when 0 =>
+        next_state <= pres_state + 1;
         program_counter <= 0;
 
       when 1 =>
         adr <= std_logic_vector(to_unsigned(program_counter, address_size));
         ROM_en <= '1';
 
+        next_state <= pres_state + 1;
+
       when 2 =>
         inst <= data;
 
+        next_state <= pres_state + 1;
+
       when 3 =>
-        case inst(9 downto 6) is
-            -- add, sub, and, or, xor, not, mov
-            when "0000" => -- add
-            when "0001" => -- sub
-            when "0010" => -- and
-            when "0011" => -- or
-            when "0100" => -- xor
-            when "0101" => -- not
-            when "0110" => -- mov
-              --state <= 4;
-              alu_op    <=  unsigned(inst(8 downto 6));       -- alu operation
-              sel_op_1  <=  unsigned(inst(5 downto 4));       -- r1; reg to read from
-              sel_in    <=  unsigned(inst(1 downto 0));       -- r3; reg to save to
-              sel_mux   <=  "00";                   -- alu output
+        case inst_op is
+          -- add, sub, and, or, xor, not, mov
+          when "0000" => -- add
+          when "0001" => -- sub
+          when "0010" => -- and
+          when "0011" => -- or
+          when "0100" => -- xor
+          when "0101" => -- not
+    	    when "0110" => -- mov
+            --state <= 4;
+            alu_op    <=  unsigned(inst(8 downto 6));       -- alu operation
+            sel_op_1  <=  unsigned(inst(5 downto 4));       -- r1; reg to read from
+            sel_in    <=  unsigned(inst(1 downto 0));       -- r3; reg to save to
+            sel_mux   <=  "00";                   -- alu output
 
-              -- "00" for NOT and MOV, r2 for the rest
-              if inst(8 downto 6) = "101" or inst(8 downto 6) = "111" then
-                sel_op_0 <= "00";
-              else
-                sel_op_0 <= unsigned(inst(5 downto 4));
-              end if;
+            -- "00" for NOT and MOV, r2 for the rest
+            if inst(8 downto 6) = "101" or inst(8 downto 6) = "111" then
+              sel_op_0 <= "00";
+            else
+              sel_op_0 <= unsigned(inst(5 downto 4));
+            end if;
 
-              alu_en    <=  '1';                    -- enable alu
-              rw_reg    <=  '0';                    -- enable write to reg
+            alu_en    <=  '1';                    -- enable alu
+            rw_reg    <=  '0';                    -- enable write to reg
 
-              program_counter <= program_counter + 1;
-              state     <=  1;
+            program_counter <= program_counter + 1;
 
           -- ldr
+          when "0111" => next_state <= 1;
           when "1000" => --state <= 5;
-            RWM_en          <=  '1';
-            ROM_en          <=  '0';
-            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
-            rw_RWM          <=  '1';                -- set RWM in 'read from' mode
-            sel_mux         <=  "01";               -- inst from RWM
-            sel_in          <=  unsigned(inst(5 downto 4));   -- r1; reg to save to
-            rw_reg          <=  '0';
-            program_counter <=  program_counter + 1;
-            state           <=  1;
+            RWM_en      <=  '1';
+            ROM_en      <=  '0';
+            adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+            rw_RWM      <=  '1';                -- set RWM in 'read from' mode
+            sel_mux     <=  "01";               -- inst from RWM
+            sel_in      <=  unsigned(inst(5 downto 4));   -- r1; reg to save to
+            rw_reg      <=  '0';
+            program_counter <= program_counter + 1;
 
           -- str
           when "1001" => --state <= 6;
-            RWM_en          <=  '1';
-            ROM_en          <=  '0';
-            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
-            rw_RWM          <=  '0';                -- set RWM in 'write to' mode
-            sel_op_1        <=  unsigned(inst(5 downto 4));
-            out_en          <=  '1';
-            program_counter <=  program_counter + 1;
-            state           <=  1;
+            RWM_en      <=  '1';
+            ROM_en      <=  '0';
+            adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+            rw_RWM      <=  '0';                -- set RWM in 'write to' mode
+            sel_op_1    <=  unsigned(inst(5 downto 4));
+            out_en      <=  '1';
+            program_counter <= program_counter + 1;
 
           -- ldi
           when "1010" => --state <= 7;
@@ -121,12 +123,10 @@ begin
             sel_mux     <=  "10";
             data_imm    <=  inst(3 downto 0);
             program_counter <= program_counter + 1;
-            state <= 1;
 
           -- nop
           when "1011" =>
             program_counter <= program_counter + 1;
-            state <= 1;
 
           -- brz
           when "1100" =>
@@ -135,7 +135,6 @@ begin
             else
               program_counter <= program_counter + 1;
             end if;
-            state <= 1;
 
           -- brn
           when "1101" =>
@@ -144,7 +143,6 @@ begin
             else
               program_counter <= program_counter + 1;
             end if;
-            state <= 1;
 
           -- bro
           when "1110" =>
@@ -153,21 +151,14 @@ begin
             else
               program_counter <= program_counter + 1;
             end if;
-            state <= 1;
 
           -- bra
           when "1111" =>
             program_counter <= to_integer(unsigned(inst(3 downto 0)));
-            state <= 1;
 
-          when others =>
-            state <= 1;
+        end case;
 
-          end case;
-
-        when others =>
-          state <= 1;
-      end case;
-    end if;
+        next_state <= 1;
+    end case;
   end process;
 end architecture;
