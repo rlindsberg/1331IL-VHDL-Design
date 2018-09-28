@@ -39,20 +39,21 @@ architecture fun_part of controller is
   signal rom_enable       : std_logic;
   signal rwm_enable       : std_logic;
 begin
-  adr       <=  address;
-  sel_op_1  <=  sel_reg_out_1;
-  sel_op_0  <=  sel_reg_out_0;
-  -- T.B.C.
 
   RST : process(clk, state, reset)
   begin
 
     if rising_edge(clk) then
-      
+
       if reset = '1' then
         state <= 0;
       end if;
 
+      adr       <=  address;
+      sel_op_1  <=  sel_reg_out_1;
+      sel_op_0  <=  sel_reg_out_0;
+      -- T.B.C.
+      
       case state is
       when 0 =>
         program_counter <= 0;
