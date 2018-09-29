@@ -27,11 +27,11 @@ end entity;
 
 architecture fun_part of controller is
   SUBTYPE state_type IS integer RANGE 0 TO 3;
-  signal pres_state       : state_type := 0;
-  signal next_state       : state_type := 0;
+  signal pres_state       :   state_type := 0;
+  signal next_state       :   state_type := 0;
 
-  signal inst             : program_word;
-  signal program_counter  : integer := 0; -- only signal for easier test benching
+  signal inst             :   program_word;
+  signal program_counter  :   integer := 0;
 
   alias inst_op           :   std_logic_vector(3 downto 0) is inst(9 downto 6);
   alias inst_alu_op       :   std_logic_vector(2 downto 0) is inst(8 downto 6);
@@ -80,13 +80,13 @@ begin
       when 3 =>
         case inst_op is
           -- add, sub, and, or, xor, not, mov
-          when "0000" => -- add
-          when "0001" => -- sub
-          when "0010" => -- and
-          when "0011" => -- or
-          when "0100" => -- xor
-          when "0101" => -- not
-    	    when "0110" => -- mov
+          when "0000" => -- add --TODO behövdes visst ändå :(
+          when "0001" => -- sub --TODO
+          when "0010" => -- and --TODO
+          when "0011" => -- or  --TODO
+          when "0100" => -- xor --TODO
+          when "0101" => -- not --TODO
+    	    when "0110" => -- mov --TODO
             --state <= 4;
             alu_op      <=  unsigned(inst_alu_op);
             sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
@@ -103,7 +103,7 @@ begin
             alu_en      <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
 
-            program_counter <= program_counter + 1;
+            program_counter <= program_counter + 1; -- TODO inte hållbart, måste endast printa ut det nya värdet
 
           -- ldr
           when "1000" => --state <= 5;
@@ -125,7 +125,7 @@ begin
             rw_RWM          <=  '0';                -- set RWM in 'write to' mode
             sel_op_1   <=  unsigned(inst_r1);
             out_en      <=  '1';
-            program_counter <= program_counter + 1;
+            program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             RWM_en      <=  '1' after 100 ps; -- deactivate RWM
 
           -- ldi
@@ -133,18 +133,18 @@ begin
             sel_in      <=  unsigned(inst_r1);
             sel_mux      <=  "10";
             data_imm          <=  inst_data_imm;
-            program_counter <= program_counter + 1;
+            program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
 
           -- nop
           when "1011" =>
-            program_counter <= program_counter + 1;
+            program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
 
           -- brz
           when "1100" =>
             if z_flag = '1' then
               program_counter <= to_integer(unsigned(inst_mem));
             else
-              program_counter <= program_counter + 1;
+              program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             end if;
 
           -- brn
@@ -152,7 +152,7 @@ begin
             if n_flag = '1' then
               program_counter <= to_integer(unsigned(inst_mem));
             else
-              program_counter <= program_counter + 1;
+              program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             end if;
 
           -- bro
@@ -160,7 +160,7 @@ begin
             if o_flag = '1' then
               program_counter <= to_integer(unsigned(inst_mem));
             else
-              program_counter <= program_counter + 1;
+              program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             end if;
 
           -- bra

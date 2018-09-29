@@ -98,7 +98,7 @@ begin
   -- check value of OUT ports.
   process
   begin
-    clock <= not clock after 1 ns;
+    --clock <= not clock after 1 ns;
 
     -- ADD --
     data_in <= inst_list(0);
