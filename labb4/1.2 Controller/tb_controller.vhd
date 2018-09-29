@@ -52,8 +52,8 @@ architecture test of tb_controller is
   signal address        :   address_bus;
   signal data_in        :   program_word;
   signal rwm_rw         :   std_logic;
-  signal rwm_en         :   std_logic;
-  signal rom_en         :   std_logic;
+  signal rwm_en         :   std_logic := '1';
+  signal rom_en         :   std_logic := '0';
   signal clock          :   std_logic := '0';
   signal reset          :   std_logic := '0';
   signal reg_rw         :   std_logic;
@@ -93,85 +93,88 @@ begin
     data_imm  =>    data_out_imm
   );
 
+  --clock <= not clock after 100 ps;
+
   -- IDEA: look at controller OUT ports,
   -- read in instruction and other IN values,
   -- check value of OUT ports.
-  process
+  process--(clock)
   begin
-    --clock <= not clock after 1 ns;
-
+    -- if rom_en = '0' then
+    --   data_in <= inst_list(to_integer(unsigned(address)));
+    -- end if;
     -- ADD --
     data_in <= inst_list(0);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- SUB
     data_in <= inst_list(1);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- AND
     data_in <= inst_list(2);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- OR
     data_in <= inst_list(3);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- XOR
     data_in <= inst_list(4);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- NOT
     data_in <= inst_list(5);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- MOV
     data_in <= inst_list(6);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- null
     data_in <= inst_list(7);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- LDR
     data_in <= inst_list(8);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- STD
     data_in <= inst_list(9);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- LDI
     data_in <= inst_list(10);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- NOP
     data_in <= inst_list(11);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- BRZ
     data_in     <= inst_list(12);
     alu_flag_z  <= '1';             -- test with z_flag = 1
-    wait for 5 ns;
+    wait for 2 ns;
     alu_flag_z  <= '0';             -- test with z_flag = 0
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- BRN
     data_in     <= inst_list(13);
     alu_flag_n  <= '1';             -- test with n_flag = 1
-    wait for 5 ns;
+    wait for 2 ns;
     alu_flag_n  <= '0';             -- test with n_flag = 0
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- BRO
     data_in <= inst_list(14);
     alu_flag_o  <= '1';             -- test with o_flag = 1
-    wait for 5 ns;
+    wait for 2 ns;
     alu_flag_o  <= '0';             -- test with o_flag = 0
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- BRA
     data_in <= inst_list(15);
-    wait for 5 ns;
+    wait for 2 ns;
 
     -- Reset
     reset <= '1';
