@@ -52,41 +52,98 @@ begin
     end if;
   end process;
 
-  -- next state decoding part
-  NEXT_STATE_DECODER: process(state)
-  begin
-    case state is
-      when 0 => next_state <= state + 1;
-      when 1 => next_state <= state + 1;
-      when 2 => next_state <= state + 1;
-      when 3 => next_state <= 1;
-    end case;
-  end process;
-
   LOGIC : process(clk, state) -- decode + branching
   begin
     if rising_edge(clk) then
     case state is
       when 0 =>
         program_counter <= 0;
+        next_state <= state + 1;
 
       when 1 =>
         ROM_en <= '0'; -- active low
         adr <= std_logic_vector(to_unsigned(program_counter, address_size));
         ROM_en <= '1' after 100 ps; -- deactive high
+        next_state <= state + 1;
 
       when 2 =>
         inst <= data;
+        next_state <= state + 1;
 
       when 3 =>
         case inst_op is
           -- add, sub, and, or, xor, not, mov
-          when "0000" => -- add --TODO behövdes visst ändå :(
-          when "0001" => -- sub --TODO
-          when "0010" => -- and --TODO
-          when "0011" => -- or  --TODO
-          when "0100" => -- xor --TODO
-          when "0101" => -- not --TODO
+          when "0000" => -- add
+            alu_op      <=  unsigned(inst_alu_op);
+            sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
+            -- sel_in chooses to which register data_in is written
+            sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
+            sel_mux     <=  "00";                   -- alu output
+            sel_op_0    <=  unsigned(inst_r2); -- r2
+            alu_en      <=  '1';                    -- enable alu
+            rw_reg      <=  '0';                    -- enable write to reg
+
+            program_counter <= program_counter + 1;
+
+          when "0001" => -- sub
+            alu_op      <=  unsigned(inst_alu_op);
+            sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
+            -- sel_in chooses to which register data_in is written
+            sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
+            sel_mux     <=  "00";                   -- alu output
+            sel_op_0    <=  unsigned(inst_r2); -- r2
+            alu_en      <=  '1';                    -- enable alu
+            rw_reg      <=  '0';                    -- enable write to reg
+
+            program_counter <= program_counter + 1;
+
+          when "0010" => -- and
+            alu_op      <=  unsigned(inst_alu_op);
+            sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
+            -- sel_in chooses to which register data_in is written
+            sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
+            sel_mux     <=  "00";                   -- alu output
+            sel_op_0    <=  unsigned(inst_r2); -- r2
+            alu_en      <=  '1';                    -- enable alu
+            rw_reg      <=  '0';                    -- enable write to reg
+
+            program_counter <= program_counter + 1;
+
+          when "0011" => -- or
+            alu_op      <=  unsigned(inst_alu_op);
+            sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
+            -- sel_in chooses to which register data_in is written
+            sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
+            sel_mux     <=  "00";                   -- alu output
+            sel_op_0    <=  unsigned(inst_r2); -- r2
+            alu_en      <=  '1';                    -- enable alu
+            rw_reg      <=  '0';                    -- enable write to reg
+
+            program_counter <= program_counter + 1;
+
+          when "0100" => -- xor
+            alu_op      <=  unsigned(inst_alu_op);
+            sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
+            -- sel_in chooses to which register data_in is written
+            sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
+            sel_mux     <=  "00";                   -- alu output
+            sel_op_0    <=  unsigned(inst_r2); -- r2
+            alu_en      <=  '1';                    -- enable alu
+            rw_reg      <=  '0';                    -- enable write to reg
+
+            program_counter <= program_counter + 1;
+
+          when "0101" => -- not
+            alu_op      <=  unsigned(inst_alu_op);
+            sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
+            -- sel_in chooses to which register data_in is written
+            sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
+            sel_mux     <=  "00";                   -- alu output
+            sel_op_0    <=  "00";
+            alu_en      <=  '1';                    -- enable alu
+            rw_reg      <=  '0';                    -- enable write to reg
+
+            program_counter <= program_counter + 1;
 
           -- mov --TODO
           when "0110" =>
@@ -96,18 +153,11 @@ begin
             -- sel_in chooses to which register data_in is written
             sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
             sel_mux     <=  "00";                   -- alu output
-
-            -- "00" for NOT and MOV, r2 for the rest
-            if inst(8 downto 6) = "101" or inst(8 downto 6) = "111" then
-              sel_op_0  <= "00";
-            else
-              sel_op_0  <= unsigned(inst_r1); -- r2
-            end if;
-
+            sel_op_0    <=  "00";
             alu_en      <=  '1';                    -- enable alu
             rw_reg      <=  '0';                    -- enable write to reg
 
-            program_counter <= program_counter + 1; -- TODO inte hållbart, måste endast printa ut det nya värdet
+            program_counter <= program_counter + 1;
 
           -- ldr
           when "1000" => --state <= 5;
@@ -129,7 +179,7 @@ begin
             rw_RWM      <=  '0';                -- set RWM in 'write to' mode
             sel_op_1    <=  unsigned(inst_r1);
             out_en      <=  '1';
-            program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+            program_counter <= program_counter + 1;
             RWM_en      <=  '1' after 100 ps; -- deactivate RWM
 
           -- ldi
@@ -137,18 +187,18 @@ begin
             sel_in      <=  unsigned(inst_r1);
             sel_mux     <=  "10";
             data_imm    <=  inst_data_imm;
-            program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+            program_counter <= program_counter + 1;
 
           -- nop
           when "1011" =>
-            program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+            program_counter <= program_counter + 1;
 
           -- brz
           when "1100" =>
             if z_flag = '1' then
               program_counter <= to_integer(unsigned(inst_mem));
             else
-              program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+              program_counter <= program_counter + 1;
             end if;
 
           -- brn
@@ -156,7 +206,7 @@ begin
             if n_flag = '1' then
               program_counter <= to_integer(unsigned(inst_mem));
             else
-              program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+              program_counter <= program_counter + 1;
             end if;
 
           -- bro
@@ -164,7 +214,7 @@ begin
             if o_flag = '1' then
               program_counter <= to_integer(unsigned(inst_mem));
             else
-              program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+              program_counter <= program_counter + 1;
             end if;
 
           -- bra
@@ -174,6 +224,7 @@ begin
           when others =>
             program_counter <= 0;
         end case;
+        next_state <= 1;
     end case;
   end if;
   end process;
