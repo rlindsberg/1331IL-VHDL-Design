@@ -52,31 +52,23 @@ begin
     end if;
   end process;
 
-  -- next state decoding part
-  NEXT_STATE_DECODER: process(state)
-  begin
-    case state is
-      when 0 => next_state <= state + 1;
-      when 1 => next_state <= state + 1;
-      when 2 => next_state <= state + 1;
-      when 3 => next_state <= 1;
-    end case;
-  end process;
-
   LOGIC : process(clk, state) -- decode + branching
   begin
     if rising_edge(clk) then
     case state is
       when 0 =>
         program_counter <= 0;
+        next_state <= state + 1;
 
       when 1 =>
         ROM_en <= '0'; -- active low
         adr <= std_logic_vector(to_unsigned(program_counter, address_size));
         ROM_en <= '1' after 100 ps; -- deactive high
+        next_state <= state + 1;
 
       when 2 =>
         inst <= data;
+        next_state <= state + 1;
 
       when 3 =>
         case inst_op is
@@ -108,6 +100,7 @@ begin
             rw_reg      <=  '0';                    -- enable write to reg
 
             program_counter <= program_counter + 1; -- TODO inte hållbart, måste endast printa ut det nya värdet
+            next_state <= 1;
 
           -- ldr
           when "1000" => --state <= 5;
@@ -120,6 +113,7 @@ begin
             rw_reg      <=  '0';
             program_counter <= program_counter + 1;
             RWM_en      <=  '1' after 100 ps; -- deactivate RWM
+            next_state <= 1;
 
           -- str
           when "1001" => --state <= 6;
@@ -131,6 +125,7 @@ begin
             out_en      <=  '1';
             program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             RWM_en      <=  '1' after 100 ps; -- deactivate RWM
+            next_state <= 1;
 
           -- ldi
           when "1010" => --state <= 7;
@@ -138,10 +133,12 @@ begin
             sel_mux     <=  "10";
             data_imm    <=  inst_data_imm;
             program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+            next_state <= 1;
 
           -- nop
           when "1011" =>
             program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
+            next_state <= 1;
 
           -- brz
           when "1100" =>
@@ -150,6 +147,7 @@ begin
             else
               program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             end if;
+            next_state <= 1;
 
           -- brn
           when "1101" =>
@@ -158,6 +156,7 @@ begin
             else
               program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             end if;
+            next_state <= 1;
 
           -- bro
           when "1110" =>
@@ -166,13 +165,16 @@ begin
             else
               program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             end if;
+            next_state <= 1;
 
           -- bra
           when "1111" =>
             program_counter <= to_integer(unsigned(inst_mem));
+            next_state <= 1;
 
           when others =>
             program_counter <= 0;
+            next_state <= 1;
         end case;
     end case;
   end if;
