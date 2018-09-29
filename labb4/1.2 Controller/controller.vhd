@@ -26,8 +26,8 @@ entity controller is
 end entity;
 
 architecture fun_part of controller is
-  SUBTYPE state_type IS integer RANGE 0 TO 3;
-  signal pres_state       :   state_type := 0;
+  subtype state_type is integer range 0 to 3;
+  signal state       :   state_type := 0;
   signal next_state       :   state_type := 0;
 
   signal inst             :   program_word;
@@ -46,26 +46,27 @@ begin
   COUNT : process(clk, reset)
   begin
     if reset = '1' then
-      pres_state <= 0;
+      state <= 0;
     elsif rising_edge(clk) then
-      pres_state <= next_state;
+      state <= next_state;
     end if;
   end process;
 
-  PRES : process(pres_state)
+  -- next state decoding part
+  NEXT_STATE_DECODER: process(state)
   begin
-    case pres_state is
-      when 0 => next_state <= pres_state + 1;
-      when 1 => next_state <= pres_state + 1;
-      when 2 => next_state <= pres_state + 1;
+    case state is
+      when 0 => next_state <= state + 1;
+      when 1 => next_state <= state + 1;
+      when 2 => next_state <= state + 1;
       when 3 => next_state <= 1;
     end case;
   end process;
 
-  LOGIC : process(clk, pres_state) -- decode + branching
+  LOGIC : process(clk, state) -- decode + branching
   begin
     if rising_edge(clk) then
-    case pres_state is
+    case state is
       when 0 =>
         program_counter <= 0;
 
@@ -86,22 +87,25 @@ begin
           when "0011" => -- or  --TODO
           when "0100" => -- xor --TODO
           when "0101" => -- not --TODO
-    	    when "0110" => -- mov --TODO
+
+          -- mov --TODO
+          when "0110" =>
             --state <= 4;
             alu_op      <=  unsigned(inst_alu_op);
             sel_op_1    <=  unsigned(inst_r1);       -- r1; reg to read from
+            -- sel_in chooses to which register data_in is written
             sel_in      <=  unsigned(inst_r3);       -- r3; reg to save to
             sel_mux     <=  "00";                   -- alu output
 
             -- "00" for NOT and MOV, r2 for the rest
             if inst(8 downto 6) = "101" or inst(8 downto 6) = "111" then
-              sel_op_0 <= "00";
+              sel_op_0  <= "00";
             else
-              sel_op_0 <= unsigned(inst_r1);
+              sel_op_0  <= unsigned(inst_r1); -- r2
             end if;
 
             alu_en      <=  '1';                    -- enable alu
-            rw_reg          <=  '0';                    -- enable write to reg
+            rw_reg      <=  '0';                    -- enable write to reg
 
             program_counter <= program_counter + 1; -- TODO inte hållbart, måste endast printa ut det nya värdet
 
@@ -110,10 +114,10 @@ begin
             RWM_en      <=  '0'; -- activate RWM
             ROM_en      <=  '1'; -- deactivate ROM
             adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
-            rw_RWM          <=  '1';                -- set RWM in 'read from' mode
-            sel_mux      <=  "01";               -- inst from RWM
+            rw_RWM      <=  '1';                -- set RWM in 'read from' mode
+            sel_mux     <=  "01";               -- inst from RWM
             sel_in      <=  unsigned(inst_r1);   -- r1; reg to save to
-            rw_reg          <=  '0';
+            rw_reg      <=  '0';
             program_counter <= program_counter + 1;
             RWM_en      <=  '1' after 100 ps; -- deactivate RWM
 
@@ -122,8 +126,8 @@ begin
             RWM_en      <=  '0'; -- activate RWM
             ROM_en      <=  '1'; -- deactivate ROM
             adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
-            rw_RWM          <=  '0';                -- set RWM in 'write to' mode
-            sel_op_1   <=  unsigned(inst_r1);
+            rw_RWM      <=  '0';                -- set RWM in 'write to' mode
+            sel_op_1    <=  unsigned(inst_r1);
             out_en      <=  '1';
             program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
             RWM_en      <=  '1' after 100 ps; -- deactivate RWM
@@ -131,8 +135,8 @@ begin
           -- ldi
           when "1010" => --state <= 7;
             sel_in      <=  unsigned(inst_r1);
-            sel_mux      <=  "10";
-            data_imm          <=  inst_data_imm;
+            sel_mux     <=  "10";
+            data_imm    <=  inst_data_imm;
             program_counter <= program_counter + 1;   -- TODO inte hållbart, måste endast printa ut det nya värdet
 
           -- nop
