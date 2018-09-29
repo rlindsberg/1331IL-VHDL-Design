@@ -28,24 +28,154 @@ architecture test of tb_controller is
             out_en    : out std_logic;                -- active high
             data_imm  : out data_word);               -- signed
   end component;
+
+  type inst_table is array (0 to 15) of instruction_bus;
+  constant  inst_list	:	    inst_table := (
+      B"0000_11_00_11",   -- ADD
+      B"0001_11_11_10",   -- SUB
+      B"0010_01_00_01",   -- AND
+      B"0011_00_11_10",   -- OR
+      B"0100_00_00_10",   -- XOR
+      B"0101_10_0_1_10",  -- NOT
+      B"0110_00_0_1_00",  -- MOV
+      B"0111_00_1100",    -- does not exist
+      B"1000_00_0000",    -- LDR
+      B"1001_00_0101",    -- STR
+      B"1010_00_0_0_0_0", -- LDI
+      B"1011_00_00_00",   -- NOP
+      B"1100_10_1111",    -- BRZ
+      B"1101_00_1101",    -- BRN
+      B"1110_00_0000",    -- BRO
+      B"1111_00_0000"     -- BRA
+    );
+
+  signal address        :   address_bus;
+  signal data_in        :   program_word;
+  signal rwm_rw         :   std_logic;
+  signal rwm_en         :   std_logic;
+  signal rom_en         :   std_logic;
+  signal clock          :   std_logic := '0';
+  signal reset          :   std_logic := '0';
+  signal reg_rw         :   std_logic;
+  signal reg_sel_out_1  :   unsigned(1 downto 0);
+  signal reg_sel_out_0  :   unsigned(1 downto 0);
+  signal reg_sel_in     :   unsigned(1 downto 0);
+  signal mux_sel        :   unsigned(1 downto 0);
+  signal alu_op         :   unsigned(2 downto 0);
+  signal alu_en         :   std_logic;
+  signal alu_flag_z     :   std_logic := '0';
+  signal alu_flag_n     :   std_logic := '0';
+  signal alu_flag_o     :   std_logic := '0';
+  signal buffer_en      :   std_logic;
+  signal data_out_imm   :   data_word;
+
 begin
+
+  CTR : controller port map (
+    adr       =>    address,
+    data      =>    data_in,        -- in
+    rw_RWM    =>    rwm_rw,
+    RWM_en    =>    rwm_en,
+    ROM_en    =>    rom_en,
+    clk       =>    clock,          -- in
+    reset     =>    reset,          -- in
+    rw_reg    =>    reg_rw,
+    sel_op_1  =>    reg_sel_out_1,
+    sel_op_0  =>    reg_sel_out_0,
+    sel_in    =>    reg_sel_in,
+    sel_mux   =>    mux_sel,
+    alu_op    =>    alu_op,
+    alu_en    =>    alu_en,
+    z_flag    =>    alu_flag_z,     -- in
+    n_flag    =>    alu_flag_n,     -- in
+    o_flag    =>    alu_flag_o,     -- in
+    out_en    =>    buffer_en,
+    data_imm  =>    data_out_imm
+  );
+
+  -- IDEA: look at controller OUT ports,
+  -- read in instruction and other IN values,
+  -- check value of OUT ports.
   process
   begin
+    clock <= not clock after 1 ns;
+
     -- ADD --
+    data_in <= inst_list(0);
+    wait for 5 ns;
 
     -- SUB
+    data_in <= inst_list(1);
+    wait for 5 ns;
+
     -- AND
+    data_in <= inst_list(2);
+    wait for 5 ns;
+
     -- OR
+    data_in <= inst_list(3);
+    wait for 5 ns;
+
     -- XOR
+    data_in <= inst_list(4);
+    wait for 5 ns;
+
     -- NOT
+    data_in <= inst_list(5);
+    wait for 5 ns;
+
     -- MOV
+    data_in <= inst_list(6);
+    wait for 5 ns;
+
+    -- null
+    data_in <= inst_list(7);
+    wait for 5 ns;
+
     -- LDR
+    data_in <= inst_list(8);
+    wait for 5 ns;
+
     -- STD
+    data_in <= inst_list(9);
+    wait for 5 ns;
+
     -- LDI
+    data_in <= inst_list(10);
+    wait for 5 ns;
+
     -- NOP
+    data_in <= inst_list(11);
+    wait for 5 ns;
+
     -- BRZ
+    data_in     <= inst_list(12);
+    alu_flag_z  <= '1';             -- test with z_flag = 1
+    wait for 5 ns;
+    alu_flag_z  <= '0';             -- test with z_flag = 0
+    wait for 5 ns;
+
     -- BRN
+    data_in     <= inst_list(13);
+    alu_flag_n  <= '1';             -- test with n_flag = 1
+    wait for 5 ns;
+    alu_flag_n  <= '0';             -- test with n_flag = 0
+    wait for 5 ns;
+
     -- BRO
+    data_in <= inst_list(14);
+    alu_flag_o  <= '1';             -- test with o_flag = 1
+    wait for 5 ns;
+    alu_flag_o  <= '0';             -- test with o_flag = 0
+    wait for 5 ns;
+
     -- BRA
+    data_in <= inst_list(15);
+    wait for 5 ns;
+
+    -- Reset
+    reset <= '1';
+    wait for 2 ns;
+
   end process;
 end architecture;

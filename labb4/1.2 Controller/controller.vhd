@@ -106,10 +106,9 @@ begin
             program_counter <= program_counter + 1;
 
           -- ldr
-          when "0111" => -- null
           when "1000" => --state <= 5;
             RWM_en      <=  '0'; -- activate RWM
-            ROM_en      <=  '1'; -- activate ROM
+            ROM_en      <=  '1'; -- deactivate ROM
             adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '1';                -- set RWM in 'read from' mode
             sel_mux      <=  "01";               -- inst from RWM
@@ -121,7 +120,7 @@ begin
           -- str
           when "1001" => --state <= 6;
             RWM_en      <=  '0'; -- activate RWM
-            ROM_en      <=  '1'; -- activate ROM
+            ROM_en      <=  '1'; -- deactivate ROM
             adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '0';                -- set RWM in 'write to' mode
             sel_op_1   <=  unsigned(inst_r1);
@@ -168,6 +167,8 @@ begin
           when "1111" =>
             program_counter <= to_integer(unsigned(inst_mem));
 
+          when others =>
+            program_counter <= 0;
         end case;
     end case;
   end if;
