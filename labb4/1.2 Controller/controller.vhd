@@ -107,7 +107,7 @@ begin
           -- ldr
           when "0111" => -- null
           when "1000" => --state <= 5;
-            RWM_en      <=  '1';
+            RWM_en      <=  '0'; -- activate RWM
             ROM_en      <=  '0';
             adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '1';                -- set RWM in 'read from' mode
@@ -115,16 +115,18 @@ begin
             sel_in      <=  unsigned(inst_r1);   -- r1; reg to save to
             rw_reg          <=  '0';
             program_counter <= program_counter + 1;
+            RWM_en      <=  '1' after 100 ps; -- deactivate RWM
 
           -- str
           when "1001" => --state <= 6;
-            RWM_en      <=  '1';
+            RWM_en      <=  '0'; -- activate RWM
             ROM_en      <=  '0';
             adr         <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '0';                -- set RWM in 'write to' mode
             sel_op_1   <=  unsigned(inst_r1);
             out_en      <=  '1';
             program_counter <= program_counter + 1;
+            RWM_en      <=  '1' after 100 ps; -- deactivate RWM
 
           -- ldi
           when "1010" => --state <= 7;
