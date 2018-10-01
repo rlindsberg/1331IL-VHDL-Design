@@ -64,9 +64,6 @@ begin
         next_pc     <= 0;
         next_state  <= state + 1;
 
-        ROM_debug   <= '0'; -- active low
-        ROM_en      <= ROM_debug;
-
       when 1 =>
         adr         <= std_logic_vector(to_unsigned(pc, address_size));
         pc          <= next_pc;
@@ -239,6 +236,11 @@ begin
             next_pc <= 0;
 
         end case;
+
+        -- prepare for state 1
+        ROM_debug   <= '0'; -- active low
+        ROM_en      <= ROM_debug;
+
         next_state <= 1 after 3500 ps;
       end case;
     end if;
