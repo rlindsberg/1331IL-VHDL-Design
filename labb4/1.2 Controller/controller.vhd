@@ -54,7 +54,6 @@ begin
   end process;
 
   LOGIC : process(clk, state) -- decode + branching
-    variable next_pc  : integer;
   begin
     if rising_edge(clk) then
       case state is
@@ -64,7 +63,7 @@ begin
 
       when 1 =>
         ROM_en      <= '0'; -- active low
-        adr         <= std_logic_vector(to_unsigned(program_counter, address_size));
+        adr         <= std_logic_vector(to_unsigned(pc, address_size));
         ROM_en      <= '1' after 1 ns; -- deactive high
         pc          <= next_pc;
         next_state  <= state + 1;
@@ -219,7 +218,7 @@ begin
             next_pc <= 0;
 
         end case;
-        next_state <= 1 after 5 ns;
+        next_state <= 1 after 3500 ps;
       end case;
     end if;
   end process;

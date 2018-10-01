@@ -105,11 +105,11 @@ begin
     -- end if;
     -- ADD --
     data_in <= inst_list(0);
-    wait for 9 ns;
+    wait for 7500 ps;
 
     -- SUB
     data_in <= inst_list(1);
-    wait for 9 ns;
+    wait for 6 ns;
 
 
   end process;
