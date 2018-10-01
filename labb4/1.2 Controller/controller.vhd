@@ -8,7 +8,7 @@ entity controller is
         data      :     program_word;             -- unsigned
         rw_RWM    : out std_logic;                -- read on high
         RWM_en    : out std_logic;                -- active low
-        ROM_en    : out std_logic := '0';                -- active low
+        ROM_en    : out std_logic;                -- active low
         clk       :     std_logic;
         reset     :     std_logic;                -- active high
         rw_reg    : out std_logic;                -- read on high
@@ -80,6 +80,7 @@ begin
 
         -- moved from state 1
         ROM_en      <= '1'; -- deactive high
+        RWM_en      <= '0'; -- deactive high
         inst        <= data;
         next_state  <= state + 1;
 
@@ -91,9 +92,9 @@ begin
         report "test 2 failed: ROM_en should be 1 but isn't."
         severity warning;
 
-
         case inst_op is
-          when "0000" => -- add
+          -- add
+          when "0000" =>
             alu_op          <=  unsigned(inst_alu_op);
             sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
             -- sel_in chooses to which register data_in is written
@@ -104,7 +105,8 @@ begin
             rw_reg          <=  '0';                    -- enable write to reg
             next_pc         <=  pc + 1;
 
-          when "0001" => -- sub
+          -- sub
+          when "0001" =>
             alu_op          <=  unsigned(inst_alu_op);
             sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
             -- sel_in chooses to which register data_in is written
@@ -115,7 +117,8 @@ begin
             rw_reg          <=  '0';                    -- enable write to reg
             next_pc         <=  pc + 1;
 
-          when "0010" => -- and
+          -- and
+          when "0010" =>
             alu_op          <=  unsigned(inst_alu_op);
             sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
             -- sel_in chooses to which register data_in is written
@@ -126,7 +129,8 @@ begin
             rw_reg          <=  '0';                    -- enable write to reg
             next_pc         <=  pc + 1;
 
-          when "0011" => -- or
+          -- or
+          when "0011" =>
             alu_op          <=  unsigned(inst_alu_op);
             sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
             -- sel_in chooses to which register data_in is written
@@ -137,7 +141,8 @@ begin
             rw_reg          <=  '0';                    -- enable write to reg
             next_pc         <=  pc + 1;
 
-          when "0100" => -- xor
+          -- xor
+          when "0100" =>
             alu_op          <=  unsigned(inst_alu_op);
             sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
             -- sel_in chooses to which register data_in is written
@@ -148,7 +153,8 @@ begin
             rw_reg          <=  '0';                    -- enable write to reg
             next_pc         <=  pc + 1;
 
-          when "0101" => -- not
+          -- not
+          when "0101" =>
             alu_op          <=  unsigned(inst_alu_op);
             sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
             -- sel_in chooses to which register data_in is written
@@ -159,9 +165,8 @@ begin
             rw_reg          <=  '0';                    -- enable write to reg
             next_pc         <=  pc + 1;
 
-          -- mov --TODO
+          -- mov
           when "0110" =>
-            --state <= 4;
             alu_op          <=  unsigned(inst_alu_op);
             sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
             -- sel_in chooses to which register data_in is written
@@ -173,28 +178,24 @@ begin
             next_pc         <=  pc + 1;
 
           -- ldr
-          when "1000" => --state <= 5;
-            RWM_en          <=  '0'; -- activate RWM
+          when "1000" =>
             adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '1';                -- set RWM in 'read from' mode
             sel_mux         <=  "01";               -- inst from RWM
             sel_in          <=  unsigned(inst_r1);   -- r1; reg to save to
             rw_reg          <=  '0';
-            RWM_en          <=  '1' after 1 ns; -- deactivate RWM
             next_pc         <=  pc + 1;
 
           -- str
-          when "1001" => --state <= 6;
-            RWM_en          <=  '0'; -- activate RWM
+          when "1001" =>
             adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '0';                -- set RWM in 'write to' mode
             sel_op_1        <=  unsigned(inst_r1);
             out_en          <=  '1';
-            RWM_en          <=  '1' after 1 ns; -- deactivate RWM
             next_pc         <=  pc + 1;
 
           -- ldi
-          when "1010" => --state <= 7;
+          when "1010" =>
             sel_in          <=  unsigned(inst_r1);
             sel_mux         <=  "10";
             data_imm        <=  inst_data_imm;
@@ -238,10 +239,11 @@ begin
         end case;
 
         -- prepare for state 1
+        RWM_en      <= '1' after 100 ps; -- active low
         ROM_debug   <= '0'; -- active low
-        ROM_en      <= ROM_debug;
+        ROM_en      <= ROM_debug after 100 ps; -- to make it toggle at the same time as rwm_en
 
-        next_state <= 1 after 3500 ps;
+        next_state <= 1 after 100 ps;
       end case;
     end if;
   end process;

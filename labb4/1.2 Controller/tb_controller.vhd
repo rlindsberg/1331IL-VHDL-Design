@@ -29,7 +29,7 @@ architecture test of tb_controller is
             data_imm  : out data_word);               -- signed
   end component;
 
-  type inst_table is array (0 to 15) of instruction_bus;
+  type inst_table is array (0 to 14) of instruction_bus;
   constant  inst_list	:	    inst_table := (
       B"0000_11_00_11",   -- ADD
       B"0001_11_11_10",   -- SUB
@@ -38,22 +38,21 @@ architecture test of tb_controller is
       B"0100_00_00_10",   -- XOR
       B"0101_10_0_1_10",  -- NOT
       B"0110_00_0_1_00",  -- MOV
-      B"0111_00_1100",    -- does not exist
       B"1000_00_0000",    -- LDR
       B"1001_00_0101",    -- STR
       B"1010_00_0_0_0_0", -- LDI
       B"1011_00_00_00",   -- NOP
-      B"1100_10_1111",    -- BRZ
+      B"1100_10_1100",    -- BRZ
       B"1101_00_1101",    -- BRN
-      B"1110_00_0000",    -- BRO
+      B"1110_00_1110",    -- BRO
       B"1111_00_0000"     -- BRA
     );
 
   signal address        :   address_bus;
   signal data_in        :   program_word;
   signal rwm_rw         :   std_logic;
-  signal rwm_en         :   std_logic := '1';
-  signal rom_en         :   std_logic := '0';
+  signal rwm_en         :   std_logic;
+  signal rom_en         :   std_logic;
   signal clock          :   std_logic := '0';
   signal reset          :   std_logic := '0';
   signal reg_rw         :   std_logic;
@@ -98,19 +97,10 @@ begin
   -- IDEA: look at controller OUT ports,
   -- read in instruction and other IN values,
   -- check value of OUT ports.
-  process--(clock)
+  process(clock)
   begin
-    -- if rom_en = '0' then
-    --   data_in <= inst_list(to_integer(unsigned(address)));
-    -- end if;
-    -- ADD --
-    data_in <= inst_list(0);
-    wait for 7500 ps;
-
-    -- SUB
-    data_in <= inst_list(1);
-    wait for 6 ns;
-
-
+    if rom_en = '0' then
+      data_in <= inst_list(to_integer(unsigned(address)));
+    end if;
   end process;
 end architecture;
