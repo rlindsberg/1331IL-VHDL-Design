@@ -63,7 +63,7 @@ begin
       when 1 =>
         ROM_en      <= '0'; -- active low
         adr         <= std_logic_vector(to_unsigned(program_counter, address_size));
-        ROM_en      <= '1' after 100 ps; -- deactive high
+        ROM_en      <= '1' after 1 ns; -- deactive high
         next_state  <= state + 1;
 
       when 2 =>
@@ -173,7 +173,7 @@ begin
             sel_mux         <=  "01";               -- inst from RWM
             sel_in          <=  unsigned(inst_r1);   -- r1; reg to save to
             rw_reg          <=  '0';
-            RWM_en          <=  '1' after 100 ps; -- deactivate RWM
+            RWM_en          <=  '1' after 1 ns; -- deactivate RWM
             if state = next_state then
               program_counter <= program_counter + 1;
             end if;
@@ -185,7 +185,7 @@ begin
             rw_RWM          <=  '0';                -- set RWM in 'write to' mode
             sel_op_1        <=  unsigned(inst_r1);
             out_en          <=  '1';
-            RWM_en          <=  '1' after 100 ps; -- deactivate RWM
+            RWM_en          <=  '1' after 1 ns; -- deactivate RWM
             if state = next_state then
               program_counter <= program_counter + 1;
             end if;
