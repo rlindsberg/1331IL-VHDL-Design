@@ -75,6 +75,7 @@ begin
         ROM_en      <= '1' after 1 ns; -- deactive high
         pc          <= next_pc;
         next_state  <= state + 1;
+        program_counter <= next_pc;
 
       when 2 =>
         inst <= data;
@@ -91,7 +92,13 @@ begin
             sel_op_0        <=  unsigned(inst_r2); -- r2
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           when "0001" => -- sub
             alu_op          <=  unsigned(inst_alu_op);
@@ -102,7 +109,13 @@ begin
             sel_op_0        <=  unsigned(inst_r2); -- r2
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           when "0010" => -- and
             alu_op          <=  unsigned(inst_alu_op);
@@ -113,7 +126,13 @@ begin
             sel_op_0        <=  unsigned(inst_r2); -- r2
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           when "0011" => -- or
             alu_op          <=  unsigned(inst_alu_op);
@@ -124,7 +143,13 @@ begin
             sel_op_0        <=  unsigned(inst_r2); -- r2
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           when "0100" => -- xor
             alu_op          <=  unsigned(inst_alu_op);
@@ -135,7 +160,13 @@ begin
             sel_op_0        <=  unsigned(inst_r2); -- r2
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           when "0101" => -- not
             alu_op          <=  unsigned(inst_alu_op);
@@ -146,7 +177,13 @@ begin
             sel_op_0        <=  "00";
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           -- mov --TODO
           when "0110" =>
@@ -159,7 +196,13 @@ begin
             sel_op_0        <=  "00";
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           -- ldr
           when "1000" => --state <= 5;
@@ -170,7 +213,13 @@ begin
             sel_in          <=  unsigned(inst_r1);   -- r1; reg to save to
             rw_reg          <=  '0';
             RWM_en          <=  '1' after 1 ns; -- deactivate RWM
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           -- str
           when "1001" => --state <= 6;
@@ -180,25 +229,47 @@ begin
             sel_op_1        <=  unsigned(inst_r1);
             out_en          <=  '1';
             RWM_en          <=  '1' after 1 ns; -- deactivate RWM
+<<<<<<< HEAD
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           -- ldi
           when "1010" => --state <= 7;
             sel_in          <=  unsigned(inst_r1);
             sel_mux         <=  "10";
             data_imm        <=  inst_data_imm;
+<<<<<<< HEAD
             next_pc <= pc + 1;
 
           -- nop
           when "1011" =>
             next_pc <= pc + 1;
+=======
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+
+          -- nop
+          when "1011" =>
+            if state = next_state then
+              next_pc <= program_counter + 1;
+            end if;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
 
           -- brz
           when "1100" =>
             if z_flag = '1' then
               next_pc <= to_integer(unsigned(inst_mem));
             elsif state = next_state then
+<<<<<<< HEAD
                 next_pc <= pc + 1;
+=======
+                next_pc <= program_counter + 1;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
             end if;
 
           -- brn
@@ -206,7 +277,11 @@ begin
             if n_flag = '1' then
               next_pc <= to_integer(unsigned(inst_mem));
             elsif state = next_state then
+<<<<<<< HEAD
                 next_pc <= pc + 1;
+=======
+                next_pc <= program_counter + 1;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
             end if;
 
           -- bro
@@ -214,7 +289,11 @@ begin
             if o_flag = '1' then
               next_pc <= to_integer(unsigned(inst_mem));
             elsif state = next_state then
+<<<<<<< HEAD
                 next_pc <= pc + 1;
+=======
+                next_pc <= program_counter + 1;
+>>>>>>> 523aef65b68bec3696d1213409821247b67a6af6
             end if;
 
           -- bra
