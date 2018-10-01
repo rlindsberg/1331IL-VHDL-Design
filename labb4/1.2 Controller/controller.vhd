@@ -29,6 +29,7 @@ architecture fun_part of controller is
   subtype state_type is integer range 0 to 3;
   signal state            :   state_type := 0;
   signal next_state       :   state_type := 0;
+  signal next_pc          :   integer := 0;
 
   signal inst             :   program_word;
   signal program_counter  :   integer := 0;
@@ -42,6 +43,13 @@ architecture fun_part of controller is
   alias inst_data_imm     :   std_logic_vector(3 downto 0) is inst(3 downto 0);
 
 begin
+
+  PC : process(clk)
+  begin
+    if rising_edge(clk) then
+      program_counter <= next_pc;
+    end if;
+  end process;
 
   COUNT : process(clk, reset)
   begin
@@ -57,7 +65,7 @@ begin
     if rising_edge(clk) then
       case state is
       when 0 =>
-        program_counter <= 0;
+        next_pc <= 0;
         next_state      <= state + 1;
 
       when 1 =>
@@ -82,7 +90,7 @@ begin
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           when "0001" => -- sub
@@ -95,7 +103,7 @@ begin
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           when "0010" => -- and
@@ -108,7 +116,7 @@ begin
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           when "0011" => -- or
@@ -121,7 +129,7 @@ begin
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           when "0100" => -- xor
@@ -134,7 +142,7 @@ begin
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           when "0101" => -- not
@@ -147,7 +155,7 @@ begin
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           -- mov --TODO
@@ -162,7 +170,7 @@ begin
             alu_en          <=  '1';                    -- enable alu
             rw_reg          <=  '0';                    -- enable write to reg
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           -- ldr
@@ -175,7 +183,7 @@ begin
             rw_reg          <=  '0';
             RWM_en          <=  '1' after 1 ns; -- deactivate RWM
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           -- str
@@ -187,7 +195,7 @@ begin
             out_en          <=  '1';
             RWM_en          <=  '1' after 1 ns; -- deactivate RWM
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           -- ldi
@@ -196,48 +204,48 @@ begin
             sel_mux         <=  "10";
             data_imm        <=  inst_data_imm;
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           -- nop
           when "1011" =>
             if state = next_state then
-              program_counter <= program_counter + 1;
+              next_pc <= program_counter + 1;
             end if;
 
           -- brz
           when "1100" =>
             if z_flag = '1' then
-              program_counter <= to_integer(unsigned(inst_mem));
+              next_pc <= to_integer(unsigned(inst_mem));
             elsif state = next_state then
-                program_counter <= program_counter + 1;
+                next_pc <= program_counter + 1;
             end if;
 
           -- brn
           when "1101" =>
             if n_flag = '1' then
-              program_counter <= to_integer(unsigned(inst_mem));
+              next_pc <= to_integer(unsigned(inst_mem));
             elsif state = next_state then
-                program_counter <= program_counter + 1;
+                next_pc <= program_counter + 1;
             end if;
 
           -- bro
           when "1110" =>
             if o_flag = '1' then
-              program_counter <= to_integer(unsigned(inst_mem));
+              next_pc <= to_integer(unsigned(inst_mem));
             elsif state = next_state then
-                program_counter <= program_counter + 1;
+                next_pc <= program_counter + 1;
             end if;
 
           -- bra
           when "1111" =>
-            program_counter <= to_integer(unsigned(inst_mem));
+            next_pc <= to_integer(unsigned(inst_mem));
 
           when others =>
-            program_counter <= 0;
+            next_pc <= 0;
 
         end case;
-        next_state <= 1;
+        next_state <= 1 after 5 ns;
       end case;
     end if;
   end process;
