@@ -64,30 +64,37 @@ begin
         next_pc     <= 0;
         next_state  <= state + 1;
 
-      when 1 =>
         ROM_debug   <= '0'; -- active low
         ROM_en      <= ROM_debug;
 
-        assert ROM_debug = '0'
-        report "test 1 failed: ROM_en should be 0 but isn't."
-        severity warning;
-
+      when 1 =>
         adr         <= std_logic_vector(to_unsigned(pc, address_size));
-        ROM_en      <= '1' after 1 ns; -- deactive high
-
-        assert ROM_debug = '1'
-        report "test 2 failed: ROM_en should be 1 but isn't."
-        severity warning;
-
         pc          <= next_pc;
         next_state  <= state + 1;
         pc          <= next_pc;
 
       when 2 =>
+
+        -- test 1: testing ROM_en's value from state 1
+        -- test 1 should success at 1000 ps, 7000 ps and 1300 ps
+        assert ROM_debug = '0'
+        report "test 1 failed: ROM_en should be 0 but isn't."
+        severity warning;
+
+        -- moved from state 1
+        ROM_en      <= '1'; -- deactive high
         inst        <= data;
         next_state  <= state + 1;
 
       when 3 =>
+
+        -- test 2: testing ROM_en's value from state 2
+        -- test 2 should success at 2500 ps, 8500 ps, 14500 ps
+        assert ROM_debug = '1'
+        report "test 2 failed: ROM_en should be 1 but isn't."
+        severity warning;
+
+
         case inst_op is
           when "0000" => -- add
             alu_op          <=  unsigned(inst_alu_op);
