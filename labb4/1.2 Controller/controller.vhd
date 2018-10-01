@@ -31,6 +31,8 @@ architecture fun_part of controller is
   signal next_state       :   state_type := 0;
   signal next_pc          :   integer := 0;
 
+  signal ROM_debug        :   std_logic;
+
   signal inst             :   program_word;
   signal pc               :   integer := 0;
 
@@ -58,13 +60,25 @@ begin
     if rising_edge(clk) then
       case state is
       when 0 =>
+        ROM_en      <= '1';
         next_pc     <= 0;
         next_state  <= state + 1;
 
       when 1 =>
-        ROM_en      <= '0'; -- active low
+        ROM_debug   <= '0'; -- active low
+        ROM_en      <= ROM_debug;
+
+        assert ROM_debug = '0'
+        report "test 1 failed: ROM_en should be 0 but isn't."
+        severity warning;
+
         adr         <= std_logic_vector(to_unsigned(pc, address_size));
         ROM_en      <= '1' after 1 ns; -- deactive high
+
+        assert ROM_debug = '1'
+        report "test 2 failed: ROM_en should be 1 but isn't."
+        severity warning;
+
         pc          <= next_pc;
         next_state  <= state + 1;
         pc          <= next_pc;
