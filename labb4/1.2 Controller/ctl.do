@@ -14,4 +14,4 @@ sim:/tb_controller/CTR/next_pc
 add wave -position insertpoint  \
 sim:/tb_controller/CTR/inst
 force -freeze sim:/tb_controller/clk 1 0, 0 {2500 ps} -r 5000
-run 485 ns
+run 500 ns
