@@ -43,8 +43,9 @@ architecture test of tb_controller is
       B"1001_00_0101",    -- STR  1000   reg0 => mem<0101>       pc += 1
       B"1010_00_0_0_0_0", -- LDI  1001   0000 => reg0            pc += 1
       B"1011_00_00_00",   -- NOP  1010  nothing                 pc += 1
-      B"1101_00_1101",    -- BRN  1100  om n_flag = 1 => pc = 13 (1101), om n_flag = 0 => pc += 1
-      B"1110_00_1110",    -- BRO  1101  om o_flag = 1 => pc = 14 (1110), om o_flag = 0 => pc += 1
+      B"1100_10_1100",    -- BRZ  1011  om z_flag = 1 => pc = 11 (1100), om z_flag = 0 => pc += 1
+      B"1101_00_1101",    -- BRN  1100  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
+      B"1110_00_1110",    -- BRO  1101  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
       B"1111_00_0000"     -- BRA  1110  0000 => pc
     );
 
