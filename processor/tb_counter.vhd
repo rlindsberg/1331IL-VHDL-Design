@@ -3,9 +3,9 @@ Use IEEE.STD_LOGIC_1164.ALL;
 use ieee.std_logic_unsigned.all;
 Use work.cpu_package.ALL;
 
-Entity tb_Counter is End Entity;
+Entity tb_counter is End Entity;
 
-Architecture RTL of tb_Counter is
+Architecture RTL of tb_counter is
   Component Counter
     Port(
       in_clk      : in  std_logic;
