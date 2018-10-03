@@ -81,8 +81,12 @@ begin
         next_state  <= state + 1;
 
         case inst_op is
-          when "1000" => RWM_en      <= '0'; -- deactive high
-          when "1001" => RWM_en      <= '0'; -- deactive high
+          when "1000" =>
+            RWM_en      <= '0'; -- deactive high
+            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+          when "1001" =>
+            RWM_en      <= '0'; -- deactive high
+            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
           when others => RWM_en      <= '1'; -- deactive high
         end case;
 
@@ -178,7 +182,6 @@ begin
 
           -- ldr
           when "1000" =>
-            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '1';                -- set RWM in 'read from' mode
             sel_mux         <=  "01";               -- inst from RWM
             sel_in          <=  unsigned(inst_r1);   -- r1; reg to save to
@@ -187,7 +190,6 @@ begin
 
           -- str
           when "1001" =>
-            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
             rw_RWM          <=  '0';                -- set RWM in 'write to' mode
             sel_op_1        <=  unsigned(inst_r1);
             out_en          <=  '1';
