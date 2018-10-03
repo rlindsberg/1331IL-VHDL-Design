@@ -29,27 +29,24 @@ architecture test of tb_controller is
             data_imm  : out data_word);               -- signed
   end component;
 
-  type inst_table is array (0 to 17) of instruction_bus;
+  type inst_table is array (0 to 14) of instruction_bus;
   constant  inst_list	:	    inst_table := (
       -- (reg<n> = value in register <n>)
-      B"0000_11_00_11",   -- ADD  0   reg3 + reg0 => reg3     pc += 1
-      B"0001_11_11_10",   -- SUB  1   reg3 - reg3 => reg2     pc += 1
-      B"0010_01_00_01",   -- AND  2   reg1 & reg0 => reg1     pc += 1
-      B"0011_00_11_10",   -- OR   3   reg0 | reg3 => reg2     pc += 1
-      B"0100_00_00_10",   -- XOR  4   reg0 xor reg0 => reg2   pc += 1
-      B"0101_10_0_1_10",  -- NOT  5   !reg2 => reg2           pc += 1
-      B"0110_00_0_1_00",  -- MOV  6   reg0 => reg0            pc += 1
-      B"1000_00_0000",    -- LDR  7   mem<0000> => reg0       pc += 1
-      B"1001_00_0101",    -- STR  8   reg0 => mem<0101>       pc += 1
-      B"1010_00_0_0_0_0", -- LDI  9   0000 => reg0            pc += 1
-      B"1011_00_00_00",   -- NOP  10  nothing                 pc += 1
-      B"1100_10_1100",    -- BRZ  11  om z_flag = 1 => pc = 11 (1100), om z_flag = 0 => pc += 1
-      B"1100_10_1100",    -- BRZ  12  om z_flag = 1 => pc = 11 (1100), om z_flag = 0 => pc += 1
-      B"1101_00_1101",    -- BRN  13  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
-      B"1101_00_1101",    -- BRN  14  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
-      B"1110_00_1110",    -- BRO  15  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
-      B"1110_00_1110",    -- BRO  16  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
-      B"1111_00_0000"     -- BRA  17  0000 => pc
+      B"0000_11_00_11",   -- ADD  0000   reg3 + reg0 => reg3     pc += 1
+      B"0001_11_11_10",   -- SUB  0001   reg3 - reg3 => reg2     pc += 1
+      B"0010_01_00_01",   -- AND  0010   reg1 & reg0 => reg1     pc += 1
+      B"0011_00_11_10",   -- OR   0011   reg0 | reg3 => reg2     pc += 1
+      B"0100_00_00_10",   -- XOR  0100   reg0 xor reg0 => reg2   pc += 1
+      B"0101_10_0_1_10",  -- NOT  0101   !reg2 => reg2           pc += 1
+      B"0110_00_0_1_00",  -- MOV  0110   reg0 => reg0            pc += 1
+      B"1000_00_0000",    -- LDR  0111   mem<0000> => reg0       pc += 1
+      B"1001_00_0101",    -- STR  1000   reg0 => mem<0101>       pc += 1
+      B"1010_00_0_0_0_0", -- LDI  1001   0000 => reg0            pc += 1
+      B"1011_00_00_00",   -- NOP  1010  nothing                 pc += 1
+      B"1100_10_1100",    -- BRZ  1011  om z_flag = 1 => pc = 11 (1100), om z_flag = 0 => pc += 1
+      B"1101_00_1101",    -- BRN  1100  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
+      B"1110_00_1110",    -- BRO  1101  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
+      B"1111_00_0000"     -- BRA  1110  0000 => pc
     );
 
   signal adr            :   address_bus;
@@ -66,9 +63,9 @@ architecture test of tb_controller is
   signal sel_mux        :   unsigned(1 downto 0);
   signal alu_op         :   unsigned(2 downto 0);
   signal alu_en         :   std_logic;
-  signal z_flag         :   std_logic := '0';
-  signal n_flag         :   std_logic := '0';
-  signal o_flag         :   std_logic := '0';
+  signal z_flag         :   std_logic := '1';
+  signal n_flag         :   std_logic := '1';
+  signal o_flag         :   std_logic := '1';
   signal out_en         :   std_logic;
   signal data_imm       :   data_word;
 
@@ -102,40 +99,9 @@ begin
   -- read in instruction and other IN values,
   -- check value of OUT ports.
   process(clk)
-    variable z_en, n_en, o_en : std_logic := '0';
   begin
-    if z_en = '1' then
-      z_flag <= '0';
-    else
-      z_flag <= '1';
-    end if;
-
-    if n_en = '1' then
-      n_flag <= '0';
-    else
-      n_flag <= '1';
-    end if;
-
-    if o_en = '1' then
-      o_flag <= '0';
-    else
-      o_flag <= '1';
-    end if;
-
     if ROM_en = '0' then
       data <= inst_list(to_integer(unsigned(adr)));
-
-      if data(9 downto 6) = "1100" then
-        z_en := '1';
-      end if;
-
-      if data(9 downto 6) = "1101" then
-        n_en := '1';
-      end if;
-
-      if data(9 downto 6) = "1110" then
-        o_en := '1';
-      end if;
     end if;
   end process;
 end architecture;
