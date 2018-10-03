@@ -120,15 +120,15 @@ begin
     if ROM_en = '0' then
       data <= inst_list(to_integer(unsigned(adr)));
 
-      if data = "1100" then
+      if data(9 downto 6) = "1100" then
         z_en := '1';
       end if;
 
-      if data = "1101" then
+      if data(9 downto 6) = "1101" then
         n_en := '1';
       end if;
 
-      if data = "1110" then
+      if data(9 downto 6) = "1110" then
         o_en := '1';
       end if;
     end if;
