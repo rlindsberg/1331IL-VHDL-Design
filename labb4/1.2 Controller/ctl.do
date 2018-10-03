@@ -8,10 +8,10 @@ sim:/tb_controller/CTR/state
 add wave -position insertpoint  \
 sim:/tb_controller/CTR/next_state
 add wave -position insertpoint  \
-sim:/tb_controller/CTR/next_pc
-add wave -position insertpoint  \
 sim:/tb_controller/CTR/pc
 add wave -position insertpoint  \
+sim:/tb_controller/CTR/next_pc
+add wave -position insertpoint  \
 sim:/tb_controller/CTR/inst
-force -freeze sim:/tb_controller/clk 1 0, 0 {250 ps} -r 500
-run 18 ns
+force -freeze sim:/tb_controller/clk 1 0, 0 {2500 ps} -r 5000
+run 485 ns
