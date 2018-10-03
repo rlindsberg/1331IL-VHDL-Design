@@ -29,7 +29,7 @@ architecture test of tb_controller is
             data_imm  : out data_word);               -- signed
   end component;
 
-  type inst_table is array (0 to 14) of instruction_bus;
+  type inst_table is array (0 to 17) of instruction_bus;
   constant  inst_list	:	    inst_table := (
       -- (reg<n> = value in register <n>)
       B"0000_11_00_11",   -- ADD  0   reg3 + reg0 => reg3     pc += 1
@@ -44,9 +44,12 @@ architecture test of tb_controller is
       B"1010_00_0_0_0_0", -- LDI  9   0000 => reg0            pc += 1
       B"1011_00_00_00",   -- NOP  10  nothing                 pc += 1
       B"1100_10_1100",    -- BRZ  11  om z_flag = 1 => pc = 11 (1100), om z_flag = 0 => pc += 1
-      B"1101_00_1101",    -- BRN  12  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
-      B"1110_00_1110",    -- BRO  13  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
-      B"1111_00_0000"     -- BRA  14  0000 => pc
+      B"1100_10_1100",    -- BRZ  12  om z_flag = 1 => pc = 11 (1100), om z_flag = 0 => pc += 1
+      B"1101_00_1101",    -- BRN  13  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
+      B"1101_00_1101",    -- BRN  14  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
+      B"1110_00_1110",    -- BRO  15  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
+      B"1110_00_1110",    -- BRO  16  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
+      B"1111_00_0000"     -- BRA  17  0000 => pc
     );
 
   signal adr            :   address_bus;
@@ -93,11 +96,13 @@ begin
     data_imm  =>    data_imm
   );
 
+
+
   -- IDEA: look at controller OUT ports,
   -- read in instruction and other IN values,
   -- check value of OUT ports.
   process(clk)
-    variable z_en, n_en, o_en :  std_logic := '0';
+    variable z_en, n_en, o_en : std_logic := '0';
   begin
     if z_en = '1' then
       z_flag <= '0';

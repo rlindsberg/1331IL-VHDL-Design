@@ -61,14 +61,15 @@ begin
       case state is
       when 0 =>
         ROM_en      <= '1';
-        next_pc     <= 0;
+        next_pc     <=  0;
+        out_en      <= '0';
+        rw_reg      <= '1';
         next_state  <= state + 1;
 
       when 1 =>
         adr         <= std_logic_vector(to_unsigned(pc, address_size));
         pc          <= next_pc;
         next_state  <= state + 1;
-        pc          <= next_pc;
 
       when 2 =>
 
@@ -83,11 +84,12 @@ begin
         case inst_op is
           when "1000" =>
             RWM_en      <= '0'; -- deactive high
-            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+            adr         <=  data(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
           when "1001" =>
             RWM_en      <= '0'; -- deactive high
-            adr             <=  inst(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
-          when others => RWM_en      <= '1'; -- deactive high
+            adr         <=  data(3 downto 0);   -- adr is connected texpressiono both RWM and ROM
+          when others =>
+            RWM_en      <= '1'; -- deactive high
         end case;
 
       when 3 =>
@@ -242,6 +244,8 @@ begin
         -- prepare for state 1
         RWM_en      <= '1' after 100 ps; -- active low
         ROM_en      <= '0' after 100 ps;
+        out_en      <= '0' after 100 ps;
+        rw_reg      <= '1' after 100 ps;
 
         next_state  <=  1 after 100 ps;
       end case;
