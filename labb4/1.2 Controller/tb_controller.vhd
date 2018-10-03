@@ -31,76 +31,106 @@ architecture test of tb_controller is
 
   type inst_table is array (0 to 14) of instruction_bus;
   constant  inst_list	:	    inst_table := (
-      B"0000_11_00_11",   -- ADD
-      B"0001_11_11_10",   -- SUB
-      B"0010_01_00_01",   -- AND
-      B"0011_00_11_10",   -- OR
-      B"0100_00_00_10",   -- XOR
-      B"0101_10_0_1_10",  -- NOT
-      B"0110_00_0_1_00",  -- MOV
-      B"1000_00_0000",    -- LDR
-      B"1001_00_0101",    -- STR
-      B"1010_00_0_0_0_0", -- LDI
-      B"1011_00_00_00",   -- NOP
-      B"1100_10_1100",    -- BRZ
-      B"1101_00_1101",    -- BRN
-      B"1110_00_1110",    -- BRO
-      B"1111_00_0000"     -- BRA
+      -- (reg<n> = value in register <n>)
+      B"0000_11_00_11",   -- ADD  0   reg3 + reg0 => reg3     pc += 1
+      B"0001_11_11_10",   -- SUB  1   reg3 - reg3 => reg2     pc += 1
+      B"0010_01_00_01",   -- AND  2   reg1 & reg0 => reg1     pc += 1
+      B"0011_00_11_10",   -- OR   3   reg0 | reg3 => reg2     pc += 1
+      B"0100_00_00_10",   -- XOR  4   reg0 xor reg0 => reg2   pc += 1
+      B"0101_10_0_1_10",  -- NOT  5   !reg2 => reg2           pc += 1
+      B"0110_00_0_1_00",  -- MOV  6   reg0 => reg0            pc += 1
+      B"1000_00_0000",    -- LDR  7   mem<0000> => reg0       pc += 1
+      B"1001_00_0101",    -- STR  8   reg0 => mem<0101>       pc += 1
+      B"1010_00_0_0_0_0", -- LDI  9   0000 => reg0            pc += 1
+      B"1011_00_00_00",   -- NOP  10  nothing                 pc += 1
+      B"1100_10_1100",    -- BRZ  11  om z_flag = 1 => pc = 11 (1100), om z_flag = 0 => pc += 1
+      B"1101_00_1101",    -- BRN  12  om n_flag = 1 => pc = 12 (1101), om n_flag = 0 => pc += 1
+      B"1110_00_1110",    -- BRO  13  om o_flag = 1 => pc = 13 (1110), om o_flag = 0 => pc += 1
+      B"1111_00_0000"     -- BRA  14  0000 => pc
     );
 
-  signal address        :   address_bus;
-  signal data_in        :   program_word;
-  signal rwm_rw         :   std_logic;
-  signal rwm_en         :   std_logic;
-  signal rom_en         :   std_logic;
-  signal clock          :   std_logic := '0';
+  signal adr            :   address_bus;
+  signal data           :   program_word;
+  signal rw_RWM         :   std_logic;
+  signal RWM_en         :   std_logic;
+  signal ROM_en         :   std_logic;
+  signal clk            :   std_logic := '0';
   signal reset          :   std_logic := '0';
-  signal reg_rw         :   std_logic;
-  signal reg_sel_out_1  :   unsigned(1 downto 0);
-  signal reg_sel_out_0  :   unsigned(1 downto 0);
-  signal reg_sel_in     :   unsigned(1 downto 0);
-  signal mux_sel        :   unsigned(1 downto 0);
+  signal rw_reg         :   std_logic;
+  signal sel_op_1       :   unsigned(1 downto 0);
+  signal sel_op_0       :   unsigned(1 downto 0);
+  signal sel_in         :   unsigned(1 downto 0);
+  signal sel_mux        :   unsigned(1 downto 0);
   signal alu_op         :   unsigned(2 downto 0);
   signal alu_en         :   std_logic;
-  signal alu_flag_z     :   std_logic := '0';
-  signal alu_flag_n     :   std_logic := '0';
-  signal alu_flag_o     :   std_logic := '0';
-  signal buffer_en      :   std_logic;
-  signal data_out_imm   :   data_word;
+  signal z_flag         :   std_logic := '0';
+  signal n_flag         :   std_logic := '0';
+  signal o_flag         :   std_logic := '0';
+  signal out_en         :   std_logic;
+  signal data_imm       :   data_word;
 
 begin
 
   CTR : controller port map (
-    adr       =>    address,
-    data      =>    data_in,        -- in
-    rw_RWM    =>    rwm_rw,
-    RWM_en    =>    rwm_en,
-    ROM_en    =>    rom_en,
-    clk       =>    clock,          -- in
+    adr       =>    adr,
+    data      =>    data,           -- in
+    rw_RWM    =>    rw_RWM,
+    RWM_en    =>    RWM_en,
+    ROM_en    =>    ROM_en,
+    clk       =>    clk,            -- in
     reset     =>    reset,          -- in
-    rw_reg    =>    reg_rw,
-    sel_op_1  =>    reg_sel_out_1,
-    sel_op_0  =>    reg_sel_out_0,
-    sel_in    =>    reg_sel_in,
-    sel_mux   =>    mux_sel,
+    rw_reg    =>    rw_reg,
+    sel_op_1  =>    sel_op_1,
+    sel_op_0  =>    sel_op_0,
+    sel_in    =>    sel_in,
+    sel_mux   =>    sel_mux,
     alu_op    =>    alu_op,
     alu_en    =>    alu_en,
-    z_flag    =>    alu_flag_z,     -- in
-    n_flag    =>    alu_flag_n,     -- in
-    o_flag    =>    alu_flag_o,     -- in
-    out_en    =>    buffer_en,
-    data_imm  =>    data_out_imm
+    z_flag    =>    z_flag,         -- in
+    n_flag    =>    n_flag,         -- in
+    o_flag    =>    o_flag,         -- in
+    out_en    =>    out_en,
+    data_imm  =>    data_imm
   );
-
-  --clock <= not clock after 100 ps;
 
   -- IDEA: look at controller OUT ports,
   -- read in instruction and other IN values,
   -- check value of OUT ports.
-  process(clock)
+  process(clk)
+    variable z_en, n_en, o_en :  std_logic := '0';
   begin
-    if rom_en = '0' then
-      data_in <= inst_list(to_integer(unsigned(address)));
+    if z_en = '1' then
+      z_flag <= '0';
+    else
+      z_flag <= '1';
+    end if;
+
+    if n_en = '1' then
+      n_flag <= '0';
+    else
+      n_flag <= '1';
+    end if;
+
+    if o_en = '1' then
+      o_flag <= '0';
+    else
+      o_flag <= '1';
+    end if;
+
+    if ROM_en = '0' then
+      data <= inst_list(to_integer(unsigned(adr)));
+
+      if data = "1100" then
+        z_en := '1';
+      end if;
+
+      if data = "1101" then
+        n_en := '1';
+      end if;
+
+      if data = "1110" then
+        o_en := '1';
+      end if;
     end if;
   end process;
 end architecture;

@@ -74,9 +74,6 @@ begin
 
         -- -- test 1: testing ROM_en's value from state 1
         -- -- test 1 should success at 1000 ps, 7000 ps and 1300 ps
-        -- assert ROM_debug = '0'
-        -- report "test 1 failed: ROM_en should be 0 but isn't."
-        -- severity warning;
 
         -- moved from state 1
         ROM_en      <= '1'; -- deactive high
@@ -93,9 +90,6 @@ begin
 
         -- test 2: testing ROM_en's value from state 2
         -- test 2 should success at 2500 ps, 8500 ps, 14500 ps
-        assert ROM_debug = '1'
-        report "test 2 failed: ROM_en should be 1 but isn't."
-        severity warning;
 
         case inst_op is
           -- add
@@ -245,11 +239,9 @@ begin
 
         -- prepare for state 1
         RWM_en      <= '1' after 100 ps; -- active low
-        -- ROM_debug   <= '0'; -- active low
-        -- ROM_en      <= ROM_debug after 100 ps; -- to make it toggle at the same time as rwm_en
         ROM_en      <= '0' after 100 ps;
 
-        next_state  <= 1 after 100 ps;
+        next_state  <=  1 after 100 ps;
       end case;
     end if;
   end process;
