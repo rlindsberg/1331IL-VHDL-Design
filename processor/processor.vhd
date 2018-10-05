@@ -97,7 +97,7 @@ Architecture Structure of CPU is
   signal sig_out_en                           : std_logic;
 
 Begin
-  controller port map (
+  Ctl_inst: controller port map (
     out_adr         =>  sig_adr,              -- out
     in_data         =>  sig_data,
     out_rw_RWM      =>  sig_rw_RWM,           -- out
@@ -117,10 +117,10 @@ Begin
     in_o_flag       =>  sig_o_flag,
     out_out_en      =>  sig_out_en,           -- out
     out_data_imm    =>  sig_data_imm,         -- out
-    in_stop         =>  sig_stop,
+    in_stop         =>  sig_stop
   );
 
-  ALU port map (
+  ALU_inst: ALU port map (
     in_Op           =>  sig_alu_op,
     in_A            =>  sig_reg_data_out_1,
     in_B            =>  sig_reg_data_out_0,
@@ -129,10 +129,10 @@ Begin
     out_y           =>  sig_alu_out,          -- out
     out_n_flag      =>  sig_n_flag,           -- out
     out_z_flag      =>  sig_z_flag,           -- out
-    out_o_flag      =>  sig_o_flag,           -- out
+    out_o_flag      =>  sig_o_flag            -- out
   );
 
-  register_file port map (
+  reg_file_inst: register_file port map (
     in_clk          =>  sig_clk,
     in_data_in      =>  sig_mux_data_out,
     out_data_out_1  =>  sig_reg_data_out_1,   -- out
@@ -140,10 +140,10 @@ Begin
     in_sel_in       =>  sig_sel_in,
     in_sel_out_1    =>  sig_sel_out_1,
     in_sel_out_0    =>  sig_sig_sel_out_0,
-    in_rw_reg       =>  sig_rw_reg,
+    in_rw_reg       =>  sig_rw_reg
   );
 
-  multiplexer port map (
+  MUX_inst: multiplexer port map (
     in_sel          =>  sig_sel_mux,
     in_data_in_2    =>  sig_data_imm,
     in_data_in_1    =>  sig_RWM_data,
@@ -151,10 +151,10 @@ Begin
     out_data_out    =>  sig_mux_data_out      -- out
   );
 
-  data_buffer port map (
+  buffer_inst: data_buffer port map (
     in_out_en       =>  sig_out_en,
     in_data_in      =>  sig_reg_data_out_1,
-    out_data_out    =>  sig_RWM_data,         -- out
+    out_data_out    =>  sig_RWM_data          -- out
   );
 
 end Architecture;
