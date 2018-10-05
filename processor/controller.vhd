@@ -22,7 +22,8 @@ entity controller is
         n_flag    :     std_logic;                -- active high
         o_flag    :     std_logic;                -- active high
         out_en    : out std_logic;                -- active high
-        data_imm  : out data_word);               -- signed
+        data_imm  : out data_word;                -- signed
+        stop      :     std_logic);
 end entity;
 
 architecture fun_part of controller is
@@ -50,7 +51,7 @@ begin
   begin
     if reset = '1' then
       state <= 0;
-    elsif rising_edge(clk) then
+    elsif rising_edge(clk) and stop /= '1' then
       state <= next_state;
     end if;
   end process;
