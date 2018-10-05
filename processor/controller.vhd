@@ -47,7 +47,7 @@ architecture fun_part of controller is
 
 begin
 
-  COUNT : process(clk, in_reset)
+  COUNT : process(clk, in_reset, in_stop)
   begin
     if in_reset = '1' then
       state <= 0;
