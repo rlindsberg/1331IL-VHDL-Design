@@ -98,13 +98,13 @@ Architecture Structure of processor is
 
 Begin
   Ctl_inst: controller port map (
-    out_adr         =>  sig_adr,              -- out
-    in_data         =>  sig_data,
-    out_rw_RWM      =>  sig_rw_RWM,           -- out
-    out_RWM_en      =>  sig_RWM_en,           -- out
-    out_ROM_en      =>  sig_ROM_en,           -- out
-    clk             =>  sig_clk,
-    in_reset        =>  sig_reset,
+    out_adr         =>  out_adr,              -- out
+    in_data         =>  in_data,
+    out_rw_RWM      =>  out_rw_RWM,           -- out
+    out_RWM_en      =>  out_RWM_en,           -- out
+    out_ROM_en      =>  out_ROM_en,           -- out
+    clk             =>  clk,
+    in_reset        =>  in_reset,
     out_rw_reg      =>  sig_rw_reg,           -- out
     out_sel_op_1    =>  sig_sel_out_1,        -- out
     out_sel_op_0    =>  sig_sel_out_0,        -- out
@@ -117,7 +117,7 @@ Begin
     in_o_flag       =>  sig_o_flag,
     out_out_en      =>  sig_out_en,           -- out
     out_data_imm    =>  sig_data_imm,         -- out
-    in_stop         =>  sig_stop
+    in_stop         =>  in_stop
   );
 
   ALU_inst: ALU port map (
@@ -125,7 +125,7 @@ Begin
     in_A            =>  sig_reg_data_out_1,
     in_B            =>  sig_reg_data_out_0,
     in_En           =>  sig_alu_en,
-    clk             =>  sig_clk,
+    clk             =>  clk,
     out_y           =>  sig_alu_out,          -- out
     out_n_flag      =>  sig_n_flag,           -- out
     out_z_flag      =>  sig_z_flag,           -- out
@@ -133,7 +133,7 @@ Begin
   );
 
   reg_file_inst: register_file port map (
-    clk             =>  sig_clk,
+    clk             =>  clk,
     in_data_in      =>  sig_mux_data_out,
     out_data_out_1  =>  sig_reg_data_out_1,   -- out
     out_data_out_0  =>  sig_reg_data_out_0,   -- out
@@ -146,7 +146,7 @@ Begin
   MUX_inst: multiplexer port map (
     in_sel          =>  sig_sel_mux,
     in_data_in_2    =>  sig_data_imm,
-    in_data_in_1    =>  sig_RWM_data,
+    in_data_in_1    =>  inout_RWM_data,
     in_data_in_0    =>  sig_alu_out,
     out_data_out    =>  sig_mux_data_out      -- out
   );
@@ -154,7 +154,7 @@ Begin
   buffer_inst: data_buffer port map (
     in_out_en       =>  sig_out_en,
     in_data_in      =>  sig_reg_data_out_1,
-    out_data_out    =>  sig_RWM_data          -- out
+    out_data_out    =>  inout_RWM_data          -- out
   );
 
 end Architecture;

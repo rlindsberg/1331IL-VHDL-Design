@@ -27,7 +27,7 @@ Begin
   -- Write Operation : When ce active low, rw write on low
   MEM_WRITE: Process (clk) Begin
     if rising_edge(clk) and in_ce = '0' and in_rw = '0' then
-      sig_mem(to_integer(unsigned(in_addr))) <= in_out_Z;
+      sig_mem(to_integer(unsigned(in_addr))) <= inout_Z;
     end if;
   End Process;
 
