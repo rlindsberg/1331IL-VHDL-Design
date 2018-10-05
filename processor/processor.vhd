@@ -11,7 +11,7 @@ Entity CPU is
         out_rw_RWM      : out   std_logic;
         out_ROM_en      : out   std_logic;
         out_RWM_en      : out   std_logic;
-        in_clk          :       std_logic;
+        clk          :       std_logic;
         in_reset        :       std_logic);
 end Entity;
 
@@ -21,7 +21,7 @@ Architecture Structure of CPU is
             in_A       : in data_word;
             in_B       : in data_word;
             in_En      : in std_logic;
-            in_clk     : in std_logic;
+            clk     : in std_logic;
             out_y      : out data_word;
             out_n_flag : out std_logic := '0';
             out_z_flag : out std_logic := '0';
@@ -34,7 +34,7 @@ Architecture Structure of CPU is
             out_rw_RWM    : out std_logic;                -- read on high
             out_RWM_en    : out std_logic;                -- active low
             out_ROM_en    : out std_logic;                -- active low
-            in_clk        :     std_logic;
+            clk        :     std_logic;
             in_reset      :     std_logic;                -- active high
             out_rw_reg    : out std_logic;                -- read on high
             out_sel_op_1  : out unsigned(1 downto 0);
@@ -66,7 +66,7 @@ Architecture Structure of CPU is
   end Component;
 
   Component register_file
-    Port(   in_clk         : in std_logic;
+    Port(   clk         : in std_logic;
             in_data_in     : in data_word;
             out_data_out_1 : out data_word;
             out_data_out_0 : out data_word;
@@ -103,7 +103,7 @@ Begin
     out_rw_RWM      =>  sig_rw_RWM,           -- out
     out_RWM_en      =>  sig_RWM_en,           -- out
     out_ROM_en      =>  sig_ROM_en,           -- out
-    in_clk          =>  sig_clk,
+    clk          =>  sig_clk,
     in_reset        =>  sig_reset,
     out_rw_reg      =>  sig_rw_reg,           -- out
     out_sel_op_1    =>  sig_sel_out_1,        -- out
@@ -125,7 +125,7 @@ Begin
     in_A            =>  sig_reg_data_out_1,
     in_B            =>  sig_reg_data_out_0,
     in_En           =>  sig_alu_en,
-    in_clk          =>  sig_clk,
+    clk          =>  sig_clk,
     out_y           =>  sig_alu_out,          -- out
     out_n_flag      =>  sig_n_flag,           -- out
     out_z_flag      =>  sig_z_flag,           -- out
@@ -133,7 +133,7 @@ Begin
   );
 
   reg_file_inst: register_file port map (
-    in_clk          =>  sig_clk,
+    clk          =>  sig_clk,
     in_data_in      =>  sig_mux_data_out,
     out_data_out_1  =>  sig_reg_data_out_1,   -- out
     out_data_out_0  =>  sig_reg_data_out_0,   -- out
