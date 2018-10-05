@@ -1,3 +1,8 @@
+Library IEEE;
+Use IEEE.std_logic_1164.all;
+Use IEEE.numeric_std.all;
+Use work.cpu_package.all;
+
 Entity enchip is
   Port( clk     :     std_logic;
         reset   :     std_logic;
@@ -40,7 +45,7 @@ Architecture structure of enchip is
   signal  sig_RWM_en, sig_ROM_en, sig_rw_RWM  : std_logic;
 
 Begin
-  PRO : processor port map (
+  PR : processor port map (
     out_adr         => sig_adr,
     in_data         => sig_data,
     in_stop         => stop,
@@ -52,13 +57,13 @@ Begin
     in_reset        => reset
   );
 
-  ROM : rom port map (
+  RO : rom port map (
     in_adr          => sig_adr,
     out_data        => sig_RWM_data,
     in_ce           => sig_ROM_en
   );
 
-  RWM : rw_memory port map (
+  RW : rw_memory port map (
     clk             => clk,
     in_adr          => sig_adr,
     inout_Z         => sig_RWM_data,

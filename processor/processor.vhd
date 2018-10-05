@@ -78,7 +78,7 @@ Architecture Structure of processor is
 
   -- ALU signals
   signal sig_z_flag, sig_n_flag, sig_o_flag, sig_alu_en   : std_logic;
-  signal sig_alu_op                           : std_logic_vector(2 downto 0);
+  signal sig_alu_op                           : unsigned(2 downto 0);
   signal sig_alu_out                          : data_word;
 
   -- controller signal
@@ -86,11 +86,11 @@ Architecture Structure of processor is
 
   -- register_file signals
   signal sig_rw_reg                           : std_logic;
-  signal sig_sel_out_0, sig_sel_out_1, sig_sel_in         : std_logic_vector(1 downto 0);
-  signal sig_reg_data_out_0, rsig_eg_data_out_1           : data_word;
+  signal sig_sel_out_0, sig_sel_out_1, sig_sel_in         : unsigned(1 downto 0);
+  signal sig_reg_data_out_0, sig_reg_data_out_1           : data_word;
 
   -- multiplexer signals
-  signal sig_sel_mux                          : std_logic_vector(1 downto 0);
+  signal sig_sel_mux                          : unsigned(1 downto 0);
   signal sig_mux_data_out                     : data_word;
 
   -- data_buffer signals
@@ -121,7 +121,7 @@ Begin
   );
 
   ALU_inst: ALU port map (
-    in_Op           =>  sig_alu_op,
+    in_Op           =>  std_logic_vector(sig_alu_op),
     in_A            =>  sig_reg_data_out_1,
     in_B            =>  sig_reg_data_out_0,
     in_En           =>  sig_alu_en,
@@ -137,14 +137,14 @@ Begin
     in_data_in      =>  sig_mux_data_out,
     out_data_out_1  =>  sig_reg_data_out_1,   -- out
     out_data_out_0  =>  sig_reg_data_out_0,   -- out
-    in_sel_in       =>  sig_sel_in,
-    in_sel_out_1    =>  sig_sel_out_1,
-    in_sel_out_0    =>  sig_sig_sel_out_0,
+    in_sel_in       =>  std_logic_vector(sig_sel_in),
+    in_sel_out_1    =>  std_logic_vector(sig_sel_out_1),
+    in_sel_out_0    =>  std_logic_vector(sig_sel_out_0),
     in_rw_reg       =>  sig_rw_reg
   );
 
   MUX_inst: multiplexer port map (
-    in_sel          =>  sig_sel_mux,
+    in_sel          =>  std_logic_vector(sig_sel_mux),
     in_data_in_2    =>  sig_data_imm,
     in_data_in_1    =>  inout_RWM_data,
     in_data_in_0    =>  sig_alu_out,
