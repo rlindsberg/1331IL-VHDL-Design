@@ -4,157 +4,157 @@ Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
 Entity CPU is
-  Port( adr       : out   address_bus;
-        data      :       instruction_bus;
-        stop      :       std_logic;
-        RWM_data  : inout data_bus;
-        rw_RWM    : out   std_logic;
-        ROM_en    : out   std_logic;
-        RWM_en    : out   std_logic;
-        clk       :       std_logic;
-        reset     :       std_logic);
+  Port( out_adr         : out   address_bus;
+        in_data         :       instruction_bus;
+        in_stop         :       std_logic;
+        inout_RWM_data  : inout data_bus;
+        out_rw_RWM      : out   std_logic;
+        out_ROM_en      : out   std_logic;
+        out_RWM_en      : out   std_logic;
+        in_clk          :       std_logic;
+        in_reset        :       std_logic);
 end Entity;
 
 Architecture Structure of CPU is
   Component ALU
-    Port (  Op    : in std_logic_vector(2 downto 0);
-            A     : in data_word;
-            B     : in data_word;
-            En    : in std_logic;
-            clk   : in std_logic;
-            y     : out data_word;
-            n_flag: out std_logic := '0';
-            z_flag: out std_logic := '0';
-            o_flag: out std_logic := '0');
+    Port (  in_Op      : in std_logic_vector(2 downto 0);
+            in_A       : in data_word;
+            in_B       : in data_word;
+            in_En      : in std_logic;
+            in_clk     : in std_logic;
+            out_y      : out data_word;
+            out_n_flag : out std_logic := '0';
+            out_z_flag : out std_logic := '0';
+            out_o_flag : out std_logic := '0');
   end Component;
 
   Component controller
-    Port(   adr       : out address_bus;              -- unsigned
-            data      :     program_word;             -- unsigned
-            rw_RWM    : out std_logic;                -- read on high
-            RWM_en    : out std_logic;                -- active low
-            ROM_en    : out std_logic;                -- active low
-            clk       :     std_logic;
-            reset     :     std_logic;                -- active high
-            rw_reg    : out std_logic;                -- read on high
-            sel_op_1  : out unsigned(1 downto 0);
-            sel_op_0  : out unsigned(1 downto 0);
-            sel_in    : out unsigned(1 downto 0);
-            sel_mux   : out unsigned(1 downto 0);
-            alu_op    : out unsigned(2 downto 0);
-            alu_en    : out std_logic;                -- active high
-            z_flag    :     std_logic;                -- active high
-            n_flag    :     std_logic;                -- active high
-            o_flag    :     std_logic;                -- active high
-            out_en    : out std_logic;                -- active high
-            data_imm  : out data_word;                -- signed
-            stop      :     std_logic);
+    Port(   out_adr       : out address_bus;              -- unsigned
+            in_data       :     program_word;             -- unsigned
+            out_rw_RWM    : out std_logic;                -- read on high
+            out_RWM_en    : out std_logic;                -- active low
+            out_ROM_en    : out std_logic;                -- active low
+            in_clk        :     std_logic;
+            in_reset      :     std_logic;                -- active high
+            out_rw_reg    : out std_logic;                -- read on high
+            out_sel_op_1  : out unsigned(1 downto 0);
+            out_sel_op_0  : out unsigned(1 downto 0);
+            out_sel_in    : out unsigned(1 downto 0);
+            out_sel_mux   : out unsigned(1 downto 0);
+            out_alu_op    : out unsigned(2 downto 0);
+            out_alu_en    : out std_logic;                -- active high
+            in_z_flag     :     std_logic;                -- active high
+            in_n_flag     :     std_logic;                -- active high
+            in_o_flag     :     std_logic;                -- active high
+            out_out_en    : out std_logic;                -- active high
+            out_data_imm  : out data_word;                -- signed
+            in_stop       :     std_logic);
   end Component;
 
   Component data_buffer
-    Port(   out_en    :     std_logic;
-            data_in   :     data_word;
-            data_out  : out data_word);
+    Port(   in_out_en     :     std_logic;
+            in_data_in    :     data_word;
+            out_data_out  : out data_word);
   end component;
 
   Component multiplexer
-    Port(   sel         :     std_logic_vector(1 downto 0);
-            data_in_2   :     data_word;
-            data_in_1   :     data_word;
-            data_in_0   :     data_word;
-            data_out    : out data_word);
+    Port(   in_sel         :     std_logic_vector(1 downto 0);
+            in_data_in_2   :     data_word;
+            in_data_in_1   :     data_word;
+            in_data_in_0   :     data_word;
+            out_data_out   : out data_word);
   end Component;
 
   Component register_file
-    Port(   clk         : in std_logic;
-            data_in     : in data_word;
-            data_out_1  : out data_word;
-            data_out_0  : out data_word;
-            sel_in      : in std_logic_vector (1 downto 0);
-            sel_out_1   : in std_logic_vector (1 downto 0);
-            sel_out_0   : in std_logic_vector (1 downto 0);
-            rw_reg      : in std_logic);
+    Port(   in_clk         : in std_logic;
+            in_data_in     : in data_word;
+            out_data_out_1 : out data_word;
+            out_data_out_0 : out data_word;
+            in_sel_in      : in std_logic_vector (1 downto 0);
+            in_sel_out_1   : in std_logic_vector (1 downto 0);
+            in_sel_out_0   : in std_logic_vector (1 downto 0);
+            in_rw_reg      : in std_logic);
   end Component;
 
   -- ALU signals
-  signal z_flag, n_flag, o_flag, alu_en   : std_logic;
-  signal alu_op                           : std_logic_vector(2 downto 0);
-  signal alu_out                          : data_word;
+  signal sig_z_flag, sig_n_flag, sig_o_flag, sig_alu_en   : std_logic;
+  signal sig_alu_op                           : std_logic_vector(2 downto 0);
+  signal sig_alu_out                          : data_word;
 
   -- controller signal
-  signal data_imm                         : data_word;
+  signal sig_data_imm                         : data_word;
 
   -- register_file signals
-  signal rw_reg                           : std_logic;
-  signal sel_out_0, sel_out_1, sel_in     : std_logic_vector(1 downto 0);
-  signal reg_data_out_0, reg_data_out_1   : data_word;
+  signal sig_rw_reg                           : std_logic;
+  signal sig_sel_out_0, sig_sel_out_1, sig_sel_in         : std_logic_vector(1 downto 0);
+  signal sig_reg_data_out_0, rsig_eg_data_out_1           : data_word;
 
   -- multiplexer signals
-  signal sel_mux                          : std_logic_vector(1 downto 0);
-  signal mux_data_out                     : data_word;
+  signal sig_sel_mux                          : std_logic_vector(1 downto 0);
+  signal sig_mux_data_out                     : data_word;
 
   -- data_buffer signals
-  signal out_en                           : std_logic;
+  signal sig_out_en                           : std_logic;
 
 Begin
   controller port map (
-    adr         =>  adr,              -- out
-    data        =>  data,
-    rw_RWM      =>  rw_RWM,           -- out
-    RWM_en      =>  RWM_en,           -- out
-    ROM_en      =>  ROM_en,           -- out
-    clk         =>  clk,
-    reset       =>  reset,
-    rw_reg      =>  rw_reg,           -- out
-    sel_op_1    =>  sel_out_1,        -- out
-    sel_op_0    =>  sel_out_0,        -- out
-    sel_in      =>  sel_in,           -- out
-    sel_mux     =>  sel_mux,          -- out
-    alu_op      =>  alu_op,           -- out
-    alu_en      =>  alu_en,           -- out
-    z_flag      =>  z_flag,
-    n_flag      =>  n_flag,
-    o_flag      =>  o_flag,
-    out_en      =>  out_en,           -- out
-    data_imm    =>  data_imm,         -- out
-    stop        =>  stop,
+    out_adr         =>  sig_adr,              -- out
+    in_data         =>  sig_data,
+    out_rw_RWM      =>  sig_rw_RWM,           -- out
+    out_RWM_en      =>  sig_RWM_en,           -- out
+    out_ROM_en      =>  sig_ROM_en,           -- out
+    in_clk          =>  sig_clk,
+    in_reset        =>  sig_reset,
+    out_rw_reg      =>  sig_rw_reg,           -- out
+    out_sel_op_1    =>  sig_sel_out_1,        -- out
+    out_sel_op_0    =>  sig_sel_out_0,        -- out
+    out_sel_in      =>  sig_sel_in,           -- out
+    out_sel_mux     =>  sig_sel_mux,          -- out
+    out_alu_op      =>  sig_alu_op,           -- out
+    out_alu_en      =>  sig_alu_en,           -- out
+    in_z_flag       =>  sig_z_flag,
+    in_n_flag       =>  sig_n_flag,
+    in_o_flag       =>  sig_o_flag,
+    out_out_en      =>  sig_out_en,           -- out
+    out_data_imm    =>  sig_data_imm,         -- out
+    in_stop         =>  sig_stop,
   );
 
   ALU port map (
-    Op          =>  alu_op,
-    A           =>  reg_data_out_1,
-    B           =>  reg_data_out_0,
-    En          =>  alu_en,
-    clk         =>  clk,
-    y           =>  alu_out,          -- out
-    n_flag      =>  n_flag,           -- out
-    z_flag      =>  z_flag,           -- out
-    o_flag      =>  o_flag,           -- out
+    in_Op           =>  sig_alu_op,
+    in_A            =>  sig_reg_data_out_1,
+    in_B            =>  sig_reg_data_out_0,
+    in_En           =>  sig_alu_en,
+    in_clk          =>  sig_clk,
+    out_y           =>  sig_alu_out,          -- out
+    out_n_flag      =>  sig_n_flag,           -- out
+    out_z_flag      =>  sig_z_flag,           -- out
+    out_o_flag      =>  sig_o_flag,           -- out
   );
 
   register_file port map (
-    clk         =>  clk,
-    data_in     =>  mux_data_out,
-    data_out_1  =>  reg_data_out_1,   -- out
-    data_out_0  =>  reg_data_out_0,   -- out
-    sel_in      =>  sel_in,
-    sel_out_1   =>  sel_out_1,
-    sel_out_0   =>  sel_out_0,
-    rw_reg      =>  rw_reg,
+    in_clk          =>  sig_clk,
+    in_data_in      =>  sig_mux_data_out,
+    out_data_out_1  =>  sig_reg_data_out_1,   -- out
+    out_data_out_0  =>  sig_reg_data_out_0,   -- out
+    in_sel_in       =>  sig_sel_in,
+    in_sel_out_1    =>  sig_sel_out_1,
+    in_sel_out_0    =>  sig_sig_sel_out_0,
+    in_rw_reg       =>  sig_rw_reg,
   );
 
   multiplexer port map (
-    sel         =>  sel_mux,
-    data_in_2   =>  data_imm,
-    data_in_1   =>  RWM_data,
-    data_in_0   =>  alu_out,
-    data_out    =>  mux_data_out      -- out
+    in_sel          =>  sig_sel_mux,
+    in_data_in_2    =>  sig_data_imm,
+    in_data_in_1    =>  sig_RWM_data,
+    in_data_in_0    =>  sig_alu_out,
+    out_data_out    =>  sig_mux_data_out      -- out
   );
 
   data_buffer port map (
-    out_en      =>  out_en,
-    data_in     =>  reg_data_out_1,
-    data_out    =>  RWM_data,         -- out
+    in_out_en       =>  sig_out_en,
+    in_data_in      =>  sig_reg_data_out_1,
+    out_data_out    =>  sig_RWM_data,         -- out
   );
 
 end Architecture;
