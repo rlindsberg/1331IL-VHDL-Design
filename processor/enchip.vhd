@@ -66,4 +66,8 @@ Begin
     in_rw           => sig_rw_RWM
   );
 
+  s <= sig_adr when choice = '0' else
+       sig_data when choice = '1' else
+       (others => 'Z');
+
 End Architecture;
