@@ -5,7 +5,7 @@ Use work.cpu_package.all;
 
 Entity rw_memory is
   Port (
-    clk     :        std_logic;
+    clk        :        std_logic;
     in_addr    :        address_bus;
     inout_Z    : inout  std_logic_vector(3 downto 0);
     in_ce      : in     std_logic;
