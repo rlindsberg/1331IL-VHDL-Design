@@ -3,9 +3,9 @@ Use IEEE.std_logic_1164.all;
 use work.cpu_package.all;
 
 Entity data_buffer is
-  Port(   out_en    :     std_logic;
-          data_in   :     data_word;
-          data_out  : out data_word);
+  Port(   in_out_en    :     std_logic;
+          in_data_in   :     data_word;
+          out_data_out  : out data_word);
 End Entity;
 
 architecture rtl of data_buffer is
