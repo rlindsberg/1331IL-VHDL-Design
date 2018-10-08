@@ -23,9 +23,9 @@ Architecture Structure of processor is
             in_En      : in std_logic;
             clk        : in std_logic;
             out_y      : out data_word;
-            out_n_flag : out std_logic := '0';
-            out_z_flag : out std_logic := '0';
-            out_o_flag : out std_logic := '0');
+            out_n_flag : out std_logic;
+            out_z_flag : out std_logic;
+            out_o_flag : out std_logic);
   end Component;
 
   Component controller

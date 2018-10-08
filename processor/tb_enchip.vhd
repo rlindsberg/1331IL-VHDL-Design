@@ -29,15 +29,13 @@ Architecture test of tb_enchip is
         in_choice  =>  sig_choice,
         out_s      =>  sig_s);
 
-    tb: Process
-      Begin
-        sig_reset   <=  '0';
-        sig_stop    <=  '0';
+    tb: Process(clock)
+    Begin
+      sig_choice  <=  '0';
+      sig_reset   <=  '0';
+      sig_stop    <=  '0';
 
-        sig_choice  <=  '0';
-        wait for 5 ns;
+      sig_choice  <=  not sig_choice after 5 ns;
 
-        sig_choice  <=  '0';
-        wait for 5 ns;
     end Process;
 end Architecture;

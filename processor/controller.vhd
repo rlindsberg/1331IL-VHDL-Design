@@ -32,8 +32,6 @@ architecture fun_part of controller is
   signal next_state       :   state_type := 0;
   signal next_pc          :   integer := 0;
 
-  signal ROM_debug        :   std_logic;
-
   signal inst             :   program_word;
   signal pc               :   integer := 0;
 
@@ -51,7 +49,7 @@ begin
   begin
     if in_reset = '1' then
       state <= 0;
-    elsif rising_edge(clk) and in_stop /= '1' then
+    elsif rising_edge(clk) and in_stop = '0' then
       state <= next_state;
     end if;
   end process;
@@ -62,15 +60,15 @@ begin
       case state is
       when 0 =>
         out_ROM_en      <= '1';
-        next_pc     <=  0;
+        next_pc         <=  0;
         out_out_en      <= '0';
         out_rw_reg      <= '1';
-        next_state  <= state + 1;
+        next_state      <= state + 1;
 
       when 1 =>
         out_adr         <= std_logic_vector(to_unsigned(pc, address_size));
-        pc          <= next_pc;
-        next_state  <= state + 1;
+        pc              <= next_pc;
+        next_state      <= state + 1;
 
       when 2 =>
 
@@ -79,8 +77,8 @@ begin
 
         -- moved from state 1
         out_ROM_en      <= '1'; -- deactive high
-        inst        <= in_data;
-        next_state  <= state + 1;
+        inst            <= in_data;
+        next_state      <= state + 1;
 
         case inst_op is
           when "1000" =>
