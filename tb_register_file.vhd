@@ -7,15 +7,15 @@ Entity tb_register_file is
 End Entity;
 
 Architecture rtl of tb_register_file is
-  Component RegisterFile Port(
-    clk         :     std_logic;
-    data_in     :     data_word;
-    data_out_1  : out data_word;
-    data_out_0  : out data_word;
-    sel_in      :     std_logic_vector(1 downto 0);
-    sel_out_1   :     std_logic_vector(1 downto 0);
-    sel_out_0   :     std_logic_vector(1 downto 0);
-    rw_reg      :     std_logic);
+  Component register_file is Port(
+    clk             : in std_logic;
+    in_data_in      : in data_word;
+    out_data_out_1  : out data_word;
+    out_data_out_0  : out data_word;
+    in_sel_in       : in std_logic_vector (1 downto 0);
+    in_sel_out_1    : in std_logic_vector (1 downto 0);
+    in_sel_out_0    : in std_logic_vector (1 downto 0);
+    in_rw_reg       : in std_logic);
   End Component;
 
   Signal clk, rw                          : std_logic := '0';
@@ -23,7 +23,7 @@ Architecture rtl of tb_register_file is
   Signal sel_in, sel_out_1, sel_out_0     : std_logic_vector(1 downto 0);
 
   Begin
-    R : RegisterFile port map (
+    RegisterFile_inst : register_file port map (
       clk,
       data_in,
       data_out_1,
