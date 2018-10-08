@@ -4,20 +4,20 @@ Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
 Entity register_file is
-  Port( clk             : in std_logic;
-        in_data_in      : in data_word;
+  Port( clk             : in  std_logic;
+        in_data_in      : in  data_word;
         out_data_out_1  : out data_word;
         out_data_out_0  : out data_word;
-        in_sel_in       : in std_logic_vector (1 downto 0);
-        in_sel_out_1    : in std_logic_vector (1 downto 0);
-        in_sel_out_0    : in std_logic_vector (1 downto 0);
-        in_rw_reg       : in std_logic);
+        in_sel_in       : in  std_logic_vector (1 downto 0);
+        in_sel_out_1    : in  std_logic_vector (1 downto 0);
+        in_sel_out_0    : in  std_logic_vector (1 downto 0);
+        in_rw_reg       : in  std_logic);
 End Entity;
 
 Architecture behavioural of register_file is
 	-- declare register file
-	Type registerFile is array(0 to 3) of data_word;
-  Signal register_inst	: registerFile;
+	Type register_data is array(0 to 3) of data_word;
+  Signal register_inst	: register_data;
 
   Begin
 

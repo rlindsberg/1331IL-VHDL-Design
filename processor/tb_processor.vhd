@@ -21,13 +21,13 @@ Architecture test of tb_processor is
 
   signal sig_adr            : address_bus;
   signal sig_ROM_data       : instruction_bus;
-  signal sig_stop           : std_logic;
+  signal sig_stop           : std_logic := '0';
   signal sig_RWM_data       : data_bus;
   signal sig_rw_RWM         : std_logic;
   signal sig_ROM_en         : std_logic;
   signal sig_RWM_en         : std_logic;
   signal clk                : std_logic;
-  signal sig_reset          : std_logic;
+  signal sig_reset          : std_logic := '0';
 
   type inst_table is array (0 to 14) of instruction_bus;
   constant  inst_list	:	    inst_table := (
@@ -63,8 +63,9 @@ begin
 
   Process(clk, sig_ROM_en)
   begin
-    if sig_ROM_en = '0' then
-      sig_ROM_data <= inst_list(to_integer(unsigned(sig_adr)));
-    end if;
+    -- if sig_ROM_en = '0' then
+    --   sig_ROM_data <= inst_list(to_integer(unsigned(sig_adr)));
+    -- end if;
+    sig_ROM_data <= "1010110011";
   end Process;
 end Architecture;

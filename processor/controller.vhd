@@ -59,7 +59,7 @@ begin
     if rising_edge(clk) then
       case state is
       when 0 =>
-        out_ROM_en      <= '1';
+        out_ROM_en      <= '0';
         next_pc         <=  0;
         out_out_en      <= '0';
         out_rw_reg      <= '1';
@@ -76,17 +76,23 @@ begin
         -- -- test 1 should success at 1000 ps, 7000 ps and 1300 ps
 
         -- moved from state 1
-        out_ROM_en      <= '1'; -- deactive high
+        --out_ROM_en      <= '1'; -- deactive high
         inst            <= in_data;
         next_state      <= state + 1;
 
         case inst_op is
           when "1000" =>
             out_RWM_en      <= '0'; -- deactive high
+            out_rw_RWM      <=  '1';                -- set RWM in 'read from' mode
+            out_rw_reg      <=  '0';
             out_adr         <=  in_data(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
           when "1001" =>
             out_RWM_en      <= '0'; -- deactive high
             out_adr         <=  in_data(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
+            out_rw_RWM      <=  '0';                -- set RWM in 'write to' mode
+            out_out_en      <=  '1';
+          when "1010" =>
+            out_rw_reg      <=  '0';
           when others =>
             out_RWM_en      <= '1'; -- deactive high
         end case;
@@ -107,7 +113,7 @@ begin
             out_sel_op_0        <=  unsigned(inst_r2); -- r2
             out_alu_en          <=  '1';                    -- enable alu
             out_rw_reg          <=  '0';                    -- enable write to reg
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- sub
           when "0001" =>
@@ -119,7 +125,7 @@ begin
             out_sel_op_0        <=  unsigned(inst_r2); -- r2
             out_alu_en          <=  '1';                    -- enable alu
             out_rw_reg          <=  '0';                    -- enable write to reg
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- and
           when "0010" =>
@@ -131,7 +137,7 @@ begin
             out_sel_op_0        <=  unsigned(inst_r2); -- r2
             out_alu_en          <=  '1';                    -- enable alu
             out_rw_reg          <=  '0';                    -- enable write to reg
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- or
           when "0011" =>
@@ -143,7 +149,7 @@ begin
             out_sel_op_0        <=  unsigned(inst_r2); -- r2
             out_alu_en          <=  '1';                    -- enable alu
             out_rw_reg          <=  '0';                    -- enable write to reg
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- xor
           when "0100" =>
@@ -155,7 +161,7 @@ begin
             out_sel_op_0        <=  unsigned(inst_r2); -- r2
             out_alu_en          <=  '1';                    -- enable alu
             out_rw_reg          <=  '0';                    -- enable write to reg
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- not
           when "0101" =>
@@ -167,7 +173,7 @@ begin
             out_sel_op_0        <=  "00";
             out_alu_en          <=  '1';                    -- enable alu
             out_rw_reg          <=  '0';                    -- enable write to reg
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- mov
           when "0110" =>
@@ -179,29 +185,26 @@ begin
             out_sel_op_0        <=  "00";
             out_alu_en          <=  '1';                    -- enable alu
             out_rw_reg          <=  '0';                    -- enable write to reg
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- ldr
           when "1000" =>
-            out_rw_RWM          <=  '1';                -- set RWM in 'read from' mode
             out_sel_mux         <=  "01";               -- inst from RWM
             out_sel_in          <=  unsigned(inst_r1);   -- r1; reg to save to
-            out_rw_reg          <=  '0';
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- str
           when "1001" =>
-            out_rw_RWM          <=  '0';                -- set RWM in 'write to' mode
             out_sel_op_1        <=  unsigned(inst_r1);
-            out_out_en          <=  '1';
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- ldi
           when "1010" =>
+            -- out_rw_reg          <=  '0';
             out_sel_in          <=  unsigned(inst_r1);
             out_sel_mux         <=  "10";
             out_data_imm        <=  inst_data_imm;
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- nop
           when "1011" =>

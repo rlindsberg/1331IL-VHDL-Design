@@ -16,9 +16,9 @@ Architecture test of tb_enchip is
   end Component;
 
     signal clock      : std_logic;
-    signal sig_reset  : std_logic;
-    signal sig_stop   : std_logic;
-    signal sig_choice : std_logic;
+    signal sig_reset  : std_logic := '0';
+    signal sig_stop   : std_logic := '0';
+    signal sig_choice : std_logic := '0';
     signal sig_s      : std_logic_vector(3 downto 0);
 
   begin
@@ -31,11 +31,6 @@ Architecture test of tb_enchip is
 
     tb: Process(clock)
     Begin
-      sig_choice  <=  '0';
-      sig_reset   <=  '0';
-      sig_stop    <=  '0';
-
-      sig_choice  <=  not sig_choice after 5 ns;
-
+      sig_choice  <=  not sig_choice after 2500 ps;
     end Process;
 end Architecture;
