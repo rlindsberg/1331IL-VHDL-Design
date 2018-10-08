@@ -7,23 +7,37 @@ Entity tb_enchip is
 end Entity;
 
 Architecture test of tb_enchip is
-  Port( clk     :     std_logic;
-        reset   :     std_logic;
-        stop    :     std_logic;
-        choice  :     std_logic;
-        s       : out std_logic_vector(3 downto 0));
+  Component enchip
+    Port( clk        :     std_logic;
+          in_reset   :     std_logic;
+          in_stop    :     std_logic;
+          in_choice  :     std_logic;
+          out_s      : out std_logic_vector(3 downto 0));
+  end Component;
 
-  signal clock      : std_logic;
-  signal sig_reset  : std_logic;
-  signal sig_stop   : std_logic;
-  signal sig_choice : std_logic;
-  signal sig_s      : std_logic_vector(3 downto 0);
+    signal clock      : std_logic;
+    signal sig_reset  : std_logic;
+    signal sig_stop   : std_logic;
+    signal sig_choice : std_logic;
+    signal sig_s      : std_logic_vector(3 downto 0);
 
-begin
-  E : enchip port map(
-      clk     =>  clock,
-      reset   =>  sig_reset,
-      stop    =>  sig_stop,
-      choice  =>  sig_choice,
-      s       =>  sig_s);
+  begin
+    E : enchip port map(
+        clk        =>  clock,
+        in_reset   =>  sig_reset,
+        in_stop    =>  sig_stop,
+        in_choice  =>  sig_choice,
+        out_s      =>  sig_s);
+
+    tb: Process
+      Begin
+        sig_reset   <=  '0';
+        sig_stop    <=  '0';
+
+        sig_choice  <=  '0';
+        wait for 5 ns;
+
+        sig_choice  <=  '0';
+        wait for 5 ns;
+    end Process;
 end Architecture;

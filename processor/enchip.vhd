@@ -4,11 +4,11 @@ Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
 Entity enchip is
-  Port( clk     :     std_logic;
-        reset   :     std_logic;
-        stop    :     std_logic;
-        choice  :     std_logic;
-        s       : out std_logic_vector(3 downto 0));
+  Port( clk        :     std_logic;
+        in_reset   :     std_logic;
+        in_stop    :     std_logic;
+        in_choice  :     std_logic;
+        out_s      : out std_logic_vector(3 downto 0));
 End Entity;
 
 Architecture structure of enchip is
@@ -40,26 +40,26 @@ Architecture structure of enchip is
 
   -- signals
   signal  sig_adr                             : address_bus;
-  signal  sig_data                            : instruction_bus;
+  signal  sig_ROM_data                        : instruction_bus;
   signal  sig_RWM_data                        : data_bus;
   signal  sig_RWM_en, sig_ROM_en, sig_rw_RWM  : std_logic;
 
 Begin
   PR : processor port map (
     out_adr         => sig_adr,
-    in_data         => sig_data,
-    in_stop         => stop,
+    in_data         => sig_ROM_data,
+    in_stop         => in_stop,
     inout_RWM_data  => sig_RWM_data,
     out_rw_RWM      => sig_rw_RWM,
     out_ROM_en      => sig_ROM_en,
     out_RWM_en      => sig_RWM_en,
     clk             => clk,
-    in_reset        => reset
+    in_reset        => in_reset
   );
 
   RO : rom port map (
     in_adr          => sig_adr,
-    out_data        => sig_RWM_data,
+    out_data        => sig_ROM_data,
     in_ce           => sig_ROM_en
   );
 
@@ -71,8 +71,14 @@ Begin
     in_rw           => sig_rw_RWM
   );
 
-  s <= sig_adr when choice = '0' else
-       sig_data when choice = '1' else
-       (others => 'Z');
+  Process(clk, in_choice, sig_adr, sig_RWM_data)
+  begin
+    if rising_edge(clk) and in_choice = '0' then
+      out_s <= sig_adr;
 
+    elsif rising_edge(clk) and in_choice = '1' then
+      out_s <= sig_RWM_data;
+
+    end if;
+  end Process;
 End Architecture;

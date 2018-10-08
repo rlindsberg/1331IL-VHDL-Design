@@ -6,7 +6,7 @@ Use work.cpu_package.all;
 Entity rw_memory is
   Port (
     clk        :        std_logic;
-    in_addr    :        address_bus;
+    in_adr     :        address_bus;
     inout_Z    : inout  std_logic_vector(3 downto 0);
     in_ce      : in     std_logic;
     in_rw      : in     std_logic
@@ -27,7 +27,7 @@ Begin
   -- Write Operation : When ce active low, rw write on low
   MEM_WRITE: Process (clk) Begin
     if rising_edge(clk) and in_ce = '0' and in_rw = '0' then
-      sig_mem(to_integer(unsigned(in_addr))) <= inout_Z;
+      sig_mem(to_integer(unsigned(in_adr))) <= inout_Z;
     end if;
   End Process;
 
@@ -35,7 +35,7 @@ Begin
   -- Read Operation : When ce active low, rw read on high
   MEM_READ: Process (clk) Begin
     if (rising_edge(clk) AND in_ce = '0' and in_rw = '1') then
-      sig_Z <= sig_mem(to_integer(unsigned(in_addr)));
+      sig_Z <= sig_mem(to_integer(unsigned(in_adr)));
     end if;
   End Process;
 End behavourial;
