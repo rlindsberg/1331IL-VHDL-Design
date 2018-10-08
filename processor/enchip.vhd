@@ -12,7 +12,7 @@ Entity enchip is
 End Entity;
 
 Architecture structure of enchip is
-  Component processor
+  Component AR4003
     Port(   out_adr         : out   address_bus;
             in_data         :       instruction_bus;
             in_stop         :       std_logic;
@@ -45,7 +45,7 @@ Architecture structure of enchip is
   signal  sig_RWM_en, sig_ROM_en, sig_rw_RWM  : std_logic;
 
 Begin
-  PR : processor port map (
+  PR : AR4003 port map (
     out_adr         => sig_adr,
     in_data         => sig_ROM_data,
     in_stop         => in_stop,

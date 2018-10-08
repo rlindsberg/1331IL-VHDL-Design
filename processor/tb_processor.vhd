@@ -3,11 +3,11 @@ Use IEEE.std_logic_1164.all;
 Use IEEE.numeric_std.all;
 Use work.cpu_package.all;
 
-Entity tb_processor is
+Entity tb_AR4003 is
 end Entity;
 
-Architecture test of tb_processor is
-  Component processor
+Architecture test of tb_AR4003 is
+  Component AR4003
     Port(   out_adr         : out   address_bus;
             in_data         :       instruction_bus;
             in_stop         :       std_logic;
@@ -50,7 +50,7 @@ Architecture test of tb_processor is
     );
 
 begin
-  Pocesor_inst : processor port map(
+  Pocesor_inst : AR4003 port map(
     out_adr         =>  sig_adr,
     in_data         =>  sig_ROM_data,
     in_stop         =>  sig_stop,
