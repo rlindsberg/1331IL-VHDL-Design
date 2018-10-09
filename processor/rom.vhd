@@ -10,7 +10,7 @@ Entity rom is
 End Entity;
 
 Architecture rtl of rom is
-  constant const_rom_length:integer:=15;
+  constant const_rom_length:integer:=16;
   type rom_table is array (0 to const_rom_length-1) of instruction_bus;
   constant const_rom_data	:	rom_table := (
       B"1010_11_0011",  -- LDI r3 3
@@ -27,6 +27,7 @@ Architecture rtl of rom is
       B"1011_00_0000",  -- NOP
       B"1001_10_1111",  -- STR r2 15
       B"1111_00_1101",  -- BRA 13
+      B"1011_00_0000",  -- NOP
       B"1011_00_0000"); -- NOP
 
 Begin
