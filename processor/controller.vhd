@@ -27,7 +27,7 @@ entity controller is
 end entity;
 
 architecture fun_part of controller is
-  subtype state_type is integer range 0 to 3;
+  subtype state_type is integer range 0 to 4;
   signal state            :   state_type := 0;
   signal next_state       :   state_type := 0;
   signal next_pc          :   integer := 0;
@@ -59,6 +59,8 @@ begin
     if rising_edge(clk) then
       case state is
       when 0 =>
+        ---- Reset Stage ----
+        out_RWM_en      <= '1';
         out_ROM_en      <= '0';
         next_pc         <=  0;
         out_out_en      <= '0';
@@ -66,38 +68,52 @@ begin
         next_state      <= state + 1;
 
       when 1 =>
+        ---- Pre-Stage ----
+        out_RWM_en      <= '1'; --after 100 ps; -- active low
+        out_ROM_en      <= '0'; --after 100 ps;
+        out_out_en      <= '0'; --after 100 ps;
+        out_rw_reg      <= '1'; --after 100 ps;
+
         out_adr         <= std_logic_vector(to_unsigned(pc, address_size));
         pc              <= next_pc;
         next_state      <= state + 1;
 
       when 2 =>
-
+        ---- instruction Stage ----
         -- -- test 1: testing out_ROM_en's value from state 1
         -- -- test 1 should success at 1000 ps, 7000 ps and 1300 ps
 
         -- moved from state 1
-        --out_ROM_en      <= '1'; -- deactive high
         inst            <= in_data;
         next_state      <= state + 1;
 
+
+      when 3 =>
+        ---- Setup Stage ----
         case inst_op is
+          when "0000" =>
+            out_alu_en          <=  '1';                      -- enable alu
+            out_rw_reg          <=  '0';                      -- enable write to reg
           when "1000" =>
-            out_RWM_en      <= '0'; -- deactive high
+            out_RWM_en      <=  '0'; -- deactive high
             out_rw_RWM      <=  '1';                -- set RWM in 'read from' mode
             out_rw_reg      <=  '0';
-            out_adr         <=  in_data(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
+            out_adr         <=  inst(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
           when "1001" =>
-            out_RWM_en      <= '0'; -- deactive high
-            out_adr         <=  in_data(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
+            out_RWM_en      <=  '0'; -- deactive high
+            out_adr         <=  inst(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
             out_rw_RWM      <=  '0';                -- set RWM in 'write to' mode
             out_out_en      <=  '1';
           when "1010" =>
             out_rw_reg      <=  '0';
           when others =>
-            out_RWM_en      <= '1'; -- deactive high
+            out_RWM_en      <=  '1'; -- deactive high
         end case;
+        out_ROM_en      <=  '1'; -- deactive high
+        next_state      <=  state + 1;
 
-      when 3 =>
+      when 4 =>
+        ---- Data Stage ----
 
         -- test 2: testing out_ROM_en's value from state 2
         -- test 2 should success at 2500 ps, 8500 ps, 14500 ps
@@ -106,91 +122,89 @@ begin
           -- add
           when "0000" =>
             out_alu_op          <=  unsigned(inst_alu_op);
-            out_sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
+            out_sel_op_1    <=  unsigned(inst_r1);        -- r1; reg to read from
+            out_sel_op_0    <=  unsigned(inst_r2);        -- r2
             -- out_sel_in chooses to which register data_in is written
-            out_sel_in          <=  unsigned(inst_r3);       -- r3; reg to save to
-            out_sel_mux         <=  "00";                   -- alu output
-            out_sel_op_0        <=  unsigned(inst_r2); -- r2
-            out_alu_en          <=  '1';                    -- enable alu
-            out_rw_reg          <=  '0';                    -- enable write to reg
+            out_sel_in          <=  unsigned(inst_r3);        -- r3; reg to save to
+            out_sel_mux         <=  "00";                     -- alu output
             next_pc             <=  pc + 1;
 
           -- sub
           when "0001" =>
             out_alu_op          <=  unsigned(inst_alu_op);
-            out_sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
+            out_sel_op_1        <=  unsigned(inst_r1);        -- r1; reg to read from
             -- out_sel_in chooses to which register data_in is written
-            out_sel_in          <=  unsigned(inst_r3);       -- r3; reg to save to
-            out_sel_mux         <=  "00";                   -- alu output
-            out_sel_op_0        <=  unsigned(inst_r2); -- r2
-            out_alu_en          <=  '1';                    -- enable alu
-            out_rw_reg          <=  '0';                    -- enable write to reg
+            out_sel_in          <=  unsigned(inst_r3);        -- r3; reg to save to
+            out_sel_mux         <=  "00";                     -- alu output
+            out_sel_op_0        <=  unsigned(inst_r2);        -- r2
+            out_alu_en          <=  '1';                      -- enable alu
+            out_rw_reg          <=  '0';                      -- enable write to reg
             next_pc             <=  pc + 1;
 
           -- and
           when "0010" =>
             out_alu_op          <=  unsigned(inst_alu_op);
-            out_sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
+            out_sel_op_1        <=  unsigned(inst_r1);        -- r1; reg to read from
             -- out_sel_in chooses to which register data_in is written
-            out_sel_in          <=  unsigned(inst_r3);       -- r3; reg to save to
-            out_sel_mux         <=  "00";                   -- alu output
-            out_sel_op_0        <=  unsigned(inst_r2); -- r2
-            out_alu_en          <=  '1';                    -- enable alu
-            out_rw_reg          <=  '0';                    -- enable write to reg
+            out_sel_in          <=  unsigned(inst_r3);        -- r3; reg to save to
+            out_sel_mux         <=  "00";                     -- alu output
+            out_sel_op_0        <=  unsigned(inst_r2);        -- r2
+            out_alu_en          <=  '1';                      -- enable alu
+            out_rw_reg          <=  '0';                      -- enable write to reg
             next_pc             <=  pc + 1;
 
           -- or
           when "0011" =>
             out_alu_op          <=  unsigned(inst_alu_op);
-            out_sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
+            out_sel_op_1        <=  unsigned(inst_r1);        -- r1; reg to read from
             -- out_sel_in chooses to which register data_in is written
-            out_sel_in          <=  unsigned(inst_r3);       -- r3; reg to save to
-            out_sel_mux         <=  "00";                   -- alu output
-            out_sel_op_0        <=  unsigned(inst_r2); -- r2
-            out_alu_en          <=  '1';                    -- enable alu
-            out_rw_reg          <=  '0';                    -- enable write to reg
+            out_sel_in          <=  unsigned(inst_r3);        -- r3; reg to save to
+            out_sel_mux         <=  "00";                     -- alu output
+            out_sel_op_0        <=  unsigned(inst_r2);        -- r2
+            out_alu_en          <=  '1';                      -- enable alu
+            out_rw_reg          <=  '0';                      -- enable write to reg
             next_pc             <=  pc + 1;
 
           -- xor
           when "0100" =>
             out_alu_op          <=  unsigned(inst_alu_op);
-            out_sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
+            out_sel_op_1        <=  unsigned(inst_r1);        -- r1; reg to read from
             -- out_sel_in chooses to which register data_in is written
-            out_sel_in          <=  unsigned(inst_r3);       -- r3; reg to save to
-            out_sel_mux         <=  "00";                   -- alu output
-            out_sel_op_0        <=  unsigned(inst_r2); -- r2
-            out_alu_en          <=  '1';                    -- enable alu
-            out_rw_reg          <=  '0';                    -- enable write to reg
+            out_sel_in          <=  unsigned(inst_r3);        -- r3; reg to save to
+            out_sel_mux         <=  "00";                     -- alu output
+            out_sel_op_0        <=  unsigned(inst_r2);        -- r2
+            out_alu_en          <=  '1';                      -- enable alu
+            out_rw_reg          <=  '0';                      -- enable write to reg
             next_pc             <=  pc + 1;
 
           -- not
           when "0101" =>
             out_alu_op          <=  unsigned(inst_alu_op);
-            out_sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
+            out_sel_op_1        <=  unsigned(inst_r1);        -- r1; reg to read from
             -- out_sel_in chooses to which register data_in is written
-            out_sel_in          <=  unsigned(inst_r3);       -- r3; reg to save to
-            out_sel_mux         <=  "00";                   -- alu output
+            out_sel_in          <=  unsigned(inst_r3);        -- r3; reg to save to
+            out_sel_mux         <=  "00";                     -- alu output
             out_sel_op_0        <=  "00";
-            out_alu_en          <=  '1';                    -- enable alu
-            out_rw_reg          <=  '0';                    -- enable write to reg
+            out_alu_en          <=  '1';                      -- enable alu
+            out_rw_reg          <=  '0';                      -- enable write to reg
             next_pc             <=  pc + 1;
 
           -- mov
           when "0110" =>
             out_alu_op          <=  unsigned(inst_alu_op);
-            out_sel_op_1        <=  unsigned(inst_r1);       -- r1; reg to read from
+            out_sel_op_1        <=  unsigned(inst_r1);        -- r1; reg to read from
             -- out_sel_in chooses to which register data_in is written
-            out_sel_in          <=  unsigned(inst_r3);       -- r3; reg to save to
-            out_sel_mux         <=  "00";                   -- alu output
+            out_sel_in          <=  unsigned(inst_r3);        -- r3; reg to save to
+            out_sel_mux         <=  "00";                     -- alu output
             out_sel_op_0        <=  "00";
-            out_alu_en          <=  '1';                    -- enable alu
-            out_rw_reg          <=  '0';                    -- enable write to reg
+            out_alu_en          <=  '1';                      -- enable alu
+            out_rw_reg          <=  '0';                      -- enable write to reg
             next_pc             <=  pc + 1;
 
           -- ldr
           when "1000" =>
-            out_sel_mux         <=  "01";               -- inst from RWM
-            out_sel_in          <=  unsigned(inst_r1);   -- r1; reg to save to
+            out_sel_mux         <=  "01";                     -- inst from RWM
+            out_sel_in          <=  unsigned(inst_r1);        -- r1; reg to save to
             next_pc             <=  pc + 1;
 
           -- str
@@ -208,7 +222,7 @@ begin
 
           -- nop
           when "1011" =>
-            next_pc         <=  pc + 1;
+            next_pc             <=  pc + 1;
 
           -- brz
           when "1100" =>
@@ -242,12 +256,6 @@ begin
             next_pc <= 0;
 
         end case;
-
-        -- prepare for state 1
-        out_RWM_en      <= '1' after 100 ps; -- active low
-        out_ROM_en      <= '0' after 100 ps;
-        out_out_en      <= '0' after 100 ps;
-        out_rw_reg      <= '1' after 100 ps;
 
         next_state  <=  1 after 100 ps;
       end case;
