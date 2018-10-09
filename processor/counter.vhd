@@ -9,7 +9,7 @@ Use IEEE.STD_LOGIC_1164.ALL;
 use ieee.std_logic_unsigned.all;
 Use work.cpu_package.ALL;
 
-Entity Counter is
+Entity counter is
   Port(
     in_clk      : in std_logic;
     in_step     : in std_logic;
@@ -19,7 +19,7 @@ Entity Counter is
   );
 End;
 
-Architecture arch of Counter is
+Architecture arch of counter is
 
   Signal internal_counter: std_logic_vector(data_size-1 downto 0);
   Signal internal_clk: std_logic;
