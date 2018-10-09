@@ -59,7 +59,7 @@ begin
     if rising_edge(clk) then
       case state is
       when 0 =>
-        out_ROM_en      <= '1';
+        out_ROM_en      <= '0';
         next_pc         <=  0;
         out_out_en      <= '0';
         out_rw_reg      <= '1';
