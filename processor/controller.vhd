@@ -126,14 +126,14 @@ begin
             out_sel_op_0        <=  unsigned(inst_r2);        -- r2
 
           when "1000" =>
-            out_RWM_en      <=  '0'; -- deactive high
+            out_RWM_en      <=  '0';                -- deactive high
             out_rw_RWM      <=  '1';                -- set RWM in 'read from' mode
             out_rw_reg      <=  '0';
-            out_adr         <=  inst(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
+            out_adr         <=  inst(3 downto 0);
 
           when "1001" =>
-            out_RWM_en      <=  '0'; -- deactive high
-            out_adr         <=  inst(3 downto 0);   -- out_adr is connected texpressiono both RWM and ROM
+            out_RWM_en      <=  '0';                -- deactive high
+            out_adr         <=  inst(3 downto 0);
             out_rw_RWM      <=  '0';                -- set RWM in 'write to' mode
             out_out_en      <=  '1';
 
@@ -227,7 +227,6 @@ begin
 
           -- ldi
           when "1010" =>
-            -- out_rw_reg          <=  '0';
             out_sel_in          <=  unsigned(inst_r1);
             out_sel_mux         <=  "10";
             out_data_imm        <=  inst_data_imm;
